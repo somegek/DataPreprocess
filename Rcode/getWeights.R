@@ -88,8 +88,9 @@ getWeights <- function(DT){
   # calculate the weight by running getWeightsSubFunc() per topic, horizon and test periods
   # .SD[TRUE] is because unmodified .SD is locked, so here modify the input by taking all rows with [TRUE]
   DT[, WEIGHT_FULL := getWeightsSubFunc(isFull = TRUE, .SD[TRUE], .SD[TIME_PERIOD < TEST_PERIOD]), by = c('FCT_TOPIC', 'FCT_HORIZON', 'TEST_PERIOD')]
+  print('Full done')
   DT[, WEIGHT_SUB := getWeightsSubFunc(isFull = FALSE, .SD[TRUE], .SD[TIME_PERIOD < TEST_PERIOD]), by = c('FCT_TOPIC', 'FCT_HORIZON', 'TEST_PERIOD')]
-  
+  print('Sub done')
   
   # adjust weights full to sum to 1 in every time period
   ## doing this adjustment makes the result worse
