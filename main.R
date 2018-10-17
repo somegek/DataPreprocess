@@ -17,7 +17,7 @@ source('Rcode/global.R', echo=FALSE)
 
 ########## step 1: preprocess the data to clean up missing values and calculate covariance #########
 # uncomment to rerun
-# source('Rcode/preprocess.R', echo=FALSE)
+source('Rcode/preprocess.R', echo=FALSE)
 
 
 ########## step 2: use the covariance to calculate the weights without threshold #########

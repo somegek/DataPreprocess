@@ -12,7 +12,7 @@ getEval <- function(DT_FCT){
   
   # calculated sum of error squared
   errSumSqList <- paste0(errList,"_SUM_SQ")
-  DT_FCT[, (errSumSqList) := lapply(.SD, function(x) sum(x)), .SDcols = errSqList, by = c('FCT_TOPIC', 'FCT_HORIZON', 'TEST_PERIOD', 'THRESHOLD')]
+  DT_FCT[TIME_PERIOD == TEST_PERIOD, (errSumSqList) := lapply(.SD, function(x) sum(x)), .SDcols = errSqList, by = c('FCT_TOPIC', 'FCT_HORIZON', 'THRESHOLD')]
   
   # calculate the ratio to the equal weights
   # the ratio is defined as SSE of full and sub divided by the SSE of equal weights
