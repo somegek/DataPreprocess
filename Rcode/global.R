@@ -1,0 +1,9 @@
+if (!require('data.table')) install.packages('data.table'); library(data.table)
+if (!require('Matrix')) install.packages('Matrix'); library(Matrix)
+if (!require('zoo')) install.packages('zoo'); library(zoo)
+if (!require('stringr')) install.packages('stringr'); library(stringr)
+
+source('Rcode/getWeights.R', echo=FALSE)
+source('Rcode/getForecast.R', echo=FALSE)
+source('Rcode/getNewWeights.R', echo=FALSE)
+source('Rcode/getEval.R', echo=FALSE)
