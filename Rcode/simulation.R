@@ -1,9 +1,10 @@
 # setting: try to see how the variance react when the threshold is away from the true value
+source('~/Github/DataPreprocess/Rcode/global.R', echo=FALSE)
 set.seed(12345677)
 
 ###tuning parameter
 obsAmount <- 10
-trueWeight <- c(-0.5, -0.1, 0, 1.2)
+trueWeight <- c(-0.5, 0.3, 0, 1.2)
 trueWeight <- trueWeight/sum(trueWeight)
 timeseriesAmount <- length(trueWeight)
 
@@ -26,7 +27,8 @@ truncIota <- rep(1,length(truncation))
 truncVal <- 0
 
 epsMean <- 0
-epsVariance <- 1.2
+epsVariance <- 0.6 #0.4, 0.5, 0.6, 0.7, 0.8, 0.9
+
 
 ###code
 DF <- mvrnorm(n = obsAmount, trueMean, trueVariance)
