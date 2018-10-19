@@ -80,7 +80,7 @@ DT[FCT_HORIZON == "P24M", FCT_HORIZON := "2"]
 DT[, FCT_HORIZON := as.numeric(FCT_HORIZON)]
 
 ## data correction
-# 2 observation of UNEM has December instead of november
+# 2 observations of UNEM has December instead of november
 DT[FCT_TOPIC == "UNEM" & TIME_PERIOD == "2000-12", TIME_PERIOD := "2000-11" ]
 DT[FCT_TOPIC == "UNEM" & TIME_PERIOD == "2001-12", TIME_PERIOD := "2001-11" ]
 

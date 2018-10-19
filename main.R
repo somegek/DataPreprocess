@@ -47,16 +47,15 @@ save(DT, file = 'Input/New_Weights.RData')
 # get the forecast value
 load(file = 'Input/New_Weights.RData')
 DT_FCT <- getForecast(DT)
-save(DT, file = 'Input/Forecasts.RData')
+save(DT_FCT, file = 'Input/Forecasts.RData')
 ########## step 5: evaluate forcasts #########
 RES <- getEval(DT_FCT)
-print(RES)
 
 
 ######
-RES_PRE <- RES[, .(MSE_EQUAL=mean(ERR_EQUAL_SUM_SQ),RATIO_SUB = mean(RATIO_SUB_THRES), RATIO_FULL = mean(RATIO_FULL_THRES)), by=c('FCT_TOPIC','THRESHOLD','FCT_HORIZON')]
+RES_PRE <- RES
 RES_PRE[,THRESHOLD := paste0("\"",THRESHOLD,"\"")]
-numericList <- c('MSE_EQUAL', 'RATIO_SUB', 'RATIO_FULL')
+numericList <- c('RATIO_SUB_THRES', 'RATIO_FULL_THRES')
 RES_PRE[, (numericList) := lapply(.SD, function(x) round(x,2)), .SDcols = numericList]
 print(RES_PRE)
 write.csv(RES_PRE, file = 'Output/Preliminary.csv',row.names = F)
