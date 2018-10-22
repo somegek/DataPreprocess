@@ -11,7 +11,7 @@ getForecast_truncate <- function(DT){
   # take 1 value per time period
   DT_FCT <- unique(DT[,c('FCT_TOPIC', 'FCT_HORIZON', 'THRESHOLD', 'TIME_PERIOD', 'TEST_PERIOD', 'TRUE_VALUE',forecastNameList),with = FALSE])
   
-  setkey(DT_FCT,FCT_TOPIC,FCT_HORIZON,THRESHOLD,TIME_PERIOD)
+  setkey(DT_FCT,FCT_TOPIC,FCT_HORIZON,TEST_PERIOD)
   
   DT_FCT
 }

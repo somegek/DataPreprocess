@@ -50,15 +50,11 @@ DT_FCT <- getForecast(DT)
 save(DT_FCT, file = 'Input/Forecasts.RData')
 ########## step 5: evaluate forcasts #########
 RES <- getEval(DT_FCT)
-
-
-######
-RES_PRE <- RES
-RES_PRE[,THRESHOLD := paste0("\"",THRESHOLD,"\"")]
+RES[,THRESHOLD := paste0("\"",THRESHOLD,"\"")]
 numericList <- c('RATIO_SUB_THRES', 'RATIO_FULL_THRES')
-RES_PRE[, (numericList) := lapply(.SD, function(x) round(x,2)), .SDcols = numericList]
-print(RES_PRE)
-write.csv(RES_PRE, file = 'Output/Preliminary.csv',row.names = F)
+RES[, (numericList) := lapply(.SD, function(x) round(x,2)), .SDcols = numericList]
+print(RES)
+write.csv(RES, file = 'Output/Preliminary.csv',row.names = F)
 
 
 
@@ -68,3 +64,9 @@ write.csv(RES_PRE, file = 'Output/Preliminary.csv',row.names = F)
 load(file = 'Input/Initial_Weights.RData')
 # get the new weights given the threshold
 DT <- getNewWeights_truncate(DT)
+DT_FCT <- getForecast_truncate(DT)
+RES <- getEval_truncate(DT_FCT)
+numericList <- c('RATIO_SUB','RATIO_SUB_THRES', 'RATIO_FULL','RATIO_FULL_THRES')
+RES[, (numericList) := lapply(.SD, function(x) round(x,2)), .SDcols = numericList]
+print(RES)
+write.csv(RES, file = 'Output/OOS_Truncate.csv',row.names = F)

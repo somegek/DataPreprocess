@@ -54,26 +54,19 @@ getWeights <- function(DT){
     # weights is appended to tempDT
     if(isFull){
       # calculate weights using full cov
-      tempWeightFull <- calculateWeight(tempCov)
-      
-      # fill in the weights
-      for(src in forcastersList){
-        tempDT[FCT_SOURCE == src, WEIGHT_FULL := tempWeightFull[[src]]]
-      }
-      return(tempDT$WEIGHT_FULL)
+      tempWeight <- calculateWeight(tempCov)
     }else{
-      # get the weights using submatrix in each time period
-      tempWeightSub <- lapply(sort(unique(tempDT$TIME_PERIOD)), function(t) calculateWeight(getSubCov(tempCov,tempDT[TIME_PERIOD == t,FCT_SOURCE])))
-      names(tempWeightSub) <- sort(unique(tempDT$TIME_PERIOD))
-      
-      # fill in the weights
-      for(src in forcastersList){
-        for (period in as.character(sort(unique(tempDT$TIME_PERIOD)))){
-          tempDT[FCT_SOURCE == src & TIME_PERIOD == period, WEIGHT_SUB := tempWeightSub[[period]][[src]]]
-        }
-      }
-      return(tempDT$WEIGHT_SUB)
+      # get the weights using submatrix
+      tempWeight <- calculateWeight(getSubCov(tempCov,tempDT[TIME_PERIOD==last(sort(TIME_PERIOD)),FCT_SOURCE]))
     }
+    
+    # fill in the weights
+    tempWeightDT <- as.data.table(tempWeight, keep.rownames = 'FCT_SOURCE')
+    setkey(tempWeightDT, FCT_SOURCE)
+    setkey(tempDT, FCT_SOURCE)
+    tempDT <- merge(tempDT,tempWeightDT)
+    tempDT[is.na(tempWeight), tempWeight := 0]
+    return(tempDT$tempWeight)
   }
   
   
