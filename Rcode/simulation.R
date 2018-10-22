@@ -1,5 +1,5 @@
 # setting: try to see how the variance react when the threshold is away from the true value
-source('~/Github/DataPreprocess/Rcode/global.R', echo=FALSE)
+source('Rcode/global.R', echo=FALSE)
 set.seed(12345677)
 
 ###tuning parameter

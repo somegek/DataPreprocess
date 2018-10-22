@@ -59,3 +59,12 @@ numericList <- c('RATIO_SUB_THRES', 'RATIO_FULL_THRES')
 RES_PRE[, (numericList) := lapply(.SD, function(x) round(x,2)), .SDcols = numericList]
 print(RES_PRE)
 write.csv(RES_PRE, file = 'Output/Preliminary.csv',row.names = F)
+
+
+
+
+###########
+# load data
+load(file = 'Input/Initial_Weights.RData')
+# get the new weights given the threshold
+DT <- getNewWeights_truncate(DT)

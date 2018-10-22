@@ -21,7 +21,7 @@ getNewWeights <- function(DT){
   weightsList <- unique(grep('SUB', names(DT), value = TRUE))
   newWeightsList <- paste0(weightsList,'_THRES')
   DT[, (newWeightsList) := lapply(.SD, function(x) thresholdFunc(x, THRESHOLD)), .SDcols = weightsList, by=c('FCT_TOPIC','FCT_HORIZON','TIME_PERIOD', 'TEST_PERIOD', 'THRESHOLD')]
-  DT[, (weightsList) := NULL]
+  # DT[, (weightsList) := NULL]
   
   # take full and remove the effect of different time period
   DT_FULL <- unique(DT[,.(FCT_TOPIC, FCT_HORIZON, FCT_SOURCE, TEST_PERIOD, THRESHOLD, WEIGHT_FULL)])
@@ -31,7 +31,7 @@ getNewWeights <- function(DT){
   newWeightsList <- paste0(weightsList,'_THRES')
   DT_FULL[, (newWeightsList) := lapply(.SD, function(x) thresholdFunc(x, THRESHOLD)), .SDcols = weightsList, by=c('FCT_TOPIC','FCT_HORIZON', 'TEST_PERIOD', 'THRESHOLD')]
   DT_FULL[, (weightsList) := NULL]
-  DT[, (weightsList) := NULL]
+  # DT[, (weightsList) := NULL]
   
   # merge data
   setkey(DT_FULL, FCT_TOPIC, FCT_HORIZON, FCT_SOURCE, TEST_PERIOD, THRESHOLD)
