@@ -9,11 +9,13 @@ getNewWeights_truncate <- function(DT){
   
   # get position of lowest ratio
   findMin <- function(ratio,thres){
-    thres[ratio==min(ratio)]
+    last(thres[ratio==min(ratio)])
   }
   DT_THRES <- DT_RES[, findMin(RATIO_SUB_THRES,THRESHOLD), by= c('FCT_TOPIC','FCT_HORIZON', 'TEST_PERIOD')]
   setnames(DT_THRES, old ='V1', new = 'FCT_THRES')
-  DT_new <- merge(DT,DT_THRES,by = c('FCT_TOPIC','FCT_HORIZON','TEST_PERIOD'))
+  setkey(DT_THRES, FCT_TOPIC,FCT_HORIZON,TEST_PERIOD)
+  setkey(DT, FCT_TOPIC,FCT_HORIZON,TEST_PERIOD)
+  DT_new <- merge(DT,DT_THRES)
   DT_new <- DT_new[,.(FCT_TOPIC,FCT_HORIZON,FCT_THRES,FCT_SOURCE,TEST_PERIOD,TIME_PERIOD,TRUE_VALUE,OBS_VALUE,WEIGHT_EQUAL,WEIGHT_SUB,WEIGHT_FULL)]
   
   # remove value below threshold and scale to 1
