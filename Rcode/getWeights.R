@@ -64,7 +64,7 @@ getWeights <- function(DT){
     tempWeightDT <- as.data.table(tempWeight, keep.rownames = 'FCT_SOURCE')
     setkey(tempWeightDT, FCT_SOURCE)
     setkey(tempDT, FCT_SOURCE)
-    tempDT <- merge(tempDT,tempWeightDT)
+    tempDT <- merge(tempDT,tempWeightDT, all.x = TRUE)
     tempDT[is.na(tempWeight), tempWeight := 0]
     return(tempDT$tempWeight)
   }
