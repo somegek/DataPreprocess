@@ -56,7 +56,9 @@ RES[, (numericList) := lapply(.SD, function(x) round(x,2)), .SDcols = numericLis
 print(RES)
 write.csv(RES, file = 'Output/Preliminary.csv',row.names = F)
 
-
+RESSummary <- DT_FCT[, lapply(.SD,summary),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON','THRESHOLD')]
+RESSummary[,Statistics:=c('min','1st Q', 'median','mean','3rd Q','max')]
+RESIQR <- DT_FCT[, lapply(.SD,IQR),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON','THRESHOLD')]
 
 
 ###########
@@ -70,3 +72,8 @@ numericList <- c('RATIO_SUB','RATIO_SUB_THRES', 'RATIO_FULL','RATIO_FULL_THRES')
 RES[, (numericList) := lapply(.SD, function(x) round(x,2)), .SDcols = numericList]
 print(RES)
 write.csv(RES, file = 'Output/OOS_Truncate.csv',row.names = F)
+
+
+RESSummary <- DT_FCT[, lapply(.SD,summary),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON')]
+RESSummary[,Statistics:=c('min','1st Q', 'median','mean','3rd Q','max')]
+RESIQR <- DT_FCT[, lapply(.SD,IQR),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON')]

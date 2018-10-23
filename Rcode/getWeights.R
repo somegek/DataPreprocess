@@ -93,11 +93,6 @@ getWeights <- function(DT){
   print('Total time')
   print(endPoint - startPoint)
   
-  # adjust weights full to sum to 1 in every time period
-  ## doing this adjustment makes the result worse
-  # DT[, WEIGHT_FULL := WEIGHT_FULL/sum(WEIGHT_FULL), by = c('FCT_TOPIC','FCT_HORIZON','TIME_PERIOD')]
-  # DT[, WEIGHT_FULL_NONEG := WEIGHT_FULL_NONEG/sum(WEIGHT_FULL_NONEG), by = c('FCT_TOPIC','FCT_HORIZON','TIME_PERIOD')]
-  
   # get equal weights
   DT[TIME_PERIOD == TEST_PERIOD, WEIGHT_EQUAL := 1/.N, by = c('FCT_TOPIC','FCT_HORIZON','TEST_PERIOD')]
   # set order by .... to put for each test period, the last obs is the equal weights
