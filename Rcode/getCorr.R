@@ -51,8 +51,10 @@ for (topic in c('HICP','RGDP','UNEM')) {
 # make a column, remove correlation == 1 (diagonal element)
 # then take summary of it
 # lapply to all cov in cov list
-corrsummary <- as.data.table(lapply(corrList, function(x) summary(matrix(x[row(x)!=col(x)],ncol=1)[TRUE])))
+corrsummary <- as.data.table(lapply(corrList, function(x) round(summary(matrix(x[row(x)!=col(x)],ncol=1)[TRUE]),2)))
 corrsummary[,Statistics:=c('min','1st Q', 'median','mean','3rd Q','max')]
 setnames(corrsummary, paste0('V',1:6), c('HICP1', 'HICP2', 'RGDP1', 'RGDP2', 'UNEM1', 'UNEM2'))
-corrsummary[,.(Statistics, HICP1, HICP2, RGDP1, RGDP2, UNEM1, UNEM2 )]
-write.csv(corrsummary, file='Output/corrSummary', row.names = F)
+setcolorder(corrsummary, c('Statistics', 'HICP1', 'HICP2', 'RGDP1', 'RGDP2', 'UNEM1', 'UNEM2' ))
+write.csv(corrsummary, file='Output/corrSummary.csv', row.names = F)
+
+
