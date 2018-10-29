@@ -58,7 +58,9 @@ write.csv(RES, file = 'Output/Preliminary.csv',row.names = F)
 
 RESSummary <- DT_FCT[, lapply(.SD,summary),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON','THRESHOLD')]
 RESSummary[,Statistics:=c('min','1st Q', 'median','mean','3rd Q','max')]
+write.csv(RESSummary, file = 'Output/preliminarySummary.csv')
 RESIQR <- DT_FCT[, lapply(.SD,IQR),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON','THRESHOLD')]
+write.csv(RESIQR, file = 'Output/preliminaryIQR.csv')
 
 
 ###########
@@ -76,4 +78,13 @@ write.csv(RES, file = 'Output/OOS_Truncate.csv',row.names = F)
 
 RESSummary <- DT_FCT[, lapply(.SD,summary),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON')]
 RESSummary[,Statistics:=c('min','1st Q', 'median','mean','3rd Q','max')]
+write.csv(RESSummary, file = 'Output/OOS_Summary.csv')
 RESIQR <- DT_FCT[, lapply(.SD,IQR),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON')]
+write.csv(RESIQR, file = 'Output/OOS_IQR.csv')
+
+
+
+source('Rcode/fluctuation.R', echo=FALSE)
+source('Rcode/modelSpace.R', echo=FALSE)
+source('Rcode/msCorrWithThres.R', echo=FALSE)
+
