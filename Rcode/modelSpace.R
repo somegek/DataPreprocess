@@ -1,5 +1,5 @@
 load(file = "Input/preprocessed.RData")
-source('~/Github/DataPreprocess/Rcode/global.R', echo=F)
+source('Rcode/global.R', echo=F)
 
 DT_MS <- unique(DT[, .(TRUE_VALUE, MIN_VALUE = min(OBS_VALUE), MAX_VALUE = max(OBS_VALUE)), by = c('FCT_TOPIC', 'FCT_HORIZON', 'TIME_PERIOD')])
 
