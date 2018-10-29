@@ -43,4 +43,4 @@ DT_THRES <- DT_THRES[is.finite(FCT_THRES)]
 
 corSummary <- DT_THRES[,.(Correlation=round(cor(FCT_THRES,avgOutside),2)), by = c('FCT_TOPIC','FCT_HORIZON')]
 
-write.csv(corSummary, file = 'Output/corrSummary.csv',row.names = F)
+write.csv(corSummary, file = 'Output/corrThresWithModelSpaceSummary.csv',row.names = F)
