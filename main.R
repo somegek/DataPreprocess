@@ -56,9 +56,14 @@ RES[, (numericList) := lapply(.SD, function(x) round(x,2)), .SDcols = numericLis
 print(RES)
 write.csv(RES, file = 'Output/Preliminary.csv',row.names = F)
 
-RESSummary <- DT_FCT[, lapply(.SD,summary),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON','THRESHOLD')]
+RESSummary <- DT_FCT[, lapply(.SD,function(x) round(summary(x),2)),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON','THRESHOLD')]
 RESSummary[,Statistics:=c('min','1st Q', 'median','mean','3rd Q','max')]
-RESIQR <- DT_FCT[, lapply(.SD,IQR),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON','THRESHOLD')]
+setcolorder(RESSummary, c('FCT_TOPIC', 'FCT_HORIZON', 'THRESHOLD', 'Statistics', 'ERR_EQUAL', 'ERR_SUB_THRES'))
+RESSummary[,THRESHOLD := paste0("\"",THRESHOLD,"\"")]
+write.csv(RESSummary, file = 'Output/preliminarySummary.csv',row.names = F)
+RESIQR <- DT_FCT[, lapply(.SD,function(x) round(IQR(x),2)),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON','THRESHOLD')]
+RESIQR[,THRESHOLD := paste0("\"",THRESHOLD,"\"")]
+write.csv(RESIQR, file = 'Output/preliminaryIQR.csv',row.names = F)
 
 
 ###########
@@ -74,6 +79,16 @@ print(RES)
 write.csv(RES, file = 'Output/OOS_Truncate.csv',row.names = F)
 
 
-RESSummary <- DT_FCT[, lapply(.SD,summary),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON')]
+RESSummary <- DT_FCT[, lapply(.SD,function(x) round(summary(x),2)),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON')]
 RESSummary[,Statistics:=c('min','1st Q', 'median','mean','3rd Q','max')]
-RESIQR <- DT_FCT[, lapply(.SD,IQR),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON')]
+setcolorder(RESSummary,c('FCT_TOPIC', 'FCT_HORIZON', 'Statistics', 'ERR_EQUAL', 'ERR_SUB_THRES'))
+write.csv(RESSummary, file = 'Output/OOS_Summary.csv',row.names = F)
+RESIQR <- DT_FCT[, lapply(.SD,function(x) round(IQR(x),2)),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON')]
+write.csv(RESIQR, file = 'Output/OOS_IQR.csv',row.names = F)
+
+
+
+source('Rcode/fluctuation.R', echo=FALSE)
+source('Rcode/modelSpace.R', echo=FALSE)
+source('Rcode/msCorrWithThres.R', echo=FALSE)
+
