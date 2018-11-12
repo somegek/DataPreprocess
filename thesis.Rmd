@@ -1,0 +1,30 @@
+---
+title: "Untitled"
+author: "Daniel Hsiao"
+date: "November 12, 2018"
+output:
+  pdf_document:
+    fig_caption: yes
+    fig_crop: no
+    keep_tex: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+---
+
+
+# Methodology
+
+# Threshold Truncation
+
+## Standard Approach
+
+## Truncation Approach
+
+## Bias Correction
+
+# Survey of Professional Forecasters (SPF)
+To illustrate the empirical results, we use the data from ECB in this paper. The data, SPF, is a quarterly survey initiated by ECB, with the aim to obtain future estimates on inflation, GDP and unemployment rate from the private sector. Starting 1999, SPF is the longest survey of macroeconomic expectation in the euro area. Until the date of this report, there are 75 quarters of observation available. 
+
+# Empirical Results
+

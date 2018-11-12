@@ -1,5 +1,12 @@
 getNewWeights_truncate <- function(DT){
   
+  
+  startThres <- -10
+  endThres <- 0
+  thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
+  thresholdList <- c(round(thresholdList,2), -Inf)
+  
+  
   # get truncated weights
   DT_W <- getNewWeights(DT)
   

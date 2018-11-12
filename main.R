@@ -17,7 +17,7 @@ source('Rcode/global.R', echo=FALSE)
 
 ########## step 1: preprocess the data to clean up missing values and calculate covariance #########
 # uncomment to rerun
-source('Rcode/preprocess.R', echo=FALSE)
+# source('Rcode/preprocess.R', echo=FALSE)
 
 
 ########## step 2: use the covariance to calculate the weights without threshold #########
@@ -30,9 +30,9 @@ save(DT, file = 'Input/Initial_Weights.RData')
 
 ########## step 3: set threshold for the weights #########
 #sequence from -1 to 0 with step size 0.1
-startThres <- -1
+startThres <- -10
 endThres <- 0
-thresholdList <- seq(from = startThres, to = endThres, by = (endThres-startThres)/10)
+thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
 thresholdList <- c(round(thresholdList,2), -Inf)
 
 # load data
