@@ -29,7 +29,7 @@ save(DT, file = 'Input/Initial_Weights.RData')
 # when TIME_PERIOD == TEST_PERIOD, it is the testing data set
 
 ########## step 3: set threshold for the weights #########
-#sequence from -1 to 0 with step size 0.1
+# sequence from -1 to 0 with step size 0.1
 startThres <- -10
 endThres <- 0
 thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
