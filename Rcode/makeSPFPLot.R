@@ -32,3 +32,13 @@ plotData(DT_new[FCT_TOPIC=='UNEM' & FCT_HORIZON==2],c(5,14),"bottomleft")
 
 makePlot()
 
+
+
+
+x = seq(1,3,length.out = 1000)
+y = 1/x
+plot(x,y, type='l', xlim = c(0,3), ylim = c(0,1),ylab = 'correlation', xlab = 'variance ratio')
+title('Area with negative weights')
+polygon(x = c(x,3, 1),
+        y = c(y, 1, 1),
+        col = "grey")

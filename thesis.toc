@@ -1,6 +1,7 @@
 \contentsline {section}{\numberline {1}Methodology}{2}{section.1}
 \contentsline {subsection}{\numberline {1.1}Standard Approach}{2}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Truncation Approach}{2}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}Bias Correction}{2}{subsection.1.3}
-\contentsline {section}{\numberline {2}Survey of Professional Forecasters (SPF)}{2}{section.2}
-\contentsline {section}{\numberline {3}Empirical Results}{4}{section.3}
+\contentsline {subsection}{\numberline {1.2}With estimation error of \(w\)}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Truncation Approach}{3}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Bias Correction}{3}{subsection.1.4}
+\contentsline {section}{\numberline {2}Survey of Professional Forecasters (SPF)}{3}{section.2}
+\contentsline {section}{\numberline {3}Empirical Results}{5}{section.3}

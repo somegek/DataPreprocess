@@ -12,14 +12,13 @@ output:
     toc_depth: 3
 header-includes:
     - \usepackage{placeins}
-    - \usepackage{kableExtra}
 ---
 
 \newpage
 
 # Methodology
 ## Standard Approach
-Consider the two variable case. We have two forecasts, $y_1$ and $y_2$, of the true variable $y$. We want to combine $y_1$ and $y_2$ with a weight $w$ that we have $y_c = w y_1 + (1-w) y_2$. Assume they follow some distribution, e.g. $y_1 \sim D(0,\sigma_1)$, $y_2 \sim D(0,\sigma_2)$, and $corr(y_1,y_2)=\rho$. Then the variance of the combined forecast $y_c$ is
+Consider the two variable case here for illustration purpose. The multivariate case is provided in the appendix for completeness. We have two forecasts, $y_1$ and $y_2$, of the true variable $y$. We want to combine $y_1$ and $y_2$ with a weight $w$ that we have $y_c = w y_1 + (1-w) y_2$. Assume they follow some distribution, e.g. $y_1 \sim D(0,\sigma_1)$, $y_2 \sim D(0,\sigma_2)$, and $corr(y_1,y_2)=\rho$. Then the variance of the combined forecast $y_c$ is
 \begin{equation}
 \label{eqn: var yc}
 Var(y_c) = w^2\sigma_1^2+ (1-w)^2\sigma_2^2+2w(1-w)\sigma_1\sigma_2\rho,
@@ -30,10 +29,54 @@ and the optimal weight with minimal variance is
 w^*=\frac{\sigma_2^2-\sigma_1\sigma_2\rho}{\sigma_1^2+\sigma_2^2 -2\sigma_1\sigma_2\rho}.
 \end{equation}
 
-Equation
+Equation \ref{eqn: simple weight} is the standard benchmark approach in the combination theory, where extensive research had been done on. **add research**. Equation \ref{eqn: simple weight} has a few empirical results that are against this approach. Two common alternatives are diagonal covariance matrix and equal weights.
 
+Ignoring the correlation term $\rho$ by setting $\rho=0$, we get the inverse relation on the variance
+\begin{equation}
+\label{eqn: simple weight no corr}
+w^*=\frac{\sigma_2^2}{\sigma_1^2+\sigma_2^2}.
+\end{equation}
+This is a robust way to avoid the estimation of the covariance when the dimension goes up. The amount of parameter to estimate for the covariance with dimension $n$ is $\frac{1}{2}n(n+1)$, which is quadratic in $n$. When the user only estimates the variances, the amount of parameter to estimate reduces to $n$, which greatly decreases the estimation error. **add citation**
+
+Equal weights is another common approach that works better empirically. **add citation** The forecast combination is in this case just an arithmetric mean of all forecasts. The reason behind this is the fact that estimating weights increases or shifts the forecast errors due to additional estimation error in the estimation of $w$. We laborate on the estimation error of $w$ more later. 
+
+**add more on equal weight**
+
+## With estimation error of $w$
+
+We can also consider the weight as non-deterministic, but related with $y$, e.g., in a trivairate distribution with finite third and fourth moments. Under trivariate distribution, the variance of the weights influences the expected value and the variance of the combined forecast. The expected value and the variance of the combined forecast becomes
+\begin{equation}
+\label{eqn: E & var yc w/ var w}
+\begin{aligned}
+  E(y_c) =& \mu + (cov(w, y_1-y_2))^2\\
+var(y_c) =& E(w)^2\sigma_1^2 + (1-E(w))^2\sigma_2^2 + 2E(w)(1-E(w))\rho\sigma_1\sigma_2 \\
++& E[(w-E(w))(y_1-y_2) (E(w)y_1 + (1-E(w))y_2 - \mu)] \\
++& E[(w-E(w))^2 (y_1-y_2)^2] - cov(w,y_1-y_2)^2.
+\end{aligned}
+\end{equation}
+
+Equation \ref{ eqn: E & var yc w/ var w} shows the general case of the forecast combination. If the covariance between $w$ and $y_1-y_2$ is not $0$, the forecast is biased when combining, with bias $cov(w, y_1-y_2)^2$. The variance also increases from euqation \ref{eqn: var yc} with $E[(w-E(w))(y_1-y_2) (E(w)y_1 + (1-E(w))y_2 - \mu)]+E[(w-E(w))^2 (y_1-y_2)^2] - cov(w,y_1-y_2)^2$. **can we prove that the change in var(yc) is positive? I tried to prove it but got stuck at $E[(w-E(w))(y_1-y_2) (E(w)y_1 + (1-E(w))y_2 - \mu)]+Var((w-Ew)(y_1-y_2))>0$**. This case the only requirements are that the individual forecast to be unbaised and that the weights sum up to 1.
 
 ## Truncation Approach
+Looking back to equation \ref{eqn: simple weight}, we examin the effect of high correlation term. Assume without loss of generality that $\sigma_1 =\sigma_2 + \delta$, where $\delta>0$, we rewrite the weight as
+\begin{equation}
+\label{eqn: w high corr}
+w = \frac{\sigma_2(-\rho\delta+ (1-\rho)\sigma_2)}{\sigma_1^2+\sigma_2^2 -2\sigma_1\sigma_2\rho}.
+\end{equation}
+The numerator in $w$ consist of standard deviation of $\sigma_2$ and a weighted mean between $-\delta$ and $\sigma_2$ with weight $\rho$. When $\rho$ is small, the weights is close to equation \ref{eqn: simple weight no corr}. When $\rho$ is large, the negative difference in variance $-\delta$ takes over and results in negative weights. The level of negativity accounts for both the negtaive difference and correlation. The boundary case is 
+\begin{equation}
+\label{eqn: corr boundary}
+\rho = \frac{\sigma_2}{\sigma_1},
+\end{equation}
+which $w$ decreases to $0$ and $y_c = y_2$. Figure
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=8cm, height=8cm]{./Output/Images/corr2Ratio.png}
+\caption{Plot of correlation and variance ratio. Grey area is where the weights become negative.}\label{fig: corr2Ratio}
+\end{figure}
+
+
 
 ## Bias Correction
 
@@ -83,9 +126,9 @@ max         & 0.96        & 0.97        & 0.98        & 0.98        & 0.94      
 \end{tabular}
 \end{table}
 
-In figure \autoref{fig: SPF data illustration} and table \autoref{tab: correlation summary statistics} we show the plots of the forecasts along side with the true value in the macroeconomics and the statistics of the covariance of the forecast error. To avoid too many lines on the figure by plotting all forecasts, we plot only the minimum, mean, and maximum from the forecasts. We see that there exist a high consistency across all forecasts, with 2 year ahead stronger than 1 year. The consistency in the forecast is lower in UNEM than the other two. Furthermore, many true values lies outside of the forecast range, with RGDP the worse of all three. More values outside of the forecast range suggest that restricting positive weights may be a strong limitation in the forecast combination. We expect to have large effect using truncation in the forecast of RGDP, while HICP and UNEM does not have too strong effect. We also expect the 2 year ahead forecast will be better than the 1 year ahead.
+In figure \ref{fig: SPF data illustration} and table \ref{tab: correlation summary statistics} we show the plots of the forecasts along side with the true value in the macroeconomics and the statistics of the covariance of the forecast error. To avoid too many lines on the figure by plotting all forecasts, we plot only the minimum, mean, and maximum from the forecasts. We see that there exist a high consistency across all forecasts, with two years ahead stronger than one year. The consistency in the forecast is lower in UNEM than the other two. Furthermore, many true values lies outside of the forecast range, with RGDP the worse of all three. More values outside of the forecast range suggest that restricting positive weights may be a strong limitation in the forecast combination. We expect to have large effect using truncation in the forecast of RGDP, while HICP and UNEM does not have too strong effect. We also expect the two year ahead forecast will be better than the one year ahead.
 
-The table \autoref{tab: correlation summary statistics} tell us on how the forecast error are correlated. The correlation are split up into different forecast topics and different forecast horizons. Diagonal element of the correlation matrix is not within the correlation when generating the summary statistics. For all of the series, the correlations are on average above 60%. In HICP and UNEM the correlation increases across all statistics when the forecast horizon increases, while RGDP remains the same. The lowest correlation to be found is -0.02, but this number is not too different than the minimum correlation in the other two topics.
+The table \ref{tab: correlation summary statistics} tell us on how the forecast error are correlated. The correlation are split up into different forecast topics and different forecast horizons. Diagonal element of the correlation matrix is not within the correlation when generating the summary statistics. For all of the series, the correlations are on average above 60%. In HICP and UNEM the correlation increases across all statistics when the forecast horizon increases, while RGDP remains the same. The lowest correlation to be found is -0.02, but this number is not too different than the minimum correlation in the other two topics.
 
 **add more explanation**
 
