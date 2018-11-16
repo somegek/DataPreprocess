@@ -68,7 +68,7 @@ The numerator in $w$ consist of standard deviation of $\sigma_2$ and a weighted 
 \label{eqn: corr boundary}
 \rho = \frac{\sigma_2}{\sigma_1},
 \end{equation}
-which $w$ decreases to $0$ and $y_c = y_2$. Figure
+which $w$ decreases to $0$ and $y_c = y_2$. Figure \ref{fig: corr2Ratio} gives a quick insight on the relationship.
 
 \begin{figure}[!h]
 \centering
@@ -76,7 +76,7 @@ which $w$ decreases to $0$ and $y_c = y_2$. Figure
 \caption{Plot of correlation and variance ratio. Grey area is where the weights become negative.}\label{fig: corr2Ratio}
 \end{figure}
 
-
+Since we have different
 
 ## Bias Correction
 
