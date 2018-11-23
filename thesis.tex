@@ -100,8 +100,7 @@
 \hypertarget{standard-approach}{%
 \subsection{Standard Approach}\label{standard-approach}}
 
-Consider the two variable case here for illustration purpose. The
-multivariate case is provided in the appendix for completeness. We have
+Consider the two variable case here for illustration purpose. We have
 two forecasts, \(y_1\) and \(y_2\), of the true variable \(y\). We want
 to combine \(y_1\) and \(y_2\) with a weight \(w\) that we have
 \(y_c = w y_1 + (1-w) y_2\). Assume they follow some distribution, e.g.
@@ -174,31 +173,116 @@ prove it but got stuck at
 This case the only requirements are that the individual forecast to be
 unbaised and that the weights sum up to 1.
 
-\hypertarget{truncation-approach}{%
-\subsection{Truncation Approach}\label{truncation-approach}}
+Let \(d = (d_1, d_2)'\) be the third moment between \(y_1\), \(y_2\),
+and
+\(\begin{bmatrix} \sigma_{11} & \sigma_{12}\\ \sigma_{12} & \sigma_{22}\end{bmatrix}\)
+be the (co)variance matrix, we have \begin{equation}
+\label{eqn: w w/ var w}
+\begin{aligned}
+w^\dagger = w^*(1+\frac{\sigma_{22} d_1 + \sigma_{11} d_2 -\sigma_{12} (d_1 + d_2)}{\sigma_{11}\sigma_{22} - 2\sigma_{12}}) - \frac{\sigma_{22} d_1 - \sigma{12}d_2}{\sigma_{11}\sigma_{22} - 2\sigma_{12}}.
+\end{aligned}
+\end{equation} The non-deterministic weight selection is a linear
+combination of the original weight. The non-deterministic weight does
+not change if the third moment is \(0\).
+
+\hypertarget{negative-weights}{%
+\subsection{Negative weights}\label{negative-weights}}
 
 Looking back to equation \ref{eqn: simple weight}, we examin the effect
 of high correlation term. Assume without loss of generality that
-\(\sigma_1 =\sigma_2 + \delta\), where \(\delta>0\), we rewrite the
+\(\sigma_1 =\sigma_2 (1 + \delta)\), where \(\delta>0\), we rewrite the
 weight as \begin{equation}
 \label{eqn: w high corr}
-w = \frac{\sigma_2(-\rho\delta+ (1-\rho)\sigma_2)}{\sigma_1^2+\sigma_2^2 -2\sigma_1\sigma_2\rho}.
-\end{equation} The numerator in \(w\) consist of standard deviation of
-\(\sigma_2\) and a weighted mean between \(-\delta\) and \(\sigma_2\)
-with weight \(\rho\). When \(\rho\) is small, the weights is close to
-equation \ref{eqn: simple weight no corr}. When \(\rho\) is large, the
-negative difference in variance \(-\delta\) takes over and results in
-negative weights. The level of negativity accounts for both the negtaive
+w = \frac{\sigma_2^2(-\rho\delta+ (1-\rho))}{\sigma_1^2+\sigma_2^2 -2\sigma_1\sigma_2\rho}.
+\end{equation} The numerator in \(w\) consist of \(\sigma_2^2\) scaled
+with a weighted mean between \(-\delta\) and \(1\) with weight \(\rho\).
+When \(\rho\) is small, the weights is close to equation
+\ref{eqn: simple weight no corr}. When \(\rho\) is large, the negative
+difference in variance \(-\delta\) takes over and results in negative
+weights. The level of negativity accounts for both the negtaive
 difference and correlation. The boundary case is \begin{equation}
 \label{eqn: corr boundary}
 \rho = \frac{\sigma_2}{\sigma_1},
-\end{equation} which \(w\) decreases to \(0\) and \(y_c = y_2\). Figure
+\end{equation} which \(w\) decreases to \(0\) and \(y_c = y_2\).
 
-\begin{figure}[!h]
-\centering
-\includegraphics[width=8cm, height=8cm]{./Output/Images/corr2Ratio.png}
-\caption{Plot of correlation and variance ratio. Grey area is where the weights become negative.}\label{fig: corr2Ratio}
-\end{figure}
+From equation \ref{eqn: w w/ var w}, we look in the scaling parameter
+and the intercept adjustment vector. Under same condition where
+\(\sigma_1 =\sigma_2 (1 + \delta)\), we rewrite the determinant to
+\begin{equation}
+\sigma_{11}\sigma_{22} - 2\sigma_{12} = \sigma_22 ((1+\delta)^2 - 2 (1+\delta)),
+\end{equation} and the scaling factors \begin{equation}
+\label{eqn: scaling factors}
+\begin{aligned}
+\frac{\sigma_{22} d_1 - \sigma{12}d_2}{\sigma_{11}\sigma_{22} - 2\sigma_{12}} =& \frac{d_1-\rho(1+\delta) d_2}{(1+\delta)^2 - 2 (1+\delta)}\\
+\frac{\sigma_{22} d_1 + \sigma_{11} d_2 -\sigma_{12} (d_1 + d_2)}{\sigma_{11}\sigma_{22} - 2\sigma_{12}} =& \frac{d_1(1- \rho(1+\delta)) + d_2 ((1+\delta)^2-\rho(1+\delta)} {(1+\delta)^2 - 2 (1+\delta))}
+\end{aligned}
+\end{equation}
+
+\textbf{and I'm lost in what I want to say}
+
+\hypertarget{truncated-weights}{%
+\subsection{Truncated weights}\label{truncated-weights}}
+
+To avoid the high correlated forecasts, we use truncation on the
+variable. The weight estimation is as follows ** insert latex equation
+of truncation** where the sum of the weights are rescaled to 1.
+
+Assume that there is no skewness in the joint distribution, e.g.,
+\(w^*\) is unbiased estimator of the true \(w\). The expected value of
+the weights \(\tilde{w}\) is \begin{equation}
+\label{eqn: E w trunc}
+\begin{aligned}
+E(\tilde{w}) &= E(I_{w>c, w<1-c}w + I_{w>1-c})\\
+&=\int_c^{1-c} wf(w)\,\mathrm{d}w+\int_c^{1-c} f(w)\,\mathrm{d}w.
+\end{aligned}
+\end{equation} The bias is therefore \begin{equation}
+\label{eqn: bias w trunc}
+\begin{aligned}
+E(\tilde{w}) - E(w^*) &= \int_{-\infty}^{c} -wf(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w)f(w)\,\mathrm{d}w,
+\end{aligned}
+\end{equation} In the first term, we have \(w<c<0\), which cancels out
+the negative sign and becomes positive. In the second term we have
+\(w>1-c>1\), which gives a negative value in \(1-w\). In general case
+where \(w\) can go above \(1-c\) or below \(c\) and the skewness of
+\(w\) is not 0, the bias is non-zero. This increases MSE to the
+estimated \(y_c\).
+
+The variance is \begin{equation}
+\label{eqn: var w trunc}
+\begin{aligned}
+Var(\tilde{w}) &= E(\tilde{w}^{2})-E(\tilde{w})^2\\
+&=\int_c^{1-c} w^2f(w)\,\mathrm{d}w+\int_c^{1-c} f(w)\,\mathrm{d}w - (\int_c^{1-c} wf(w)\,\mathrm{d}w+\int_{1-c}^{\infty} f(w)\,\mathrm{d}w)^2,
+\end{aligned}
+\end{equation} And the change in variance is \begin{equation}
+\label{eqn: delta var w trunc 1}
+\begin{aligned}
+Var(\tilde{w}) - Var(w) &=\int_{-\infty}^{c} -w^2f(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w^2)f(w)\,\mathrm{d}w \\
+& - (\int_c^{1-c} wf(w)\,\mathrm{d}w + \int_{1-c}^{\infty} f(w)\,\mathrm{d}w)^2 + (\int_{-\infty}^{\infty} wf(w)\,\mathrm{d}w)^2.
+\end{aligned}
+\end{equation} By Cauchy--Schwarz inequality, and take \(g(w)\) as the
+weight generating function of \(\tilde{w}\), we have \begin{equation}
+\label{eqn: delta var w trunc 2}
+\begin{aligned}
+Var(\tilde{w}) - Var(w) &\leq \int_{-\infty}^{c} -w^2f(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w^2)f(w)\,\mathrm{d}w \\
+& - (\int_c^{\infty} g(w)f(w)\,\mathrm{d}w)^2 + \int_{-\infty}^{\infty} w^2f^2(w)\,\mathrm{d}w.
+\end{aligned}
+\end{equation} Since \(|g(w)|\leq|w|\) for all \(w\), thus
+\(g^2(w) \leq w^2\) for all \(w\). Equation
+\ref{eqn: delta var w trunc 2} becomes \textbf{rewrite starting here}
+\begin{equation}
+\label{eqn: delta var w trunc 3}
+\begin{aligned}
+Var(\tilde{w}) - Var(w) &\geq \int_{-\infty}^{c} -w^2f(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w^2)f(w)\,\mathrm{d}w \\
+& - \int_c^{\infty} w^2f^2(w)\,\mathrm{d}w + (\int_{-\infty}^{\infty} wf(w)\,\mathrm{d}w)^2.
+\end{aligned}
+\end{equation} Since \(f(w)\leq 1\) for all \(w\), we have
+\(f(w)\geq f^2(w)\) for all \(w\). Rewrite into \begin{equation}
+\label{eqn: delta var w trunc 3}
+\begin{aligned}
+Var(\tilde{w}) - Var(w) &\geq \int_{-\infty}^{\infty} -w^2f(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w^2)f(w)\,\mathrm{d}w \\
+& + (\int_{-\infty}^{\infty} wf(w)\,\mathrm{d}w)^2.
+\end{aligned}
+\end{equation}
 
 \hypertarget{bias-correction}{%
 \subsection{Bias Correction}\label{bias-correction}}
@@ -320,6 +404,22 @@ in the other two topics.
 
 \hypertarget{empirical-results}{%
 \section{Empirical Results}\label{empirical-results}}
+
+\hypertarget{proceure}{%
+\subsection{Proceure}\label{proceure}}
+
+The procedure to get the weights can be different between different
+researcher. Therefore we provide a through order of the steps we take in
+the weight estimation. We do the weights estimation for the truncation
+using the following steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Estimate the simple weight \(w^*\) from equation
+  \ref{eqn: simple weight}.
+\end{enumerate}
 
 
 \end{document}

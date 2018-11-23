@@ -18,7 +18,7 @@ header-includes:
 
 # Methodology
 ## Standard Approach
-Consider the two variable case here for illustration purpose. The multivariate case is provided in the appendix for completeness. We have two forecasts, $y_1$ and $y_2$, of the true variable $y$. We want to combine $y_1$ and $y_2$ with a weight $w$ that we have $y_c = w y_1 + (1-w) y_2$. Assume they follow some distribution, e.g. $y_1 \sim D(0,\sigma_1)$, $y_2 \sim D(0,\sigma_2)$, and $corr(y_1,y_2)=\rho$. Then the variance of the combined forecast $y_c$ is
+Consider the two variable case here for illustration purpose. We have two forecasts, $y_1$ and $y_2$, of the true variable $y$. We want to combine $y_1$ and $y_2$ with a weight $w$ that we have $y_c = w y_1 + (1-w) y_2$. Assume they follow some distribution, e.g. $y_1 \sim D(0,\sigma_1)$, $y_2 \sim D(0,\sigma_2)$, and $corr(y_1,y_2)=\rho$. Then the variance of the combined forecast $y_c$ is
 \begin{equation}
 \label{eqn: var yc}
 Var(y_c) = w^2\sigma_1^2+ (1-w)^2\sigma_2^2+2w(1-w)\sigma_1\sigma_2\rho,
@@ -57,28 +57,112 @@ var(y_c) =& E(w)^2\sigma_1^2 + (1-E(w))^2\sigma_2^2 + 2E(w)(1-E(w))\rho\sigma_1\
 
 Equation \ref{ eqn: E & var yc w/ var w} shows the general case of the forecast combination. If the covariance between $w$ and $y_1-y_2$ is not $0$, the forecast is biased when combining, with bias $cov(w, y_1-y_2)^2$. The variance also increases from euqation \ref{eqn: var yc} with $E[(w-E(w))(y_1-y_2) (E(w)y_1 + (1-E(w))y_2 - \mu)]+E[(w-E(w))^2 (y_1-y_2)^2] - cov(w,y_1-y_2)^2$. **can we prove that the change in var(yc) is positive? I tried to prove it but got stuck at $E[(w-E(w))(y_1-y_2) (E(w)y_1 + (1-E(w))y_2 - \mu)]+Var((w-Ew)(y_1-y_2))>0$**. This case the only requirements are that the individual forecast to be unbaised and that the weights sum up to 1.
 
-## Truncation Approach
-Looking back to equation \ref{eqn: simple weight}, we examin the effect of high correlation term. Assume without loss of generality that $\sigma_1 =\sigma_2 + \delta$, where $\delta>0$, we rewrite the weight as
+Let $d = (d_1, d_2)'$ be the third moment between $y_1$, $y_2$, and $\begin{bmatrix} \sigma_{11} & \sigma_{12}\\ \sigma_{12} & \sigma_{22}\end{bmatrix}$ be the (co)variance matrix, we have
+\begin{equation}
+\label{eqn: w w/ var w}
+\begin{aligned}
+w^\dagger = w^*(1+\frac{\sigma_{22} d_1 + \sigma_{11} d_2 -\sigma_{12} (d_1 + d_2)}{\sigma_{11}\sigma_{22} - 2\sigma_{12}}) - \frac{\sigma_{22} d_1 - \sigma{12}d_2}{\sigma_{11}\sigma_{22} - 2\sigma_{12}}.
+\end{aligned}
+\end{equation}
+The non-deterministic weight selection is a linear combination of the original weight. The non-deterministic weight does not change if the third moment is $0$.
+
+## Negative weights
+Looking back to equation \ref{eqn: simple weight}, we examin the effect of high correlation term. Assume without loss of generality that $\sigma_1 =\sigma_2 (1 + \delta)$, where $\delta>0$, we rewrite the weight as
 \begin{equation}
 \label{eqn: w high corr}
-w = \frac{\sigma_2(-\rho\delta+ (1-\rho)\sigma_2)}{\sigma_1^2+\sigma_2^2 -2\sigma_1\sigma_2\rho}.
+w = \frac{\sigma_2^2(-\rho\delta+ (1-\rho))}{\sigma_1^2+\sigma_2^2 -2\sigma_1\sigma_2\rho}.
 \end{equation}
-The numerator in $w$ consist of standard deviation of $\sigma_2$ and a weighted mean between $-\delta$ and $\sigma_2$ with weight $\rho$. When $\rho$ is small, the weights is close to equation \ref{eqn: simple weight no corr}. When $\rho$ is large, the negative difference in variance $-\delta$ takes over and results in negative weights. The level of negativity accounts for both the negtaive difference and correlation. The boundary case is 
+The numerator in $w$ consist of $\sigma_2^2$ scaled with a weighted mean between $-\delta$ and $1$ with weight $\rho$. When $\rho$ is small, the weights is close to equation \ref{eqn: simple weight no corr}. When $\rho$ is large, the negative difference in variance $-\delta$ takes over and results in negative weights. The level of negativity accounts for both the negtaive difference and correlation. The boundary case is 
 \begin{equation}
 \label{eqn: corr boundary}
 \rho = \frac{\sigma_2}{\sigma_1},
 \end{equation}
-which $w$ decreases to $0$ and $y_c = y_2$. Figure \ref{fig: corr2Ratio} gives a quick insight on the relationship.
+which $w$ decreases to $0$ and $y_c = y_2$.
 
-\begin{figure}[!h]
-\centering
-\includegraphics[width=8cm, height=8cm]{./Output/Images/corr2Ratio.png}
-\caption{Plot of correlation and variance ratio. Grey area is where the weights become negative.}\label{fig: corr2Ratio}
-\end{figure}
+From equation \ref{eqn: w w/ var w}, we look in the scaling parameter and the intercept adjustment vector. Under same condition where $\sigma_1 =\sigma_2 (1 + \delta)$, we rewrite the determinant to
+\begin{equation}
+\sigma_{11}\sigma_{22} - 2\sigma_{12} = \sigma_22 ((1+\delta)^2 - 2 (1+\delta)),
+\end{equation}
+and the scaling factors
+\begin{equation}
+\label{eqn: scaling factors}
+\begin{aligned}
+\frac{\sigma_{22} d_1 - \sigma{12}d_2}{\sigma_{11}\sigma_{22} - 2\sigma_{12}} =& \frac{d_1-\rho(1+\delta) d_2}{(1+\delta)^2 - 2 (1+\delta)}\\
+\frac{\sigma_{22} d_1 + \sigma_{11} d_2 -\sigma_{12} (d_1 + d_2)}{\sigma_{11}\sigma_{22} - 2\sigma_{12}} =& \frac{d_1(1- \rho(1+\delta)) + d_2 ((1+\delta)^2-\rho(1+\delta)} {(1+\delta)^2 - 2 (1+\delta))}
+\end{aligned}
+\end{equation}
 
-Since we have different
+**and I'm lost in what I want to say**
+
+## Truncated weights
+To avoid the high correlated forecasts, we use truncation on the variable. The weight estimation is as follows
+\begin{equation}
+\label{eqn: w trunc}
+** insert latex equation of truncation**
+\end{equation}
+where the sum of the weights are rescaled to 1.
+
+Assume that there is no skewness in the joint distribution, e.g., $w^*$ is unbiased estimator of the true $w$. The expected value of the weights $\tilde{w}$ is 
+\begin{equation}
+\label{eqn: E w trunc}
+\begin{aligned}
+E(\tilde{w}) &= E(I_{w>c, w<1-c}w + I_{w>1-c})\\
+&=\int_c^{1-c} wf(w)\,\mathrm{d}w+\int_c^{1-c} f(w)\,\mathrm{d}w.
+\end{aligned}
+\end{equation}
+The bias is therefore
+\begin{equation}
+\label{eqn: bias w trunc}
+\begin{aligned}
+E(\tilde{w}) - E(w^*) &= \int_{-\infty}^{c} -wf(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w)f(w)\,\mathrm{d}w,
+\end{aligned}
+\end{equation}
+In the first term, we have $w<c<0$, which cancels out the negative sign and becomes positive. In the second term we have $w>1-c>1$, which gives a negative value in $1-w$. In general case where $w$ can go above $1-c$ or below $c$ and the skewness of $w$ is not 0, the bias is non-zero. This increases MSE to the estimated $y_c$.
+
+The variance is
+\begin{equation}
+\label{eqn: var w trunc}
+\begin{aligned}
+Var(\tilde{w}) &= E(\tilde{w}^{2})-E(\tilde{w})^2\\
+&=\int_c^{1-c} w^2f(w)\,\mathrm{d}w+\int_c^{1-c} f(w)\,\mathrm{d}w - (\int_c^{1-c} wf(w)\,\mathrm{d}w+\int_{1-c}^{\infty} f(w)\,\mathrm{d}w)^2,
+\end{aligned}
+\end{equation}
+And the change in variance is
+\begin{equation}
+\label{eqn: delta var w trunc 1}
+\begin{aligned}
+Var(\tilde{w}) - Var(w) &=\int_{-\infty}^{c} -w^2f(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w^2)f(w)\,\mathrm{d}w \\
+& - (\int_c^{1-c} wf(w)\,\mathrm{d}w + \int_{1-c}^{\infty} f(w)\,\mathrm{d}w)^2 + (\int_{-\infty}^{\infty} wf(w)\,\mathrm{d}w)^2.
+\end{aligned}
+\end{equation}
+By Cauchy–Schwarz inequality, and take $g(w)$ as the weight generating function of $\tilde{w}$, we have
+\begin{equation}
+\label{eqn: delta var w trunc 2}
+\begin{aligned}
+Var(\tilde{w}) - Var(w) &\leq \int_{-\infty}^{c} -w^2f(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w^2)f(w)\,\mathrm{d}w \\
+& - (\int_c^{\infty} g(w)f(w)\,\mathrm{d}w)^2 + \int_{-\infty}^{\infty} w^2f^2(w)\,\mathrm{d}w.
+\end{aligned}
+\end{equation}
+Since $|g(w)|\leq|w|$ for all $w$, thus $g^2(w) \leq w^2$ for all $w$. Equation \ref{eqn: delta var w trunc 2} becomes **rewrite starting here**
+\begin{equation}
+\label{eqn: delta var w trunc 3}
+\begin{aligned}
+Var(\tilde{w}) - Var(w) &\geq \int_{-\infty}^{c} -w^2f(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w^2)f(w)\,\mathrm{d}w \\
+& - \int_c^{\infty} w^2f^2(w)\,\mathrm{d}w + (\int_{-\infty}^{\infty} wf(w)\,\mathrm{d}w)^2.
+\end{aligned}
+\end{equation}
+Since $f(w)\leq 1$ for all $w$, we have $f(w)\geq f^2(w)$ for all $w$. Rewrite into
+\begin{equation}
+\label{eqn: delta var w trunc 3}
+\begin{aligned}
+Var(\tilde{w}) - Var(w) &\geq \int_{-\infty}^{\infty} -w^2f(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w^2)f(w)\,\mathrm{d}w \\
+& + (\int_{-\infty}^{\infty} wf(w)\,\mathrm{d}w)^2.
+\end{aligned}
+\end{equation}
 
 ## Bias Correction
+
+
 
 # Survey of Professional Forecasters (SPF)
 To illustrate the empirical results, we use the data from ECB **(footnote link to data)** in this paper. The data, SPF, is a quarterly survey initiated by ECB, with the aim to obtain future estimates on inflation (HICP), RGDP and unemployment rate (UNEM) from the private sector. Every quarter, a gourp of professional forecasters from financial and non-financial instutition, such as economic research institutions, respond to the survey with the idea on the future economic. Starting 1999, SPF is the longest survey of macroeconomic expectation in the euro area. Until the date of this paper, there are 75 quarters of observation available, with 1999 Q4 as the first forecasted value, and 2018 Q2 as the last observed true macroeconomic indice.
@@ -133,4 +217,34 @@ The table \ref{tab: correlation summary statistics} tell us on how the forecast 
 **add more explanation**
 
 # Empirical Results
+## Proceure
+The procedure to get the weights can be different between different researcher. Therefore we provide a through order of the steps we take in the weight estimation. We do the weights estimation for the truncation using the following steps:
+
+Given each time to forecast, we take all the know observation before that forecast time period. 
+
+1. Find the nearest positive definite covariance matrix. This step is required for the covariance to be invertible. We employ the nearPD function from r package *Matrix*. The nearPD function first decompose the covariance into univariate variance and the correlation. The function then uses the algorithm by *higham* on the correlation matrix to compute the nearest positive definite matrix. THe final results the the covariance matrix that is combined from the univariate variance and the correlation matrix.
+
+2. Subset the covariance. Since there are more forecsaters in the estimation step than the amount of forecasters in the testing period, we take the sub matrix containing only the avaiable forecast on the testing period. That is, if 80 forecasters had made some forecasts before, but out of them, only 60 has a forecast this time, we discard the 20 extra forecasters.
+
+3. Estimate the simple weight $w^*$ from equation \ref{eqn: simple weight}.
+
+4. Truncate the weights with equation \ref{eqn: w trunc}. The weight no has less values and does not sum to one. Due to the fact that our selection of the truncation parameter are negative, the summation is higher than one and we scale down the weights accordingly.
+
+5. Combine the forecast using the weights.
+
+## Ratio of Mean Squared Prediction Error
+We eavluate the performance of different weights by mean squared prediction error (MSPE). The trunacted MSPE is then compared with the MSPE from equal weight. 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
