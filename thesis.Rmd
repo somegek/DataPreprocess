@@ -175,7 +175,7 @@ Within the datasets, not all forecasters did a forecast every time period. To av
 
 Following **(ref paper)**, we calculate the covariance by looking at the intersection between each forecasters. 
 
-**insert equation**
+**insert equation** 
 
 When there are no intersection between 2 forecasters, we set the covariance value to 0. Additionally, we calculate the correlation by using the covariance divided by the standard deviation. Standard deviation is obtained from the square root of the diagonal.
 
@@ -260,6 +260,28 @@ Threshold & Truncated Ratio    & Equal MSPE    & Truncated Ratio    & Equal MSPE
 0         & 0.98               & 0.74          & 0.98               & 1.47          \\
 \end{tabular}
 \end{table}
+
+
+## Out-of-sample truncation selection 
+In this section we show the forecast ability in weight truncation when the truncation parameter is selected out-of-sample (OOS). To perform the OOS selection of the truncation parameter, we follow the following step:
+
+1. Estimate the normal weight in equation \ref{eqn: simple weight}.
+
+2. Calculate the mean squared error (MSE) with truncated weight. The truncation parameter ranges from 0 to -10 with a step of -0.1.
+
+3. Select the truncation parameter with the lowest MSE. If there are multiple truncation points with the same MSE value, we take the largest truncation value within the same MSE.
+
+4. Use the selected truncation parameter to forecast the combined prediction.
+
+A remark on the selection of the largest truncation value. The reason to choose largest value is that the threshold is closer to the next changing point. Assume for exmaple, a weight with minimum of -1 is optimal, and any higher weight results in higher MSE. Then all truncation values between -10 and -1 gives the same minimal MSE. We therefore choose -1 to record. The choice does not influence the forecast, and is pure for the analysis later.
+
+## Out-of-sample truncation result
+We evaluate the OOS forecast ability using the same way as the MSPE with in-sample truncation parameter selection. The MSPE ratio and the MSPE of the equal weight is given in table \ref{}. We see in table \ref{} that the truncation improves in all cases from the equal weights. The truncation works better in RGDP 1 year ahead forecast and UNEM 1 and 2 year ahead forecasts.  If we compare the value to non truncated MSPE, we see that the truncation improves the forecasts of RGDP 2 year ahead for a large amount. 
+
+
+
+
+
 
 
 
