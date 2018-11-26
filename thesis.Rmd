@@ -235,16 +235,31 @@ Given each time to forecast, we take all the know observation before that foreca
 ## Ratio of Mean Squared Prediction Error
 We eavluate the performance of different weights by mean squared prediction error (MSPE). The trunacted MSPE is then compared with the MSPE from equal weight. 
 
-
-
-
-
-
-
-
-
-
-
+\begin{table}[!h]
+\centering
+\caption{Mean Squared Prediction Error of inflation with different truncated value. The MSPE of the truncated value is given in the ratio of tuncation to euqal weights. Larger than 1 means truncated is worse, where as smaller than 1 means truncated weight helps in reducing MSPE.}
+\label{my-label}
+\begin{tabular}{lcccc}
+          & \multicolumn{4}{c}{HICP}                                                \\
+          \cmidrule{2-5}
+          & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Year Horizon} \\
+          \cmidrule{2-3} \cmidrule{4-5}
+Threshold & Truncated Ratio    & Equal MSPE    & Truncated Ratio    & Equal MSPE    \\
+\cmidrule{1-1} \cmidrule{2-2} \cmidrule{3-3} \cmidrule{4-4} \cmidrule{5-5}
+-Inf      & 3.29               & 0.74          & 2.21               & 1.47          \\
+-10       & 2.82               & 0.74          & 2.21               & 1.47          \\
+-9        & 2.82               & 0.74          & 2.21               & 1.47          \\
+-8        & 2.82               & 0.74          & 2.21               & 1.47          \\
+-7        & 2.82               & 0.74          & 2.21               & 1.47          \\
+-6        & 2.82               & 0.74          & 2.08               & 1.47          \\
+-5        & 2.82               & 0.74          & 2.11               & 1.47          \\
+-4        & 2.82               & 0.74          & 2.15               & 1.47          \\
+-3        & 2.82               & 0.74          & 1.55               & 1.47          \\
+-2        & 0.81               & 0.74          & 0.99               & 1.47          \\
+-1        & 0.88               & 0.74          & 0.98               & 1.47          \\
+0         & 0.98               & 0.74          & 0.98               & 1.47          \\
+\end{tabular}
+\end{table}
 
 
 
