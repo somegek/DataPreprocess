@@ -12,6 +12,7 @@ output:
     toc_depth: 3
 header-includes:
     - \usepackage{placeins}
+    - \usepackage{siunitx}
 ---
 
 \newpage
@@ -124,7 +125,7 @@ The variance is
 \label{eqn: var w trunc}
 \begin{aligned}
 Var(\tilde{w}) &= E(\tilde{w}^{2})-E(\tilde{w})^2\\
-&=\int_c^{1-c} w^2f(w)\,\mathrm{d}w+\int_c^{1-c} f(w)\,\mathrm{d}w - (\int_c^{1-c} wf(w)\,\mathrm{d}w+\int_{1-c}^{\infty} f(w)\,\mathrm{d}w)^2,
+&=E[\tilde{w}^2],
 \end{aligned}
 \end{equation}
 And the change in variance is
@@ -143,26 +144,15 @@ Var(\tilde{w}) - Var(w) &\leq \int_{-\infty}^{c} -w^2f(w)\,\mathrm{d}w+\int_{1-c
 & - (\int_c^{\infty} g(w)f(w)\,\mathrm{d}w)^2 + \int_{-\infty}^{\infty} w^2f^2(w)\,\mathrm{d}w.
 \end{aligned}
 \end{equation}
-Since $|g(w)|\leq|w|$ for all $w$, thus $g^2(w) \leq w^2$ for all $w$. Equation \ref{eqn: delta var w trunc 2} becomes **rewrite starting here**
-\begin{equation}
-\label{eqn: delta var w trunc 3}
-\begin{aligned}
-Var(\tilde{w}) - Var(w) &\geq \int_{-\infty}^{c} -w^2f(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w^2)f(w)\,\mathrm{d}w \\
-& - \int_c^{\infty} w^2f^2(w)\,\mathrm{d}w + (\int_{-\infty}^{\infty} wf(w)\,\mathrm{d}w)^2.
-\end{aligned}
-\end{equation}
-Since $f(w)\leq 1$ for all $w$, we have $f(w)\geq f^2(w)$ for all $w$. Rewrite into
-\begin{equation}
-\label{eqn: delta var w trunc 3}
-\begin{aligned}
-Var(\tilde{w}) - Var(w) &\geq \int_{-\infty}^{\infty} -w^2f(w)\,\mathrm{d}w+\int_{1-c}^{\infty} (1-w^2)f(w)\,\mathrm{d}w \\
-& + (\int_{-\infty}^{\infty} wf(w)\,\mathrm{d}w)^2.
-\end{aligned}
-\end{equation}
+Since $|g(w)|\leq|w|$ for all $w$, thus $g^2(w) \leq w^2$ for all $w$. Equation \ref{eqn: delta var w trunc 2} becomes 
 
 ## Bias Correction
-
-
+Assume for the prediction error from forecast $i$, $\epsilon_i = y - y_i$, that we can decompose it into predictable term and unpredictable term:
+\begin{equation}
+\label{eqn: w bias assumption}
+\epsilon_i = b_i + \xi_i. 
+\end{equation}
+Then we can write the weight as a function that minimize the 
 
 # Survey of Professional Forecasters (SPF)
 To illustrate the empirical results, we use the data from ECB **(footnote link to data)** in this paper. The data, SPF, is a quarterly survey initiated by ECB, with the aim to obtain future estimates on inflation (HICP), RGDP and unemployment rate (UNEM) from the private sector. Every quarter, a gourp of professional forecasters from financial and non-financial instutition, such as economic research institutions, respond to the survey with the idea on the future economic. Starting 1999, SPF is the longest survey of macroeconomic expectation in the euro area. Until the date of this paper, there are 75 quarters of observation available, with 1999 Q4 as the first forecasted value, and 2018 Q2 as the last observed true macroeconomic indice.
@@ -175,7 +165,10 @@ Within the datasets, not all forecasters did a forecast every time period. To av
 
 Following **(ref paper)**, we calculate the covariance by looking at the intersection between each forecasters. 
 
-**insert equation** 
+\begin{equation}
+\label{equation}
+\sigma_{i,j} = \frac{1}{|y_i \cap y_j|}\sum_{k\in \{y_i \cap y_j\}} (y_{i,k}-E(y_i))*(y_{j,k}-E(y_j))
+\end{equation}
 
 When there are no intersection between 2 forecasters, we set the covariance value to 0. Additionally, we calculate the correlation by using the covariance divided by the standard deviation. Standard deviation is obtained from the square root of the diagonal.
 
@@ -184,41 +177,82 @@ When there are no intersection between 2 forecasters, we set the covariance valu
 \rho_{i,j} = \frac{\sigma_{i,j}}{\sigma_{i}\sigma_{j}}
 \end{equation}
 
-The cleaned up gives us a preliminary view on the SPF data without the noises.
+The cleaned up gives us a preliminary view on the SPF data without the noises. 
 
 \begin{figure}[!h]
-\centering
+%\centering
 \includegraphics{./Output/Images/SPF.png}
 \caption{Survey of Professional Forecasters data illustration}\label{fig: SPF data illustration}
 \end{figure}
 
-\begin{table}
+
+In figure \ref{fig: SPF data illustration} and table \ref{tab: correlation summary statistics} we show the plots of the forecasts along side with the true value in the macroeconomics and the statistics of the covariance of the forecast error. To avoid too many lines on the figure by plotting all forecasts, we plot only the minimum, mean, and maximum from the forecasts. We see that there exist a high consistency across all forecasts, with two years ahead stronger than one year. The consistency in the forecast is lower in UNEM than the other two. Furthermore, many true values lies outside of the forecast range, with RGDP the worse of all three. More values outside of the forecast range suggest that restricting positive weights may be a strong limitation in the forecast combination. 
+
+We examine the amount of true value out side of forecast range by looking at the summary statistics. Let the $ms$ be an indicator with 1 when the true value is outside of the forecast range, and 0 when the true value is inside. Table \ref{tab: modelspace summary statistics} shows the mean of the indicator. From the three macro topic, RGDP with 18% has the least chance within the forecast range, followed by HICP with 52%. UNEM with 62% has the highest chance to be in the forecast range. Changing from 1 year to 2 year generally does not influence the mean of the indicator a lot. From the results from figure \ref{fig: SPF data illustration} and table \ref{tab: modelspace summary statistics}, we expect to have large effect using truncation in the forecast of RGDP, while HICP and UNEM does not have too strong effect. We also expect the two year ahead forecast will be better than the one year ahead.
+
+\begin{table}[!h]
 \centering
-\caption{Summary statistics of the correlation of the forecast error. The correlation are split up into different forecast topics and different forecast horizons. For all of the series, the correlation are on average above 60%. In HICP and UNEM the correlation increases across all statistics when the forecast horizon increases, while RGDP remains the same.}
-\label{tab: correlation summary statistics}
-\begin{tabular}{lllllll}
+\caption{Mean of the model space indicator of the forecast. The indicators are split up into different forecast topics and different forecast horizons. From the three macro topic, RGDP has the least chance within the forecast range, followed by HICP. UNEM has the highest chance to be in the forecast range.}
+\label{tab: modelspace summary statistics}
+\begin{tabular}{lcccccc}
 \hline
+&\multicolumn{5}{c}{Model Space Indicator}\\
 Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 Horizon     & 1 year & 2 year & 1 year & 2 year & 1 year & 2 year \\ \hline
-min         & 0.03        & 0.02        & 0.11        & 0.13        & -0.02        & 0.08       \\
-1st Q       & 0.53        & 0.62        & 0.63        & 0.65        & 0.47         & 0.56       \\
-median      & 0.66        & 0.72        & 0.81        & 0.8         & 0.62         & 0.7        \\
-mean        & 0.64        & 0.7         & 0.75        & 0.75        & 0.59         & 0.67       \\
-3rd Q       & 0.77        & 0.81        & 0.89        & 0.87        & 0.74         & 0.8        \\
-max         & 0.96        & 0.97        & 0.98        & 0.98        & 0.94         & 0.95       \\ 
+Mean        & 0.45        & 0.51         & 0.83        & 0.82        & 0.37         & 0.39       \\
 \hline
 \end{tabular}
 \end{table}
 
-In figure \ref{fig: SPF data illustration} and table \ref{tab: correlation summary statistics} we show the plots of the forecasts along side with the true value in the macroeconomics and the statistics of the covariance of the forecast error. To avoid too many lines on the figure by plotting all forecasts, we plot only the minimum, mean, and maximum from the forecasts. We see that there exist a high consistency across all forecasts, with two years ahead stronger than one year. The consistency in the forecast is lower in UNEM than the other two. Furthermore, many true values lies outside of the forecast range, with RGDP the worse of all three. More values outside of the forecast range suggest that restricting positive weights may be a strong limitation in the forecast combination. We expect to have large effect using truncation in the forecast of RGDP, while HICP and UNEM does not have too strong effect. We also expect the two year ahead forecast will be better than the one year ahead.
-
 The table \ref{tab: correlation summary statistics} tell us on how the forecast error are correlated. The correlation are split up into different forecast topics and different forecast horizons. Diagonal element of the correlation matrix is not within the correlation when generating the summary statistics. For all of the series, the correlations are on average above 60%. In HICP and UNEM the correlation increases across all statistics when the forecast horizon increases, while RGDP remains the same. The lowest correlation to be found is -0.02, but this number is not too different than the minimum correlation in the other two topics.
 
-**add more explanation**
+
+\begin{table}[!h]
+\centering
+\caption{Summary statistics of the correlation of the forecast error. The correlation are split up into different forecast topics and different forecast horizons. For all of the series, the correlation are on average above 60\%. In HICP and UNEM the correlation increases across all statistics when the forecast horizon increases, while RGDP remains the same.}
+\label{tab: correlation summary statistics}
+\begin{tabular}{lcccccc}%{S[table-format=3.2]}
+\hline
+&\multicolumn{5}{c}{Correlation}\\
+Macro topic & \multicolumn{2}{c}{HICP}  & \multicolumn{2}{c}{RGDP}  & \multicolumn{2}{c}{UNEM}  \\
+Horizon     & 1 year      & 2 year      & 1 year      & 2 year      & 1 year       & 2 year     \\ \hline
+Minimum     & 0.03        & 0.02        & 0.11        & 0.13        & -0.02        & 0.08       \\
+First Q     & 0.53        & 0.62        & 0.63        & 0.65        & 0.47         & 0.56       \\
+Mean        & 0.64        & 0.70        & 0.75        & 0.75        & 0.59         & 0.67       \\
+Median      & 0.66        & 0.72        & 0.81        & 0.80        & 0.62         & 0.70       \\
+Third Q     & 0.77        & 0.81        & 0.89        & 0.87        & 0.74         & 0.80       \\
+Maximum     & 0.96        & 0.97        & 0.98        & 0.98        & 0.94         & 0.95       \\ 
+\hline
+\end{tabular}
+\end{table}
+
+Analysis on the simple weights given by equation \ref{eqn: simple weight} provides us a preliminary understanding on the variability. Table \ref{tab: simple weight summary statistics} shows the summary statistics of the weight. We see that for all macroeconomic topics, the mean and median variate around 0.02, which is close to the calculation from equal weights. Looking at the first and the third quantile, we see that half of the weights are between -0.6 and 0.6, which gives us an possible range of effectiveness of the truncation. The minimum and the maximum is extreme consider that 1 is 100%. With negativity up to -11, -21, and -14, and first and third quartile only up to -0.6 and 0.6, the weight indicates a strong thick tail behaviour. Looking further to the difference between 1 year and 2 year ahead, we see that in two out of three macro topics, we see that the extreme values converge to 0, while RGDP becomes worse. On the other hand, the gap between first and the third quantile increases for all topics. This indicates the increase in the choice of negative weights in the general cases for 2 year horizon. The mean and median does not change much in relation to the forecsat horizon.
+
+\begin{table}[!h]
+\centering
+\caption{Summary statistics of the weights from equation \ref{eqn: simple weight}. The mean and median is close to the value from equal weights. However, extreme values exist in the weights, visible in the mimum and maximum. Based on the first and the third quantile, we see that half of the weights are between -0.6 and 0.6.}
+\label{tab: simple weight summary statistics}
+\begin{tabular}{lcccccc}%{S[table-format=3.2]}
+\hline
+&\multicolumn{5}{c}{Weights}\\
+Macro topic & \multicolumn{2}{c}{HICP}  & \multicolumn{2}{c}{RGDP}  & \multicolumn{2}{c}{UNEM}  \\
+Horizon     & 1 year      & 2 year      & 1 year      & 2 year      & 1 year       & 2 year     \\ \hline
+Minimum      & -11.05      & -6.21      & -9.00      & -21.79      & -14.41      & -5.64      \\
+First Q      & -0.30       & -0.59      & -0.20      & -0.63       & -0.28       & -0.40      \\
+Mean         & 0.04        & 0.04       & 0.01       & -0.01       & 0.03        & 0.05       \\
+Median       & 0.05        & 0.03       & 0.04       & 0.01        & 0.04        & 0.03       \\
+Third Q      & 0.41        & 0.60       & 0.25       & 0.82        & 0.39        & 0.43       \\
+Maximum      & 12.94       & 7.56       & 8.74       & 16.34       & 11.26       & 7.90       \\ 
+\hline
+\end{tabular}
+\end{table}
+
+We conclude in for the analysis of SPF that there exhibits characteristics that are not in the standard cases. By incorporating the possiblity of negative weights, we expect to see some improvement in the forecast errors.
+
 
 # Empirical Results
 ## Proceure
-The procedure to get the weights can be different between different researcher. Therefore we provide a through order of the steps we take in the weight estimation. We do the weights estimation for the truncation using the following steps:
+We seek to evaluate the effect of truncating the weights with SPF data. The procedure to get the weights can be different between different researcher. Therefore we provide a through order of the steps we take in the weight estimation. We do the weights estimation for the truncation using the following steps:
 
 Given each time to forecast, we take all the know observation before that forecast time period. 
 
@@ -261,12 +295,44 @@ In this section we show the forecast ability in weight truncation when the trunc
 A remark on the selection of the largest truncation value. The reason to choose largest value is that the threshold is closer to the next changing point. Assume for exmaple, a weight with minimum of -1 is optimal, and any higher weight results in higher MSE. Then all truncation values between -10 and -1 gives the same minimal MSE. We therefore choose -1 to record. The choice does not influence the forecast, and is pure for the analysis later.
 
 ## Out-of-sample truncation result
-We evaluate the OOS forecast ability using the same way as the MSPE with in-sample truncation parameter selection. The MSPE ratio and the MSPE of the equal weight is given in table \ref{}. We see in table \ref{} that the truncation improves in all cases from the equal weights. The truncation works better in RGDP 1 year ahead forecast and UNEM 1 and 2 year ahead forecasts.  If we compare the value to non truncated MSPE, we see that the truncation improves the forecasts of RGDP 2 year ahead for a large amount. 
+We evaluate the OOS forecast ability using the same way as the MSPE with in-sample truncation parameter selection. The MSPE ratio and the MSPE of the equal weight is given in table \ref{tab: oos mspe}. 
 
+We see in table \ref{tab: oos mspe} that the truncation improves in all cases from the equal weights. The truncation works better in RGDP 1 year ahead forecast and UNEM 1 and 2 year ahead forecasts. If we compare the value to non truncated MSPE, we see that the truncation improves the forecasts of RGDP 2 year ahead for a large amount. On the other hand, there is relatively smaller improvement to UNEM 1 year and RGDP 1 year ahead. This results verify the idea that the truncation in general improves the upon equal weights even if the truncation uncertainty can increase the MSPE.
 
+\begin{table}[!h]
+\centering
+\caption{Mean squared prediction error ratio when the selection of the truncation is also out-of-sample. On average the truncation improves the forecast in all cases.}
+\label{tab: oos mspe}
+\begin{tabular}{lcccccc}
+\hline
+&\multicolumn{5}{c}{MSPE with OOS Truncation}\\
+Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
+Horizon     & 1 year & 2 year & 1 year & 2 year & 1 year & 2 year \\ \hline
+MSPE-ratio  & 0.97   & 0.96   & 0.93   & 0.96   & 0.92   & 0.88   \\ 
+\hline
+\end{tabular}
+\end{table}
 
+To understand the oos truncation more, table \ref{tab: truncation summary statistics} looks at the selection of the truncation. The results shows that on average, a truncation around -0.5 is selected, indicating a positive effect on the negative weights. HICP 2 year and RGDP 2 years select on average lower truncation, -0.8 and -1.0 respectively. UNEM selects -0.2 on average, highest among all. The minimum across all macro topics are at most -1, with RGDP 1 year, RGDP 2 year, and UNEM 1 year the lowest selected minimum. The first and the third quantile show that for the most cases, the truncation are not extreme, ranging between -0.5 to -0.2 in 1 year and -1 to 0 in 2 year horizon. We notice an increase in the variation when the horizon increases. This can be attibute to the uncertainty in the horizon adds uncertainty in the truncation parameter selection.
 
+\begin{table}[!h]
+\centering
+\caption{Summary statistics of the truncation selected.}
+\label{tab: truncation summary statistics}
+\begin{tabular}{lcccccc}%{S[table-format=3.2]}
+\hline
+&\multicolumn{5}{c}{Truncation}\\
+Macro topic & \multicolumn{2}{c}{HICP}  & \multicolumn{2}{c}{RGDP}  & \multicolumn{2}{c}{UNEM}  \\
+Horizon     & 1 year      & 2 year      & 1 year      & 2 year      & 1 year       & 2 year     \\ \hline
+Minimum     & -1.0        & -2.1        & -3.3        & -4.6        & -3.0        & -1.0        \\
+First Q     & -0.6        & -1.0        & -0.5        & -1.1        & -0.4        & -0.3        \\
+Mean        & -0.5        & -0.8        & -0.5        & -1.0        & -0.4        & -0.2        \\s
+Median      & -0.4        & -0.6        & -0.2        & -0.4        & -0.2        & -0.2        \\
+Third Q     & -0.3        & -0.3        & -0.1        & -0.2        & -0.2        & 0.0         \\
+Maximum     & 0.0         & 0.0         & 0.0         & 0.0         & 0.0         & 0.0         \\ 
+\hline
+\end{tabular}
+\end{table}
 
-
-
-
+## Bias weighting
+The bias weighting is an interesting case here. If the model in the bias estimation successfully estimates the predictable part and the unpredictable error, this can attirbute to a better weight selection with additional information gained. We estimate the bias by
