@@ -19,8 +19,8 @@ getEval <- function(DT_FCT){
   # the ratio is defined as SSE of full and sub divided by the SSE of equal weights
   ratioSumSqList <- paste0('RATIO_',str_sub(forecastList,start = 5))
   DT_RES[, (ratioSumSqList) := lapply(.SD, function(x) x/ERR_EQUAL_SUM_SQ), .SDcols = errSumSqList]
-  
+
   # show the ratio and SSE of equal weights per category
-  DT_RES <- unique(DT_RES[,.(FCT_TOPIC, FCT_HORIZON, THRESHOLD, RATIO_SUB_THRES, RATIO_FULL_THRES)])
+  DT_RES <- unique(DT_RES[,.(FCT_TOPIC, FCT_HORIZON, THRESHOLD, RATIO_SUB_THRES, RATIO_FULL_THRES,ERR_EQUAL_SUM_SQ)])
   DT_RES
 }
