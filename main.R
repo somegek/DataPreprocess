@@ -30,9 +30,9 @@ save(DT, file = 'Input/Initial_Weights.RData')
 
 ########## step 3: set threshold for the weights #########
 # sequence from -1 to 0 with step size 0.1
-startThres <- -10
+startThres <- -5
 endThres <- 0
-thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
+thresholdList <- seq(from = startThres, to = endThres, by = 0.2)
 thresholdList <- c(round(thresholdList,2), -Inf)
 
 # load data
