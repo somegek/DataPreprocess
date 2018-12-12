@@ -13,6 +13,8 @@ output:
 header-includes:
     - \usepackage{placeins}
     - \usepackage{siunitx}
+    - \usepackage{multirow}
+    - \usepackage{booktabs}
 ---
 
 \newpage
@@ -196,9 +198,12 @@ We examine the amount of true value out side of forecast range by looking at the
 \label{tab: modelspace summary statistics}
 \begin{tabular}{lcccccc}
 \hline
-&\multicolumn{5}{c}{Model Space Indicator}\\
+&\multicolumn{6}{c}{Model Space Indicator}\\
+\cmidrule{2-7}
 Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
-Horizon     & 1 year & 2 year & 1 year & 2 year & 1 year & 2 year \\ \hline
+\cmidrule{2-3} \cmidrule{4-5}\cmidrule{6-7}
+Horizon     & 1 year & 2 year & 1 year & 2 year & 1 year & 2 year \\ 
+\cmidrule{2-2} \cmidrule{3-3} \cmidrule{4-4} \cmidrule{5-5} \cmidrule{6-6} \cmidrule{7-7}
 Mean        & 0.45        & 0.51         & 0.83        & 0.82        & 0.37         & 0.39       \\
 \hline
 \end{tabular}
@@ -213,9 +218,12 @@ The table \ref{tab: correlation summary statistics} tell us on how the forecast 
 \label{tab: correlation summary statistics}
 \begin{tabular}{lcccccc}%{S[table-format=3.2]}
 \hline
-&\multicolumn{5}{c}{Correlation}\\
-Macro topic & \multicolumn{2}{c}{HICP}  & \multicolumn{2}{c}{RGDP}  & \multicolumn{2}{c}{UNEM}  \\
-Horizon     & 1 year      & 2 year      & 1 year      & 2 year      & 1 year       & 2 year     \\ \hline
+&\multicolumn{6}{c}{Correlation}\\
+\cmidrule{2-7}
+Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
+\cmidrule{2-3} \cmidrule{4-5}\cmidrule{6-7}
+Horizon     & 1 year & 2 year & 1 year & 2 year & 1 year & 2 year \\ 
+\cmidrule{2-2} \cmidrule{3-3} \cmidrule{4-4} \cmidrule{5-5} \cmidrule{6-6} \cmidrule{7-7}
 Minimum     & 0.03        & 0.02        & 0.11        & 0.13        & -0.02        & 0.08       \\
 First Q     & 0.53        & 0.62        & 0.63        & 0.65        & 0.47         & 0.56       \\
 Mean        & 0.64        & 0.70        & 0.75        & 0.75        & 0.59         & 0.67       \\
@@ -235,8 +243,11 @@ Analysis on the simple weights given by equation \ref{eqn: simple weight} provid
 \begin{tabular}{lcccccc}%{S[table-format=3.2]}
 \hline
 &\multicolumn{5}{c}{Weights}\\
-Macro topic & \multicolumn{2}{c}{HICP}  & \multicolumn{2}{c}{RGDP}  & \multicolumn{2}{c}{UNEM}  \\
-Horizon     & 1 year      & 2 year      & 1 year      & 2 year      & 1 year       & 2 year     \\ \hline
+\cmidrule{2-7}
+Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
+\cmidrule{2-3} \cmidrule{4-5}\cmidrule{6-7}
+Horizon     & 1 year & 2 year & 1 year & 2 year & 1 year & 2 year \\ 
+\cmidrule{2-2} \cmidrule{3-3} \cmidrule{4-4} \cmidrule{5-5} \cmidrule{6-6} \cmidrule{7-7}
 Minimum      & -11.05      & -6.21      & -9.00      & -21.79      & -14.41      & -5.64      \\
 First Q      & -0.30       & -0.59      & -0.20      & -0.63       & -0.28       & -0.40      \\
 Mean         & 0.04        & 0.04       & 0.01       & -0.01       & 0.03        & 0.05       \\
@@ -267,13 +278,14 @@ Given each time to forecast, we take all the know observation before that foreca
 5. Combine the forecast using the weights.
 
 ## Ratio of Mean Squared Prediction Error
-We eavluate the performance of different weights by mean squared prediction error (MSPE). The trunacted MSPE is then compared with the MSPE from equal weight. The results of HICP, RGDP, and UNEM are given in table \ref{tab: MSPE HICP}, \ref{tab: MSPE RGDP}, and \ref{tab: MSPE UNEM} respectively. The MSPE of equal weight is not influenced by the changes in the truncation value.
+We eavluate the performance of different weights by mean squared prediction error (MSPE). The trunacted MSPE is then compared with the MSPE from equal weight. The results of HICP, RGDP, and UNEM are given in table \ref{tab: MSPE HICP}, \ref{tab: MSPE RGDP}, and \ref{tab: MSPE UNEM} respectively. The MSPE of equal weight is not influenced by the changes in the truncation value. We see in table \ref{tab: MSPE HICP} that for truncation value
 
 \begin{table}[!h]
 \centering
-\caption{Mean Squared Prediction Error of inflation with different truncated value. The MSPE of the truncated value is given in the ratio of tuncation to euqal weights. Larger than 1 means truncated is worse, where as smaller than 1 means truncated weight helps in reducing MSPE.}
+\caption{Mean Squared Prediction Error (MSPE) of inflation with different truncated value. The MSPE of the truncated value is given in the ratio of tuncation to euqal weights. Larger than 1 means truncated is worse, where as smaller than 1 means truncated weight helps in reducing MSPE.}
 \label{tab: MSPE HICP}
 \begin{tabular}{lcccc}
+\hline
           & \multicolumn{4}{c}{HICP}                                                \\
           \cmidrule{2-5}
           & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Year Horizon} \\
@@ -291,15 +303,17 @@ Threshold & Truncated Ratio    & Equal MSPE    & Truncated Ratio    & Equal MSPE
 -3        & 2.82               & 0.74          & 1.55               & 1.47          \\
 -2        & 0.81               & 0.74          & 0.99               & 1.47          \\
 -1        & 0.88               & 0.74          & 0.98               & 1.47          \\
-0         & 0.98               & 0.74          & 0.98               & 1.47          \\
+0         & 0.98               & 0.74          & 0.98               & 1.47          \\ 
+\hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!h]
 \centering
-\caption{Mean Squared Prediction Error of economic growth with different truncated value. The MSPE of the truncated value is given in the ratio of tuncation to euqal weights. Larger than 1 means truncated is worse, where as smaller than 1 means truncated weight helps in reducing MSPE.}
+\caption{Mean Squared Prediction Error (MSPE) of economic growth with different truncated value. The MSPE of the truncated value is given in the ratio of tuncation to euqal weights. Larger than 1 means truncated is worse, where as smaller than 1 means truncated weight helps in reducing MSPE.}
 \label{tab: MSPE RGDP}
 \begin{tabular}{lcccc}
+\hline
           & \multicolumn{4}{c}{RGDP}                                                \\
           \cmidrule{2-5}
           & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Year Horizon} \\
@@ -317,15 +331,16 @@ Threshold & Truncated Ratio    & Equal MSPE    & Truncated Ratio    & Equal MSPE
 -3        & 0.88 & 3.54 & 1.08 & 3.36 \\
 -2        & 0.84 & 3.54 & 1.08 & 3.36 \\
 -1        & 0.86 & 3.54 & 1.14 & 3.36 \\
-0         & 0.97 & 3.54 & 1.01 & 3.36 \\
+0         & 0.97 & 3.54 & 1.01 & 3.36 \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!h]
 \centering
-\caption{Mean Squared Prediction Error of nemployment with different truncated value. The MSPE of the truncated value is given in the ratio of tuncation to euqal weights. Larger than 1 means truncated is worse, where as smaller than 1 means truncated weight helps in reducing MSPE.}
+\caption{Mean Squared Prediction Error (MSPE) of nemployment with different truncated value. The MSPE of the truncated value is given in the ratio of tuncation to euqal weights. Larger than 1 means truncated is worse, where as smaller than 1 means truncated weight helps in reducing MSPE.}
 \label{tab: MSPE UNEM}
 \begin{tabular}{lcccc}
+\hline
           & \multicolumn{4}{c}{UNEM}                                                \\
           \cmidrule{2-5}
           & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Year Horizon} \\
@@ -343,7 +358,7 @@ Threshold & Truncated Ratio    & Equal MSPE    & Truncated Ratio    & Equal MSPE
 -3        & 0.93 & 0.33 & 1.95 & 0.81 \\
 -2        & 0.77 & 0.33 & 1.87 & 0.81 \\
 -1        & 0.73 & 0.33 & 1.42 & 0.81 \\
-0         & 0.93 & 0.33 & 0.88 & 0.81 \\
+0         & 0.93 & 0.33 & 0.88 & 0.81 \\ \hline
 \end{tabular}
 \end{table}
 
@@ -373,8 +388,11 @@ We see in table \ref{tab: oos mspe} that the truncation improves in all cases fr
 \begin{tabular}{lcccccc}
 \hline
 &\multicolumn{5}{c}{MSPE with OOS Truncation}\\
+\cmidrule{2-7}
 Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
-Horizon     & 1 year & 2 year & 1 year & 2 year & 1 year & 2 year \\ \hline
+\cmidrule{2-3} \cmidrule{4-5}\cmidrule{6-7}
+Horizon     & 1 year & 2 year & 1 year & 2 year & 1 year & 2 year \\ 
+\cmidrule{2-2} \cmidrule{3-3} \cmidrule{4-4} \cmidrule{5-5} \cmidrule{6-6} \cmidrule{7-7}
 MSPE-ratio  & 0.97   & 0.96   & 0.93   & 0.96   & 0.92   & 0.88   \\ 
 \hline
 \end{tabular}
@@ -389,8 +407,11 @@ To understand the oos truncation more, table \ref{tab: truncation summary statis
 \begin{tabular}{lcccccc}%{S[table-format=3.2]}
 \hline
 &\multicolumn{5}{c}{Truncation}\\
-Macro topic & \multicolumn{2}{c}{HICP}  & \multicolumn{2}{c}{RGDP}  & \multicolumn{2}{c}{UNEM}  \\
-Horizon     & 1 year      & 2 year      & 1 year      & 2 year      & 1 year       & 2 year     \\ \hline
+\cmidrule{2-7}
+Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
+\cmidrule{2-3} \cmidrule{4-5}\cmidrule{6-7}
+Horizon     & 1 year & 2 year & 1 year & 2 year & 1 year & 2 year \\ 
+\cmidrule{2-2} \cmidrule{3-3} \cmidrule{4-4} \cmidrule{5-5} \cmidrule{6-6} \cmidrule{7-7}
 Minimum     & -1.0        & -2.1        & -3.3        & -4.6        & -3.0        & -1.0        \\
 First Q     & -0.6        & -1.0        & -0.5        & -1.1        & -0.4        & -0.3        \\
 Mean        & -0.5        & -0.8        & -0.5        & -1.0        & -0.4        & -0.2        \\s
@@ -402,4 +423,7 @@ Maximum     & 0.0         & 0.0         & 0.0         & 0.0         & 0.0       
 \end{table}
 
 ## Bias weighting
-The bias weighting is an interesting case here. If the model in the bias estimation successfully estimates the predictable part and the unpredictable error, this can attirbute to a better weight selection with additional information gained. We estimate the bias by
+The bias weighting is an interesting case here. If the model in the bias estimation successfully estimates the predictable part and the unpredictable error, this can attirbute to a better weight selection with additional information gained. We estimate the bias by the following equation
+\begin{equation}
+\epsilon_i = b_i + \xi_i.
+\end{equation}

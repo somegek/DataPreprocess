@@ -1,46 +1,37 @@
 load(file = "Input/preprocessed.RData")
 source('Rcode/global.R', echo=F)
 
-DT_MS <- unique(DT[, .(TRUE_VALUE, MIN_VALUE = min(OBS_VALUE), MAX_VALUE = max(OBS_VALUE)), by = c('FCT_TOPIC', 'FCT_HORIZON', 'TIME_PERIOD')])
-
-DT_MS[TRUE_VALUE<MIN_VALUE | TRUE_VALUE>MAX_VALUE, Outside := 1]
-DT_MS[TRUE_VALUE>=MIN_VALUE & TRUE_VALUE<=MAX_VALUE, Outside := 0]
+DT_MS <- unique(DT[, .(PERCENT_UNDER = sum(OBS_VALUE<TRUE_VALUE)/.N), by = c('FCT_TOPIC', 'FCT_HORIZON', 'TIME_PERIOD')])
 
 load(file = 'Input/Initial_Weights.RData')
 
-#sequence from -1 to 0 with step size 0.1
-startThres <- -1
-endThres <- 0
-thresholdList <- seq(from = startThres, to = endThres, by = (endThres-startThres)/10)
-thresholdList <- c(round(thresholdList,2), -Inf)
+DT_NEGW <- unique(DT[,.(PERCENT_NEG = sum(WEIGHT_SUB<0)/.N), by = c('FCT_TOPIC', 'FCT_HORIZON','TIME_PERIOD')])
 
-# get truncated weights
-DT_W <- getNewWeights(DT)
+setkey(DT_MS, FCT_TOPIC ,FCT_HORIZON ,TIME_PERIOD)
+setkey(DT_NEGW, FCT_TOPIC ,FCT_HORIZON ,TIME_PERIOD)
+DT_FULL <- merge(DT_MS,DT_NEGW)
+DT_FULL[,.(correlation=cor(PERCENT_UNDER,PERCENT_NEG)), by= c('FCT_TOPIC', 'FCT_HORIZON')]
 
-# get forecasts and the insample mse
-DT_FCT <- getForecast(DT_W)
-DT_RES <- getEval_insample(DT_FCT)
 
-# get position of lowest ratio
-findMin <- function(ratio,thres){
-  last(thres[ratio==min(ratio)])
+
+plotData <- function(DT,legendPos, ylimpara = c(0,1)){
+  plot(DT$PERCENT_UNDER, type = 'l',ylim=ylimpara, ylab = '', xlab='year',xaxt = "n", main = paste0(unique(DT$FCT_TOPIC), " ",unique(DT$FCT_HORIZON)," year ahead"))
+  lines(DT$PERCENT_NEG, type = 'l', col = 'red')
+  legend(legendPos,c("scaled absolute deviation from 0.5", "% negative weight"),
+         fill=c("black","red"), bty = 'n'
+  )
+  # if(DT$FCT_HORIZON[1]==1)  axis(1, at=seq(2,74,8), labels=seq(2000,2018,2)) else   axis(1, at=seq(1,75,8), labels=seq(2000,2018,2)) 
 }
 
-DT_THRES <- DT_RES[, findMin(RATIO_SUB_THRES,THRESHOLD), by= c('FCT_TOPIC','FCT_HORIZON', 'TEST_PERIOD')]
-setnames(DT_THRES, old ='V1', new = 'FCT_THRES')
-
-for(topic in c('HICP','RGDP','UNEM')){
-  for(horz in 1:2){
-    testList <- DT_THRES[FCT_TOPIC==topic & FCT_HORIZON == horz, TEST_PERIOD]
-    tempDT <- DT_MS[FCT_TOPIC==topic & FCT_HORIZON == horz]
-    for (test_time in testList){
-      DT_THRES[FCT_TOPIC==topic & FCT_HORIZON == horz & TEST_PERIOD == test_time, avgOutside := mean(tempDT[TIME_PERIOD < test_time,Outside])]
-    }
-  }
+makePlot <- function(){
+  par(mfrow=c(3,2))
+  plotData(DT_FULL[FCT_TOPIC=='HICP' & FCT_HORIZON==1],"bottomright")
+  plotData(DT_FULL[FCT_TOPIC=='HICP' & FCT_HORIZON==2],"bottomright")
+  plotData(DT_FULL[FCT_TOPIC=='RGDP' & FCT_HORIZON==1],"bottomright")
+  plotData(DT_FULL[FCT_TOPIC=='RGDP' & FCT_HORIZON==2],"bottomright")
+  plotData(DT_FULL[FCT_TOPIC=='UNEM' & FCT_HORIZON==1],"bottomright")
+  plotData(DT_FULL[FCT_TOPIC=='UNEM' & FCT_HORIZON==2],"bottomright")
 }
 
-DT_THRES <- DT_THRES[is.finite(FCT_THRES)]
+makePlot()
 
-corSummary <- DT_THRES[,.(Correlation=round(cor(FCT_THRES,avgOutside),2)), by = c('FCT_TOPIC','FCT_HORIZON')]
-
-write.csv(corSummary, file = 'Output/corrThresWithModelSpaceSummary.csv',row.names = F)

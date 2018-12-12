@@ -38,7 +38,7 @@ getWeights <- function(DT) {
     list(bias = tempDT[TIME_PERIOD == last(sort(TIME_PERIOD)), BIAS], Cov = tempCov)
   }
 
-  # get bias weights
+  # get bias weights by changing the covariance matrix
   getBiasWeights <- function(tempDT, trainDT) {
     biasList <- getBias(tempDT, trainDT)
     Cov_Err <- getSubCov(biasList$Cov, tempDT[TIME_PERIOD == last(sort(TIME_PERIOD)), FCT_SOURCE]) + biasList$bias %o% biasList$bias
@@ -46,6 +46,7 @@ getWeights <- function(DT) {
     weight
   }
 
+  # calcualte the covariance matrix
   getCovariance <- function(tempDT, trainDT) {
     # list of all forecasters
     forcastersList <- unique(tempDT$FCT_SOURCE)
