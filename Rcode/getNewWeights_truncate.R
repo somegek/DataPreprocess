@@ -1,11 +1,7 @@
 getNewWeights_truncate <- function(DT){
-  
-  
-  startThres <- -10
-  endThres <- 0
-  thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
-  thresholdList <- c(round(thresholdList,2), -Inf)
-  
+  # This function adds on getNewWeights()
+  # starting with get new weights, it obtain the optimal threshold from insample data
+  # then make the new weight according to the selected threshold
   
   # get truncated weights
   DT_W <- getNewWeights(DT)
@@ -39,7 +35,6 @@ getNewWeights_truncate <- function(DT){
   weightsList <- unique(grep('SUB', names(DT_new), value = TRUE))
   newWeightsList <- paste0(weightsList,'_THRES')
   DT_new[, (newWeightsList) := lapply(.SD, function(x) thresholdFunc(x, THRESHOLD)), .SDcols = weightsList, by=c('FCT_TOPIC','FCT_HORIZON','TIME_PERIOD', 'TEST_PERIOD', 'THRESHOLD')]
-  # DT[, (weightsList) := NULL]
   
   # take full and remove the effect of different time period
   DT_FULL <- unique(DT_new[,.(FCT_TOPIC, FCT_HORIZON, FCT_SOURCE, TEST_PERIOD, THRESHOLD, WEIGHT_FULL)])
@@ -49,7 +44,6 @@ getNewWeights_truncate <- function(DT){
   newWeightsList <- paste0(weightsList,'_THRES')
   DT_FULL[, (newWeightsList) := lapply(.SD, function(x) thresholdFunc(x, THRESHOLD)), .SDcols = weightsList, by=c('FCT_TOPIC','FCT_HORIZON', 'TEST_PERIOD', 'THRESHOLD')]
   DT_FULL[, (weightsList) := NULL]
-  # DT[, (weightsList) := NULL]
   
   # merge data
   setkey(DT_FULL, FCT_TOPIC, FCT_HORIZON, FCT_SOURCE, TEST_PERIOD, THRESHOLD)

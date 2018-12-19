@@ -1,7 +1,17 @@
+# this script plot the mspe ratio for different time series
 startThres <- -5
 endThres <- 0
 thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
 
+
+# load data
+load(file = 'Input/Initial_Weights.RData')
+# get the new weights given the threshold and get the results
+DT <- getNewWeights(DT)
+DT_FCT <- getForecast(DT)
+RES <- getEval(DT_FCT)
+
+# plot the data
 plotData <- function(DT,legendPos){
   plot(DT$RATIO_FULL_THRES,
        x =  thresholdList,
@@ -9,7 +19,6 @@ plotData <- function(DT,legendPos){
   legend(legendPos,c("MSPE Ratio"),
          fill=c("black")#, bty = 'n'
   )
-  # if(DT$FCT_HORIZON[1]==1)  axis(1, at=seq(2,74,8), labels=seq(2000,2018,2)) else   axis(1, at=seq(1,75,8), labels=seq(2000,2018,2)) 
 }
 
 makePlot <- function(){
