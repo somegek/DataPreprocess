@@ -31,11 +31,11 @@ source('Rcode/global.R', echo=FALSE)
 
 ########## step 3: set threshold for the weights #########
 # sequence from -5 to 0 with step size 0.1
-startThres <- -5
+startThres <- -1
 endThres <- 0
 thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
 # append -inf in behind
-thresholdList <- c(round(thresholdList,2), -Inf)
+thresholdList <- c(round(thresholdList,2)) #, -Inf)
 
 # load data
 load(file = 'Input/Initial_Weights.RData')
@@ -54,6 +54,7 @@ save(DT_FCT, file = 'Input/Forecasts.RData')
 
 ########## step 5: evaluate forcasts #########
 # get evaluation results
+load(file='Input/Forecasts.RData')
 RES <- getEval(DT_FCT)
 # paste "" to avoid error in excel
 RES[,THRESHOLD := paste0("\"",THRESHOLD,"\"")]

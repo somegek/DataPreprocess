@@ -1,11 +1,15 @@
-DT_THRES[is.infinite(FCT_THRES), FCT_THRES:=-0.9]
+source('~/Erasmus/Msc QF/Thesis/Code/DataPreprocess/Rcode/fluctuation.R', echo=TRUE)
+# this script plot the selected threshold
+
+# make plot
+DT_THRES[,FCT_MED:=median(FCT_THRES),by=c('FCT_TOPIC','FCT_HORIZON')]
+DT_THRES[is.infinite(FCT_THRES), FCT_THRES:=FCT_MED]
 plotData <- function(DT,legendPos){
   plot(y = DT$FCT_THRES, x= DT$TEST_PERIOD,
        type = 'l', ylab = 'Threshold', xlab='year', main = paste0(unique(DT$FCT_TOPIC), " ",unique(DT$FCT_HORIZON)," year ahead"))
   legend(legendPos,c("Selected Threshold"),
          fill=c("black")#, bty = 'n'
   )
-  # if(DT$FCT_HORIZON[1]==1)  axis(1, at=seq(2,74,8), labels=seq(2000,2018,2)) else   axis(1, at=seq(1,75,8), labels=seq(2000,2018,2)) 
 }
 
 makePlot <- function(){

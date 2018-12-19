@@ -1,4 +1,7 @@
 getNewWeights <- function(DT){
+  # this function get the truncated weight from the optimal weight
+  # input DT with optimal weight
+  # output DT with threshold weight
   
   # remove value below threshold and scale to 1
   thresholdFunc <- function(x, threshold){

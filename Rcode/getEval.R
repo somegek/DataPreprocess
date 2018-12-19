@@ -1,4 +1,9 @@
 getEval <- function(DT_FCT){
+  # this function is used in main
+  # input DT_FCT where the forecast of the data exist
+  # ouput DT_RES with evaluation result
+  # difference between this and insample is the evaluation window
+  
   # get list of forecasts, without FCT_TOPIC and FCT_HORIZON
   forecastList <- grep('FCT_',names(DT_FCT),value = TRUE)[-1:-2]
   
@@ -12,6 +17,8 @@ getEval <- function(DT_FCT){
   
   # calculated sum of error squared
   errSumSqList <- paste0(errList,"_SUM_SQ")
+  
+  # take only periods where the forecast are done
   DT_RES <- DT_FCT[TIME_PERIOD == TEST_PERIOD]
   DT_RES[, (errSumSqList) := lapply(.SD, function(x) mean(x)), .SDcols = errSqList, by = c('FCT_TOPIC', 'FCT_HORIZON', 'THRESHOLD')]
   
