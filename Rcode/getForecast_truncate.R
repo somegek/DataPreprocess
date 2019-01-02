@@ -1,4 +1,7 @@
 getForecast_truncate <- function(DT){
+  # this function is similar to getForecast()
+  # it does the same thing. The only difference is line 17 with setkey.
+  # since there are only 1 threshold per test period, ordering on threshold does not make sense anymore
   
   # get the lists of weights, and forecasts
   weightsList <- grep('WEIGHT',names(DT), value = TRUE)

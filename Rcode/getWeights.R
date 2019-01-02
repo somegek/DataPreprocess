@@ -1,5 +1,9 @@
 getWeights <- function(DT) {
-
+  # this function calculate the optimal weights
+  # input preprocessed data
+  # output data with optimal weights
+  
+  
   # get the sub covariance matrix given name list
   getSubCov <- function(Cov, colNameList) {
     colInd <- which(colnames(Cov) %in% colNameList)
@@ -12,7 +16,8 @@ getWeights <- function(DT) {
     weight <- weight / sum(weight)
     weight
   }
-
+  
+  # get the bias in the forecast according to the definition
   getBias <- function(tempDT, trainDT) {
     # calculate demeaned error and forecast
     colNamesList <- c("OBS_DEMEAN", "ERR_DEMEAN")
@@ -79,6 +84,7 @@ getWeights <- function(DT) {
     }
     # make sure it is p.d. (choice according to the paper)
     tempCov <- nearPD(tempCov)
+    
     # take the matrix from the output structure of nearPD
     tempCov <- as.data.frame.matrix(tempCov$mat)
     colnames(tempCov) <- forcastersList

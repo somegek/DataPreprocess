@@ -1,4 +1,9 @@
 getEval_truncate <- function(DT_FCT){
+  # this function is used in main
+  # input DT_FCT where the forecast of the data exist
+  # ouput DT_RES with evaluation result
+  # difference between this and normal is the MSE are not done per threshold value
+  
   # get list of forecasts, without FCT_TOPIC and FCT_HORIZON
   forecastList <- grep('FCT_',names(DT_FCT),value = TRUE)[-1:-2]
   

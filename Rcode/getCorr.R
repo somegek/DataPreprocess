@@ -1,4 +1,6 @@
 load(file = "Input/preprocessed.RData")
+# this script make a summary of the correlation matrix
+
 
 # get the weights by first getting the covariance, then calculate the weights
 getCorr<- function(tempDT){
@@ -37,6 +39,7 @@ getCorr<- function(tempDT){
   corr
 }
 
+# do getCorr for all topic and horizon
 corrList <- list()
 i <- 1
 for (topic in c('HICP','RGDP','UNEM')) {
