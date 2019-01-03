@@ -193,6 +193,14 @@ rm(MacroData, HICP, UNEM, RGDP)
 # filter on amount
 DT[, N := .N, by = c("FCT_TOPIC", "FCT_HORIZON", "FCT_SOURCE")]
 DT <- DT[N >= 24]
+# DT[,.(TOTAL_FCT_SOURCE = length(unique(FCT_SOURCE))),by=c('FCT_TOPIC', 'FCT_HORIZON')]
+#    FCT_TOPIC FCT_HORIZON TOTAL_FCT_SOURCE
+# 1:      HICP           1               72
+# 2:      HICP           2               60
+# 3:      RGDP           1               70
+# 4:      RGDP           2               64
+# 5:      UNEM           1               65
+# 6:      UNEM           2               53
 # remove excess column
 DT[,N:=NULL]
 
