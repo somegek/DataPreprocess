@@ -1,5 +1,6 @@
 source('~/Erasmus/Msc QF/Thesis/Code/DataPreprocess/Rcode/fluctuation.R', echo=TRUE)
 # this script plot the selected threshold
+# figure 3 threshold
 
 # make plot
 DT_THRES[,FCT_MED:=median(FCT_THRES),by=c('FCT_TOPIC','FCT_HORIZON')]

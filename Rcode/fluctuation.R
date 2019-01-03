@@ -2,13 +2,14 @@ load(file = 'Input/Initial_Weights.RData')
 source('./Rcode/global.R', echo=F)
 # this script see how the threshold varies
 # output csv threshold summary
+# table 11
 
 #sequence from -10 to 0 with step size 0.1
 startThres <- -10
 endThres <- 0
 thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
 # add no threshold
-thresholdList <- c(round(thresholdList,2), -Inf)
+thresholdList <- c(round(thresholdList,2))#, -Inf)
 
 # get truncated weights
 DT_W <- getNewWeights(DT)

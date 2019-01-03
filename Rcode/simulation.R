@@ -1,5 +1,6 @@
 # setting: try to see how the variance react when the threshold is away from the true value
 # this simulation look at difference in signal to noise ratio and correlation
+# figure 5 simulation
 source('Rcode/global.R', echo=FALSE)
 set.seed(12345677)
 par(mfrow=c(2,2))

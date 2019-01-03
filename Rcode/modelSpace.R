@@ -1,5 +1,6 @@
 # this script loads the preprocessed data and make the summary statistics 
 # for true value within model space or ture value outside of model space
+# table 1
 
 load(file = "Input/preprocessed.RData")
 source('Rcode/global.R', echo=F)

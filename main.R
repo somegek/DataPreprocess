@@ -6,6 +6,7 @@
 # step 4: use the combine the forecasts using the weights
 # step 5: evaluate forcasts
 
+# table 7,8,9,10,12,13,14
 
 #####################################################################################################################
 ################################################### before running ##################################################
@@ -31,11 +32,11 @@ source('Rcode/global.R', echo=FALSE)
 
 ########## step 3: set threshold for the weights #########
 # sequence from -5 to 0 with step size 0.1
-startThres <- -1
+startThres <- -5
 endThres <- 0
-thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
+thresholdList <- seq(from = startThres, to = endThres, by = 0.5)
 # append -inf in behind
-thresholdList <- c(round(thresholdList,2)) #, -Inf)
+thresholdList <- c(thresholdList, -Inf)
 
 # load data
 load(file = 'Input/Initial_Weights.RData')
@@ -58,28 +59,19 @@ load(file='Input/Forecasts.RData')
 RES <- getEval(DT_FCT)
 # paste "" to avoid error in excel
 RES[,THRESHOLD := paste0("\"",THRESHOLD,"\"")]
-numericList <- c('RATIO_SUB_THRES', 'RATIO_FULL_THRES')
+numericList <- c('RATIO_SUB_THRES', 'RATIO_FULL_THRES','RATIO_SUB_THRES_ABS', 'RATIO_FULL_THRES_ABS')
 # round to 2 digits
-RES[, (numericList) := lapply(.SD, function(x) round(x,2)), .SDcols = numericList]
+RES[, (numericList) := lapply(.SD, function(x) round(x,4)), .SDcols = numericList]
 print(RES)
 # save
 write.csv(RES, file = 'Output/Preliminary.csv',row.names = F)
 
-# summary statistics of the error term
-RESSummary <- DT_FCT[, lapply(.SD,function(x) round(summary(x),2)),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON','THRESHOLD')]
-# add label
-RESSummary[,Statistics:=c('min','1st Q', 'median','mean','3rd Q','max')]
-# reorder coloumn
-setcolorder(RESSummary, c('FCT_TOPIC', 'FCT_HORIZON', 'THRESHOLD', 'Statistics', 'ERR_EQUAL', 'ERR_SUB_THRES'))
-RESSummary[,THRESHOLD := paste0("\"",THRESHOLD,"\"")]
-write.csv(RESSummary, file = 'Output/preliminarySummary.csv',row.names = F)
-# calculate iqr of the errors
-RESIQR <- DT_FCT[, lapply(.SD,function(x) round(IQR(x),2)),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON','THRESHOLD')]
-RESIQR[,THRESHOLD := paste0("\"",THRESHOLD,"\"")]
-write.csv(RESIQR, file = 'Output/preliminaryIQR.csv',row.names = F)
-
-
 ###########
+startThres <- -1
+endThres <- 0
+thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
+# append -inf in behind
+thresholdList <- c(thresholdList, -Inf)
 # load data
 load(file = 'Input/Initial_Weights.RData')
 # get the new weights with optimal threshold
@@ -89,22 +81,7 @@ DT_FCT <- getForecast_truncate(DT)
 # evaluate it
 RES <- getEval_truncate(DT_FCT)
 # round to 2 digit
-numericList <- c('RATIO_SUB','RATIO_SUB_THRES', 'RATIO_FULL','RATIO_FULL_THRES')
-RES[, (numericList) := lapply(.SD, function(x) round(x,2)), .SDcols = numericList]
+numericList <- c('RATIO_SUB','RATIO_SUB_THRES', 'RATIO_FULL','RATIO_FULL_THRES','RATIO_SUB_ABS','RATIO_FULL_ABS','RATIO_SUB_THRES_ABS', 'RATIO_FULL_THRES_ABS')
+RES[, (numericList) := lapply(.SD, function(x) round(x,4)), .SDcols = numericList]
 print(RES)
 write.csv(RES, file = 'Output/OOS_Truncate.csv',row.names = F)
-
-# make summary statistics
-RESSummary <- DT_FCT[, lapply(.SD,function(x) round(summary(x),2)),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON')]
-RESSummary[,Statistics:=c('min','1st Q', 'median','mean','3rd Q','max')]
-setcolorder(RESSummary,c('FCT_TOPIC', 'FCT_HORIZON', 'Statistics', 'ERR_EQUAL', 'ERR_SUB_THRES'))
-write.csv(RESSummary, file = 'Output/OOS_Summary.csv',row.names = F)
-RESIQR <- DT_FCT[, lapply(.SD,function(x) round(IQR(x),2)),.SDcols = c('ERR_EQUAL','ERR_SUB_THRES'),by=c('FCT_TOPIC','FCT_HORIZON')]
-write.csv(RESIQR, file = 'Output/OOS_IQR.csv',row.names = F)
-
-
-
-source('Rcode/fluctuation.R', echo=FALSE)
-source('Rcode/modelSpace.R', echo=FALSE)
-source('Rcode/msCorrWithThres.R', echo=FALSE)
-

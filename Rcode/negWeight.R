@@ -2,6 +2,7 @@ load(file = 'Input/Initial_Weights.RData')
 source('Rcode/global.R', echo=FALSE)
 
 # this script shows the summary statistics of the optimal weight
+# table 6
 
 # calculate the summary statistics
 DT_NEG <- DT[WEIGHT_SUB!=0,.(Minimum = round(min(WEIGHT_SUB),2), 

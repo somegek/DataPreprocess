@@ -1,5 +1,6 @@
 load(file = "Input/preprocessed.RData")
 # this script make a summary of the correlation matrix
+# table 5
 
 
 # get the weights by first getting the covariance, then calculate the weights

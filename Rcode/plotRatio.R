@@ -1,4 +1,5 @@
 # this script plot the mspe ratio for different time series
+# figure 2 and figure 4
 startThres <- -5
 endThres <- 0
 thresholdList <- seq(from = startThres, to = endThres, by = 0.1)
@@ -13,7 +14,7 @@ RES <- getEval(DT_FCT)
 
 # plot the data
 plotData <- function(DT,legendPos){
-  plot(DT$RATIO_FULL_THRES,
+  plot(DT$RATIO_SUB_THRES,
        x =  thresholdList,
        type = 'l', ylab = 'Ratio', xlab='Truncation', main = paste0(unique(DT$FCT_TOPIC), " ",unique(DT$FCT_HORIZON)," year ahead"))
   legend(legendPos,c("MSPE Ratio"),
