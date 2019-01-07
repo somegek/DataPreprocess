@@ -1,4 +1,5 @@
 \documentclass[11pt]{article}
+\usepackage{natbib}
 \usepackage{setspace}
 \linespread{1.25}
 \usepackage{lmodern}
@@ -107,9 +108,9 @@ breaklinks=true}
 \section{Introduction}\label{introduction}
 Everyone makes predictions. Drawing a line or a curve through the plot, guesses base on intuition, or complex mathematical models are all predictions. However, people don't always make the same forecasts. As a matter of facts, most predictions are different. The more people there are, the more variety the predictions will be. The questions are, "which is better?" and "can we do better than any forecasts alone?"
 
-The study raised from the second question is forecast combinations. The idea is simple: if we don't know which forecast is the best, maybe there are a better solution which is a linear combination of all the forecasts. By combining the forecasts, the prediction contains less idiosyncratic risk, and becomes more the general opinion of all forecasters. This has proven to be successful in decreasing forecast error (\textbf{Clemen 1989, Diebold and Lopez 1996, Chen and Stock and Watson 1999, Dunis and Laws and Chauvin 2000, Stock and Watson 1999}).
+The study raised from the second question is forecast combinations. The idea is simple: if we don't know which forecast is the best, maybe there are a better solution which is a linear combination of all the forecasts. By combining the forecasts, the prediction contains less idiosyncratic risk, and becomes more the general opinion of all forecasters. This has proven to be successful in decreasing forecast error (\cite{Clemen1989}, \cite{Diebold1996}, \cite{Chen1999} , \cite{Dunis2000}, \cite{Stock2004}).
 
-The current literature starts with the seminal article of (\textbf{Bates and Granger 1969}) where forecast combination had been introduced to the public. The literature exploded and twenty years later, (\textbf{Clemen 1989}) gathered and reviewed the literature with over 200 items in the bibliography.
+The current literature starts with the seminal article of \cite{Bates1969} where forecast combination had been introduced to the public. The literature exploded and twenty years later, \cite{Clemen1989} gathered and reviewed the literature with over 200 items in the bibliography. Despite the extensive research on forecast combinations, \citeauthor{Clemen1989} found that some issues are still unsolved. One of the issue is 'What is the explanation for the robustness of the simple average of forecasts?'. Simple average with equal weights often outperforms more complicated weighting schemes when one compares the combination of point forecasts based on mean squared prediction error. This is further supported with future literatures \citep{Stock2004}. In 2004, \citeauthor{Elliot2004} made another review on recent theoretical contributions. \cite{Gibbs2017} proposed a bias estimation method on the forecast and adjust the weight according to the bias.
 
 In this paper, we look at the correlation between forecasters. The correlation is a strong factor in the weight determination. While many researchers choose to discard correlation due to uncertainty in the covariance estimation, the effect of the correlation can be in favour of the forecast. If both forecaster always over estimates, the high covariance detects this and results in a combined forecast that is not between the two forecasts. Therefore we want to see the effect of negative weights during estimation and to what extend limiting the negative weights can help in the forecast combination.
 
@@ -119,7 +120,7 @@ The result shows that the test statistics\footnote{Lower is better.} decreases i
 
 We look further in bias correction and simulation study. Bias correction aims to decrease the weights of the forecasts with known bias, while in the simulation study we show the effect of noise-to-signal ratio and correlation on the shape of mean squared prediction error. Bias estimation does not improve in most cases, but improve greatly for one timeseries where threshold does not help. The simulation on the other hand shows that when the correlation increases, the end position of the MSPE decreases. The similar effect can be found in the noise-to-signal ratio. When the noise-to-signal ratio increases, the achievable MSPE with negative weights increases.
 
-In this paper we demonstrated the ability to improve upon equal weight using threshold. The results are promising, but requires further research in areas such as optimal parameter selection.
+In this paper, we demonstrated the ability to improve upon equal weight using threshold. The results are promising, but requires further research in areas such as optimal parameter selection.
 
 
 \section{Methodology}\label{methodology}
@@ -147,8 +148,7 @@ w^*=\frac{\sigma_2^2-\sigma_1\sigma_2\rho}{\sigma_1^2+\sigma_2^2 -2\sigma_1\sigm
 \end{equation}
 
 Equation \ref{eqn: simple weight} is the standard benchmark approach in
-the combination theory, where extensive researches had been done on. 
-\textbf{add research}. We refer this weight as the simple weight. Equation \ref{eqn: simple weight} has a few
+the combination theory, where extensive researches had been done on. We refer this weight as the optimal weight. Equation \ref{eqn: simple weight} has a few
 empirical results that are against this approach. Two common
 alternative solutions are diagonal covariance matrix and equal weight.
 
@@ -165,10 +165,10 @@ dimension goes up. The amount of parameters to estimate for the
 covariance with dimension \(n\) is \(\frac{1}{2}n(n+1)\), which is
 quadratic in \(n\). When the user only estimates the variances, the
 amount of parameters to estimate reduces to \(n\), which greatly
-decreases the estimation error. \textbf{add citation}
+decreases the estimation error. \cite{Stock2001}
 
 Applying more restriction by setting $\sigma_1=\sigma_2$, we get equal weight. Equal weight is another common approach that works better empirically.
-\textbf{add citation} The forecast combination is in this case just an
+\cite{Clemen1989} The forecast combination is in this case just an
 arithmetic mean of all forecasts. The reason behind using equal weight is the fact
 that estimating weight increases or shifts the forecast errors due to
 additional estimation error in the estimation of \(w\). This estimation error has a negative effect on the forecast.
@@ -295,7 +295,7 @@ w^* &, \text{ if } c<w^*<1-c \\
 1 &, \text{ if } w^*>1-c.
 \end{dcases}
 \end{equation}
-
+This truncation is effectively searching for the forecasts that are above a certain level of weights. If the weight is below the threshold, the forecast is discarded. Therefore the truncation can also be viewed as a forecast selection method.
 
 Assume that there is no skewness in the joint distribution, e.g.,
 \(w^*\) is an unbiased estimator of the true \(w\). The expected value of
@@ -360,7 +360,7 @@ MSE_c &= Bias_c(\tilde{w})^2 + Var(\tilde{w})\\
 \end{aligned}
 \end{equation}
 
-Without an assumption on the distribution of the weight, it is hard to tell if the change in truncation will lead to a higher MSE or a lower MSE. We expect that when $c$ is small enough, e.g. $\tilde{w}\approx w^*$, the increase in bias is small compared to the decrease in variance. When the truncation $c$ gradually increases, the decrease of the variance starts to slow down, and the bias starts to increase more. This is due to the quadratic behaviour of MSE. Thus, somewhere between $w^*$ and $\frac{1}{n}$, there will be an optimal trade-off. This is similar to shrinkage estimator \textbf{cite James Stein}. However, truncation set the truncated weight to 0 instead of $c$. This effectively removes the forecast from the list to be combined. By incorporating this truncation style, the weight can be viewed as a variable selection method in the area of forecast combination, where negative weight is empirically inferior to positive weight. 
+Without an assumption on the distribution of the weight, it is hard to tell if the change in truncation will lead to a higher MSE or a lower MSE. We expect that when $c$ is small enough, e.g. $\tilde{w}\approx w^*$, the increase in bias is small compared to the decrease in variance. When the truncation $c$ gradually increases, the decrease of the variance starts to slow down, and the bias starts to increase more. This is due to the quadratic behaviour of MSE. Thus, somewhere between $w^*$ and $\frac{1}{n}$, there will be an optimal trade-off. This is similar to shrinkage estimator \citep{James1961}. However, truncation set the truncated weight to 0 instead of $c$. This effectively removes the forecast from the list to be combined. By incorporating this truncation style, the weight can be viewed as a variable selection method in the area of forecast combination, where negative weight is empirically inferior to positive weight. 
 
 \subsection{Bias Correction}\label{bias-correction}
 
@@ -432,8 +432,7 @@ The implication on the optimal weight is also different from equation \ref{eqn: 
 \section{Survey of Professional Forecasters
 (SPF)}\label{survey-of-professional-forecasters-spf}
 
-To illustrate the empirical results, we use the data from European Central Bank (ECB)
-\textbf{(footnote link to data)} in this paper. The data, Survey of Professional Forecasters (SPF), is a
+To illustrate the empirical results, we use the data from European Central Bank (ECB) in this paper. The data, Survey of Professional Forecasters (SPF), is a
 quarterly survey initiated by ECB, with the aim to obtain future
 estimates on inflation (HICP), Real Gross Domestic Product year-on-year growth (RGDP) and unemployment rate (UNEM) from
 the private sector. Every quarter, a group of professional forecasters
@@ -454,7 +453,7 @@ the two most answered periods, which is 1 year ahead and 2 years ahead
 as our dataset for all HICP, RGDP, and UNEM.
 
 To compare the forecasts with the actual macroeconomics, we obtain the
-true value from ECB database \textbf{(footnote link to data)}. The data
+true value from ECB database. The data
 cannot be observed from the economic in 100\% accuracy within the first
 time frame and exhibits changes to the initial estimates after
 revision. We use the final revision of the macroeconomics where
@@ -464,9 +463,9 @@ original forecast is not the real target to forecast.
 Within the datasets, not all forecasters did a forecast every time
 period. To avoid singular outliers, we remove all forecasters with a
 total forecasted period of less than 24 quarter (6 years). The removal
-approach is in-line with \textbf{(ref paper)}.
+approach is in-line with \cite{Matsypura2018}.
 
-Following \textbf{(ref paper)}, we calculate the covariance by looking
+Following \cite{Matsypura2018}, we calculate the covariance by looking
 at the intersection between each forecaster. Let $T_i$ be the set of periods which the $i$-th forecaster has respond to the survey, $T_i \subseteq \{1,\ldots,T\}$, and let $e_{it}$ be the forecast error of $i$-th forecaster on time $t$, $e_{it} \in T_i$. Then the variance/covariance can be calculated with
 
 \begin{equation}
@@ -537,7 +536,7 @@ Mean        & 0.45        & 0.51         & 0.83        & 0.82        & 0.37     
 \end{tabular}
 \end{table}
 
-As not all forecasters replied to each survey, we show the amount of forecasters per macroeconomic topic in table \ref{tab: amount of forecasters}. The amount of forecasters after filtering is around 70 for 1 year ahead forecasts, and 60 for 2 year ahead forecasts. We also show the amount of replies per forecaster in a summary statistic in table \ref{tab: forecaster summary statis	tics}. For readability purpose, we round the mean statistics to whole number. The minimum amount of forecast are set to 24, and all forecasters with less than 24 forecasts are discarded. The maximum replies are round 70, which is disctinctivly lower than the full reply of 91 observations. With the mean around 50, we have enough observations to do pair-wise covariance, but multivariate covariance remains skeptical.
+As not all forecasters replied to each survey, we show the amount of forecasters per macroeconomic topic in table \ref{tab: amount of forecasters}. The amount of forecasters after filtering is around 70 for 1 year ahead forecasts, and 60 for 2 year ahead forecasts. We also show the amount of replies per forecaster in a summary statistic in table \ref{tab: forecaster summary statistics}. For readability purpose, we round the mean statistics to whole number. The minimum amount of forecast are set to 24, and all forecasters with less than 24 forecasts are discarded. The maximum replies are round 70, which is close to the full amount of 75 observations. With the mean around 50, we have enough observations to do pair-wise covariance, but multivariate covariance remains skeptical.
 
 \begin{table}[!h]
 \centering
@@ -672,18 +671,18 @@ forecast errors.
 
 \section{Empirical Results}\label{empirical-results}
 \subsection{Optimal Weight}\label{optimal-weight}
-Analysis of the simple weight given by equation
+Analysis of the optimal weight given by equation
 \ref{eqn: simple weight} provides us with a preliminary understanding of the
 variability. Table \ref{tab: simple weight summary statistics} shows the
 summary statistics of the optimal weight. We see that for all macroeconomic
 topics, the mean and median variate around 0.02, which is close to the
 calculation from equal weight. Looking at the first and the third
 quantile, we see that half of the weight are between -0.6 and 0.6,
-which gives us a possible range of effectiveness of the truncation. The
+which gives us a possible range of effectiveness of the threshold. The
 minimum and the maximum is extreme considering that 1 is 100\%. With
 negativity up to -11, -21, and -14, and first and third quartile only up
 to -0.6 and 0.6, the weight indicates a strong thick tail behaviour.
-Looking further to the difference between 1 year and 2 yearss ahead, we
+Looking further to the difference between 1 year and 2 years ahead, we
 see that in two out of three macro topics, we see that the extreme
 values converge to 0, while RGDP becomes worse. On the other hand, the
 gap between first and the third quantile increases for all topics. This
@@ -979,24 +978,24 @@ Figure \ref{fig: fluctuation} gives a visual inspection on the stability of the 
 
 The bias weighting is an interesting case here. If the model in the bias
 estimation successfully estimates the predictable part and the
-unpredictable error, this can attirbute to a better weight selection
-with additional information gained. Our approach to bias estimation is similar to \textbf{Gibbs \& Vasnev} but deviates in the variable used. We estimate the bias by
+unpredictable error, this can attribute to a better weight selection
+with additional information gained. Our approach to bias estimation is similar to \cite{Gibbs2017} but deviates in the variable used. We estimate the bias by
 \begin{equation}
 \label{eqn: bias estimation}
-\epsilon_{i,t} = \alpha + \gamma_i y_{i,t} + \eta_{i,t}.
+\epsilon_{i,t} = \alpha + \gamma_i y_{i,t} + \eta_{i,t},
 \end{equation}
-Which we then produce the estimated future forecast bias by taking the expected value
+which we then produce the estimated future forecast bias by taking the expected value
 \begin{equation}
 E(\epsilon_{i,t+1}) = \alpha + \gamma_i y_{i,t+1}.
 \end{equation}
- \textbf{Gibbs \& Vasnev} uses the true macroeconomic data, while we uses the forecast itself. Essentially they are interchangeable. Rewrite equation \ref{eqn: bias estimation} into
+\citeauthor{Gibbs2017} uses the true macroeconomic data, while we uses the forecast itself. Essentially they are interchangeable. Rewrite equation \ref{eqn: bias estimation} into
 \begin{equation}
 \begin{aligned}
 \epsilon_{i,t} &= \frac{\alpha}{1+\gamma_i}+\frac{\gamma_i}{1+\gamma_i}y_t + \frac{1}{1+\gamma_i}\eta_{i,t}\\
 &= \alpha^* + \gamma_i^* y_t + \eta_{i,t}^*,
 \end{aligned} 
 \end{equation}
-and equation \ref{eqn: bias estimation} becomes the equation given by \textbf{Gibbs \& Vasnev}.
+and equation \ref{eqn: bias estimation} becomes the equation given by \citeauthor{Gibbs2017}.
 
 Table \ref{tab: MSPE HICP bias}, \ref{tab: MSPE RGDP bias}, and \ref{tab: MSPE UNEM bias} shows the effect of truncation with bias-corrected weight. The estimation of bias increases the estimation error and therefore is another trade-off between estimation error and the bias. Only two out of six topics have a ratio below 1, considerably worse than without bias correction. The two topics are RGDP 2 year and UNEM 1 year, with minimum of 0.83 and 0.56 respectively. For HICP with bias correction, the truncation performs best with the highest value. This is different from no-bias selection.
 
@@ -1115,28 +1114,28 @@ For a U-shape to exist, e.g. equal weight is not the best, the correlation and e
 \section{Conclusion and discussion}\label{conclusion}
 In this paper, we look into the possibility to use truncation to improve the forecast within forecast combination. Simple weight derived with a deterministic weight assumption often show bad empirical behaviour when compared to equal weight by arithmetic mean. Equal weight has a behaviour that the combined forecast cannot exceed the minimum or the maximum of all forecast. This limitation also holds for all weight selection method where the weight cannot be negative. 
 
-Using truncation, five out of six macroeconomic topics have a positive effect on the mean squared prediction error (MSPE) for European central bank's survey of professional forecasters (SPF). SPF is a quarterly survey sent to the private sector to understand their view on inflation (HICP), economic growth (RGDP), and unemployment (UNEM) in the next one and two year. The survey forecasts have a strong correlation within the forecasters, which we show that the true value often lies outside of the minimum/maximum range. Additionally, the increase in the correlation leads to an increase in the negative weight. Therefore the relaxation of no negative weight can help in this aspect.
+Using truncation, five out of six macroeconomic topics have a positive effect on the mean squared prediction error (MSPE) and mean absolute prediction error (MAPE) for European central bank's survey of professional forecasters (SPF). SPF is a quarterly survey sent to the private sector to understand their view on inflation (HICP), economic growth (RGDP), and unemployment (UNEM) in the next one and two year. The survey forecasts have a strong correlation within the forecasters, which we show that the true value often lies outside of the minimum/maximum range. Additionally, the increase in the correlation leads to an increase in the negative weight. Therefore the relaxation of no negative weight can help in this aspect.
 
 By truncation, we set the weight below a certain threshold to 0, which removes the forecasts from the combination list. The results indicate a positive effect up to 30\% decrease in MSPE compared to equal weight. 
 This is positive news considering the amount of forecaster is relatively large compared to the sample size. 
 With up to 120 forecasters and 60 observations, the weight estimation contains a large amount of estimation noise.
 This gives the estimated weight a wide variation, with a minimum of -21.79 and maximum of 16.34. On the other hand, the weights calculated by equal weight method are around 0.01.
 
-The truncation effect holds for out-of-sample (OOS) selection on the truncation parameter. The effect decreases from up to 30\% to up to 12\% decrease in MSPE. Contrary to the truncation where the parameter stays constant, OOS selection allows the parameter to vary over time. This attributes to the increase in performance of RGDP with 2 years forecast horizon. In all six macroeconomic cases, we see an improvement in MSPE when compared to equal weight. For the selected truncation, most of the selected parameter are below -1.5, which is well below the original -21.79. Setting the parameter below -1.5 limits the variation, and therefore decreases the variance and the estimation error.
+The truncation effect holds for optimal threshold (OT) selection on the truncation parameter. The effect decreases from up to 30\% to up to 12\% decrease in MSPE. Contrary to the truncation where the parameter stays constant, OT selection allows the parameter to vary over time. This attributes to the increase in performance of RGDP with 2 years forecast horizon. In all six macroeconomic cases, we see an improvement in MSPE and MAPE when compared to equal weight. For the selected truncation, most of the selected parameter are below -1.5, which is well below the original -21.79. Setting the parameter below -1.5 limits the variation, and therefore decreases the variance and the estimation error.
 
-Looking further into the weight selection, it is possible that the characteristic of SPF is dominated by a consistent bias over a certain forecaster. An example would be a case where the forecaster undervalues the growth and the decline, resulting in a forecast closer to 0 than the true value. Therefore we construct the bias correcting forecast weight and applies the truncation analysis on the corrected weight. The result is mix bag of good and bad news. Four out of six macroeconomic topics are worse than equal weight, while without bias correction, we have only 1 truncation weight that is under-performing. There are still declines in the MSPE compared to the non-truncated ones. On the positive news, bias-correction improves the only macro topic that does not outperform equal weight without bias-correction. The MSPE decreases up to 17\% compared with equal weight. Another positive news is an additional decrease of 13\% in UNEM 1 year ahead. The difference with and without bias correction could be in the direction of the changes of the weight. Truncation tries to extend the forecast upon the range by using negative weight, while bias-correction tries to identify the consistent bias within each forecaster.
+Looking further into the weight selection, it is possible that the characteristic of SPF is dominated by a consistent bias over a certain forecaster. An example would be a case where the forecaster undervalues the growth and the decline, resulting in a forecast closer to 0 than the true value. Therefore we construct the bias correcting forecast weight and applies the truncation analysis on the corrected weight. The result is mix bag of good and bad news. Four out of six macroeconomic topics are worse than equal weight, while without bias correction, we have only 1 truncation weight that is under-performing. There are still declines in the test statistics compared to the non-truncated ones. On the positive news, bias-correction improves the only macro topic that does not outperform equal weight without bias-correction. The MSPE decreases up to 17\% compared with equal weight and MAPE up to 12 \%. Another positive news is an additional decrease of 13\% in UNEM 1 year ahead. The difference with and without bias correction could be in the direction of the changes of the weight. Truncation tries to extend the forecast upon the range by using negative weight, while bias-correction tries to identify the consistent bias within each forecaster.
 
 We also study the different effect of correlation and estimation uncertainty on the shape of the MSPE. Correlation and estimation uncertainty both play important intertwined roles in the truncation. Higher correlation only allows lower error when finding the optimal truncation parameter, while lower correlation also allows higher error to exist. Since estimation uncertainty and correlation can be known before applying truncation, the selection of best truncation using that information is a possible future research topic.
 
-We list a few other points in this paper that require further research. All analytical derivations are done in two forecasts scenario. They can be extended to multivariate setting. 
-RGDP 2 years ahead shows an unexpected shape of MSPE. The reason to this shape is unclear.
+We list a few other points in this paper that require further research. All analytical derivations are done in two forecasts scenario, which can be extended to multivariate setting. 
+RGDP 2 years ahead shows an unexpected shape of MSPE, with the reason to this shape unclear.
 Knowing the reason to spikes in the truncation selection is helpful as this can help in limiting variation.
-Combination of other techniques like shrinkage on the covariance to improve the estimates.
+Combination of other techniques like shrinkage on the covariance to improve the estimates. Additionally, use the threshold value instead of 0 to the truncation can also change the effect of the method.
 
 All in all, we demonstrate the ability to improve upon equal weight by truncation. The requirements for the improvement lies in the correlation and forecast uncertainty. When the conditions are met, for example, the SPF data, equal weight is no longer the prime choice in the forecast combination. 
 
 
-
+\bibliographystyle{apalike}
 \bibliography{shortbib}
 
 \end{document}
