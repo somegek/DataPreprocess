@@ -14,17 +14,19 @@ RES <- getEval(DT_FCT)
 
 # plot the data
 plotData <- function(DT,legendPos){
-  plot(DT$RATIO_SUB_THRES,
+  plot(DT$RATIO_FULL_THRES,
        x =  thresholdList,
        type = 'l', ylab = 'Ratio', xlab='Truncation', main = paste0(unique(DT$FCT_TOPIC), " ",unique(DT$FCT_HORIZON)," year ahead"))
-  legend(legendPos,c("MSPE Ratio"),
-         fill=c("black")#, bty = 'n'
+  lines(DT$RATIO_FULL_THRES_ABS,
+       x =  thresholdList, col = 'red')
+  legend(legendPos,c("MSPE Ratio",'MAPE Ratio'),
+         fill=c("black",'red')#, bty = 'n'
   )
 }
 
 makePlot <- function(){
   par(mfrow=c(3,2))
-  plotData(RES[FCT_TOPIC=='HICP' & FCT_HORIZON==1 & THRESHOLD!='-Inf'],"topright")
+  plotData(RES[FCT_TOPIC=='HICP' & FCT_HORIZON==1 & THRESHOLD!='-Inf'],"bottomleft")
   plotData(RES[FCT_TOPIC=='HICP' & FCT_HORIZON==2 & THRESHOLD!='-Inf'],"topright")
   plotData(RES[FCT_TOPIC=='RGDP' & FCT_HORIZON==1 & THRESHOLD!='-Inf'],"topright")
   plotData(RES[FCT_TOPIC=='RGDP' & FCT_HORIZON==2 & THRESHOLD!='-Inf'],"topright")
