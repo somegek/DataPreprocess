@@ -5,26 +5,6 @@
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{mathtools}
-\usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-\ifxetex
-\usepackage{mathspec}
-\else
-\usepackage{fontspec}
-\fi
-\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-\fi
-%use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-%use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
@@ -52,15 +32,6 @@ breaklinks=true}
 \providecommand{\tightlist}{%
 \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-%Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
 
 %Use protect on footnotes to avoid problems with footnotes in titles
 \let\rmarkdownfootnote\footnote%
@@ -298,13 +269,13 @@ w^* &, \text{ if } c<w^*<1-c \\
 This truncation is effectively searching for the forecasts that are above a certain level of weights. If the weight is below the threshold, the forecast is discarded. Therefore the truncation can also be viewed as a forecast selection method.
 
 Assume that there is no skewness in the joint distribution, e.g.,
-\(w^*\) is an unbiased estimator of the true \(w\). The expected value of
+\(w^*\) is an unbiased estimator of the true \(w\). By law of total expectation, the expected value of
 the weight \(\tilde{w}\) is
 
 \begin{equation}
 \label{eqn: E w trunc}
 \begin{aligned}
-E(\tilde{w}) &= E(I_{c<w^*<1-c}w^*) + P(w^*>1-c).
+E(\tilde{w}) &= E(w^*|c<w^*<1-c)P(c<w^*<1-c) + P(w^*>1-c).
 \end{aligned}
 \end{equation}
 
@@ -312,51 +283,51 @@ The bias is therefore
 \begin{equation}
 \label{eqn: bias w trunc}
 \begin{aligned}
-Bias_c(\tilde{w}) = E(\tilde{w}) - E(w^*) &= -E(I_{w^*<c}w^*)+E(I_{w^*>1-c}(1-w^*))
+Bias_c(\tilde{w}) = E(w^*) - E(\tilde{w}) \\
+&= E(w^*|w^*<c)P(w^*<c) + E(w^*-1|w^*>1-c)P(w^*>1-c)
 \end{aligned}
 \end{equation}
 
 In the first term, we have \(w^*<c<0\), which cancels out the negative
 sign and becomes positive. In the second term we have \(w^*>1-c>1\), which
-gives a negative value in \(1-w\). In general case where \(w\) can go
-above \(1-c\) or below \(c\) and the skewness of \(w\) is not 0, the
-bias is non-zero. The changes in going from $c_1$ to $c_2$ with $c_1<c_2$ is
-\begin{equation}
-\label{eqn: bias w trunc}
-\begin{aligned}
-Bias_{c_2}(\tilde{w})- Bias_{c_1}(\tilde{w}) &= -E(I_{c_1<w^*<c_2}w^*)+E(I_{1-c_2<w^*<1-c_1}(1-w^*)).
-\end{aligned}
-\end{equation}
+gives a positive value in \(w^*-1\). In general case where \(w^*\) can go
+above \(1-c\) or below \(c\) and the distribution of \(w\) is not symmetric, then the
+bias is non-zero.
 
-The variance is
+By law of total variance, the variance of the weight is
 
 \begin{equation}
 \label{eqn: var w trunc}
 \begin{aligned}
 Var(\tilde{w}) &= Var(I_{c<w^*<1-c}w^*+I_{w^*>1-c})\\
-&=Var(I_{c<w^*<1-c}w) + Var(I_{w^*>1-c}) + 2 Cov(I_{c<w^*<1-c}w,I_{w^*>1-c})\\
-&=Var(I_{c<w^*<1-c}w) + P(w^*>1-c)(1-P(w^*>1-c)) \\&- 2E(I_{c<w^*<1-c}w^*)P(w^*>1-c)
+&=Var(w^*|c<w^*<1-c)P(c<w^*<1-c) + P(w^*>1-c)(1-P(w^*>1-c)) \\&- 2E(w^*|c<w^*<1-c)P(c<w^*<1-c)P(w^*>1-c),
 \end{aligned}
 \end{equation}
-
-And the change in variance when $c_1$ becomes $c_2$ is
-
+and the difference between $\tilde{w}$ and $w^*$ is
 \begin{equation}
-\label{eqn: delta var w trunc 1}
+\label{eqn: delta var w trunc}
 \begin{aligned}
-Var_{c_2}(\tilde{w}) - Var_{c_1}(\tilde{w}) &=Var(I_{c_1<w^*<c_2}w+I_{1-c_2<w^*<1-c_1}w^*)\\
-&-2Cov(I_{c_2<w^*<1-c_2}w^*,I_{c_1<w^*<c_2}w+I_{1-c_2<w^*<1-c_1}w^*)\\
-&+P(1-c_2<w^*<1-c_1)(1-P(1-c_2<w^*<1-c_1))\\
-&-2\Big(E(I_{c_2<w^*<1-c_2}w^*)P(w^*>1-c_2)-E(I_{c_1<w^*<1-c_1}w^*)P(w^*>1-c_1)\Big)
+Var(w^*) - Var(\tilde{w}) &= Var(w^* | w^*<c)P(w<c)+Var(w^*|w^*>1-c)P(w^*>1-c)\\
+&+E(w^*|w^*<c)^2P(w^*<c)(1-P(w^*<c))\\
+&+E(w^*|w^*>1-c)^2P(w^*>1-c)(1-P(w^*>1-c))\\
+&-2E(w^*|w^*<c)P(w^*<c)E(w^*|w^*>1-c)P(w^*>1-c)\\
+&-2E(w^*|c<w^*<1-c)P(c<w^*<1-c)E(w^*|w^*>1-c)P(w^*>1-c)\\
+&-2E(w^*|w^*>1-c)P(w^*>1-c)E(w^*|c<w^*<1-c)P(c<w^*<1-c)\\
+&+2P(w^*>1-c)E(w^*|c<w^*<1-c)P(c<w^*<1-c)\\
+&= Var(w^*|w^*<c, w^*>1-c)\\
+&-2E(w^*|c<w^*<1-c)P(c<w^*<1-c)\\[P(w^*>1-c)(E(w^*|w^*>1-c)-1)-E(w^*|w^*<c)P(w^*<c)],
 \end{aligned}
 \end{equation}
+where row 1, 2, 3, and 5 collapse to $Var(w^*|w^*<c, w^*>1-c)$.
 
 The mean squared error (MSE) is then given by 
 \begin{equation}
 \label{eqn: MSE trunc}
 \begin{aligned}
 MSE_c &= Bias_c(\tilde{w})^2 + Var(\tilde{w})\\
-&=(E(I_{1-c_2<w^*<1-c_1}(1-w^*))-E(I_{c_1<w^*<c_2}w^*))^2 + Var(I_{c<w^*<1-c}w)\\ & + P(w^*>1-c)(1-P(w^*>1-c)) - 2E(I_{c<w^*<1-c}w^*)P(w^*>1-c)
+&=(E(w^*|w^*<c)P(w^*<c) + E(w^*-1|w^*>1-c)P(w^*>1-c))^2 \\
+&+ Var(w^*|c<w^*<1-c)P(c<w^*<1-c) + P(w^*>1-c)(1-P(w^*>1-c)) \\
+&- 2E(I_{c<w^*<1-c}w^*)P(w^*>1-c)
 \end{aligned}
 \end{equation}
 
