@@ -71,27 +71,27 @@ breaklinks=true}
 \newpage
 
 \section{Introduction}\label{introduction}
-Everyone makes predictions. Drawing a line or a curve through a plot, guessesing base on intuition, or complex mathematical models are all predictions. However, people do not always make the same forecasts. As a matter of facts, most predictions are different. The more people there are, the more variety the predictions will be. The questions are, "which is better?" and "can we do better than any forecasts alone?"
+Everyone makes predictions. Drawing a line or a curve through a plot, guessesing base on intuition, or complex mathematical models are all predictions. However, people do not always make the same forecasts. As a matter of facts, most predictions are different. The more people there are, the more variety the predictions will be. The questions are, "which forecast is better?" and "can we do better than any forecasts alone?"
 
 Forecast combinations is a study raised from the second question. The idea is simple: if we don't know which forecast is the best, maybe there are a better solution which is a linear combination of all the forecasts. By combining the forecasts, the prediction contains less idiosyncratic risk, and becomes more the general opinion of all forecasters. This has proven to be successful in decreasing forecast error (\cite{Clemen1989}, \cite{Diebold1996}, \cite{Chen1999} , \cite{Dunis2000}, \cite{Stock2004}).
 
-The current literature starts with the seminal article of \cite{Bates1969} where forecast combination had been introduced to the public. The literature blooms and twenty years later, \cite{Clemen1989} gathered and reviewed the over 200 items in the literature. Despite the extensive research on forecast combinations, \citeauthor{Clemen1989} found that some issues are still unsolved. One of the issue is 'What is the explanation for the robustness of the simple average of forecasts?'. Simple average with equal weights often outperforms more complicated weighting schemes when one compares the combination of point forecasts based on mean squared prediction error. This is further supported with further studies, for example, \citep{Stock2004}. In 2004, \citeauthor{Elliot2004} made another review on recent theoretical contributions. \cite{Gibbs2017} proposed a bias estimation method on the forecast and adjust the weight according to the bias.
+The current literature starts with the seminal article of \cite{Bates1969} where forecast combination had been introduced to the public. The literature blooms and twenty years later, \cite{Clemen1989} gathered and reviewed the over 200 items in the literature. Despite the extensive research on forecast combinations, \citeauthor{Clemen1989} found that some issues are still unsolved. One of the issue is 'What is the explanation for the robustness of the simple average of forecasts?'. Simple average with equal weights often outperforms more complicated weighting schemes when one compares the combination of point forecasts based on mean squared prediction error. This is further supported with further studies, for example, \citep{Stock2004}. In 2004, \citeauthor{Elliot2004} made another review on recent theoretical contributions. Additionally on the research relates to this paper, \cite{Gibbs2017} proposed a bias estimation method on the forecast and adjust the weight according to the bias.
 
 This paper looks at the correlation between forecasters. The correlation is a strong factor in the weight determination. While many researchers choose to discard correlation due to uncertainty in the covariance estimation, the effect of the correlation can be in favour of the forecast. If both forecaster always over estimates, the high covariance detects this and results in a combined forecast that is not between the two forecasts. Therefore we want to see the effect of negative weights during estimation and to what extend limiting the negative weights can help in the forecast combination.
 
-We propose to limit the negative weights instead of neglecting the correlation at once. We show with survey data from European Central Bank (ECB) that the limiting negative weight method can improve the prediction. We impose a threshold parameter, where every negative weights below the threshold are set to zero. Not only does it improve the prediction in terms of mean squared prediction error and mean absolute error, it is also able to outperform equal weight in some area.
+We propose to limit the negative weights instead of neglecting the correlation at once. We show with survey data from European Central Bank (ECB) that the limiting negative weight method can improve the prediction. We impose a threshold parameter, where every negative weights below the threshold are set to zero. Not only does the threshold improve the prediction in terms of mean squared prediction error and mean absolute error, the threshold is also able to outperform equal weight in some area.
 
 The result shows that the test statistics\footnote{Lower is better.} decreases in a smooth adjustments and the choice of threshold parameter is not very sensitive to minor changes. This relieves the error during threshold selection, as choosing a slightly wrong threshold does not impact the performance largely. We show that even with in-sample threshold parameter selection, the threshold method still outperforms the equal weights.
 
 We look further in bias correction and simulation study. Bias correction aims to decrease the weights of the forecasts with known bias, while in the simulation study we show the effect of noise-to-signal ratio and correlation on the shape of mean squared prediction error. Bias estimation does not improve in most cases, but improve greatly for one timeseries where threshold does not help. The simulation on the other hand shows that when the correlation increases, the end position of the MSPE decreases. The similar effect can be found in the noise-to-signal ratio. When the noise-to-signal ratio increases, the achievable MSPE with negative weights increases.
 
-The paper is structured as following. Section two starts with methodology and the implications on the truncation. Section three explains the data structure and preliminary analysis on the data. Section four provides empirical results and a simulation study on the threshold method in relation with signal-to-noise ratio and correlation.
+The paper is structured as following: Section two starts with methodology and the implications on the truncation. Section three explains the data structure and preliminary analysis on the data. Section four provides empirical results and a simulation study on the threshold method in relation with signal-to-noise ratio and correlation.
 
 \section{Methodology}\label{methodology}
 
 \subsection{Standard Approach with High Covariance}\label{standard-approach}
 
-For the methodology section, we consider the two variable case for illustrative purpose. We have
+For the methodology in this paper, we consider the two variable case for illustrative purpose. We have
 two forecasts, \(y_1\) and \(y_2\), of the true variable \(y\). We want
 to combine \(y_1\) and \(y_2\) with a weight \(w\) such that we have
 \(y_c = w y_1 + (1-w) y_2\). Assuming they follow some distribution with finite first and second moment, e.g.
@@ -123,10 +123,9 @@ dimension goes up. The amount of parameters to estimate for the
 covariance with dimension \(n\) is \(\frac{1}{2}n(n+1)\), which is
 quadratic in \(n\). When the user only estimates the variances, the
 amount of parameters to estimate reduces to \(n\), which greatly
-decreases the estimation error \cite{Stock2001}.
+decreases the estimation error \citep{Stock2001}.
 
-Applying more restriction by setting $\sigma_1=\sigma_2$, we get equal weight. Equal weight is another common approach that works better empirically.
-\cite{Clemen1989} The forecast combination is in this case just an
+Applying more restriction by setting $\sigma_1=\sigma_2$, we get equal weight. Equal weight is another common approach that works better empirically \citep{Clemen1989}. The forecast combination is in this case just an
 arithmetic mean of all forecasts. The reason behind using equal weight is the fact
 that estimating weight increases or shifts the forecast errors due to
 additional estimation error in the estimation of \(w\). This estimation error has a negative effect on the forecast.
@@ -211,7 +210,7 @@ and the weights become
 w^\dagger = w^*(1+\frac{d_1(1- \rho(1+\delta)) + d_2 ((1+\delta)^2-\rho(1+\delta))} {\sigma_{11} (1- \rho^2)}) - \frac{d_1-\rho(1+\delta) d_2}{\sigma_{11}(1- \rho^2)}.
 \end{aligned}
 \end{equation}
-Looking at a special case where $\sigma_{22} d_1 - \sigma_{12}d_2$, we get $d_1=\rho(1+\delta) d_2$ and 
+Looking at a special case where $\sigma_{22} d_1 - \sigma_{12}d_2=0$, we get $d_1=\rho(1+\delta) d_2$ and 
 \begin{equation}
 \label{eqn: special case}
 \begin{aligned}
@@ -234,18 +233,21 @@ When $\rho$ reaches 1, the determinant becomes 0, and the limit of weight become
 
 \subsection{Truncated weight}\label{truncated-weight}
 
-To avoid the high correlated forecasts, we use truncation on the
-variable. The weight estimation is as follows
+To avoid the high correlated forecasts, truncation is  used on the
+weights after estimation. Given optimal weight $w^*$, the truncated weight is 
 \begin{equation}
 \label{eqn: w trunc}
 \tilde{w} = 
 \begin{dcases}
 w^* &, \text{ if } c<w^*<1-c \\
-0 &, \text{ if } w^*<c \\
-1 &, \text{ if } w^*>1-c.
+c &, \text{ if } w^*<c \\
+1-c &, \text{ if } w^*>1-c.
 \end{dcases}
 \end{equation}
-This truncation is effectively searching for the forecasts that are above a certain level of weights. If the weight is below the threshold, the forecast is discarded. Therefore the truncation can also be viewed as a forecast selection method.
+\textbf{This weight estimation limits the minimum of the weight to $c$, and normalises the sum of weight to $1$. 
+
+
+One special case of $c$ is worth noting. When $c$ is set to $0$, the truncated weight becomes a variable selection method. If the weight is below the threshold, the forecast is discarded.}
 
 Assuming that there is no skewness in the joint distribution, e.g.,
 \(w^*\) is an unbiased estimator of the true \(w\), then by law of total expectation, the expected value of
@@ -264,13 +266,12 @@ Bias_c(\tilde{w}) &= E(w^*) - E(\tilde{w}) \\
 &= E(w^*|w^*<c)P(w^*<c) + E(w^*-1|w^*>1-c)P(w^*>1-c).
 \end{aligned}
 \end{equation}
-In the first term, we have \(w^*<c<0\), which cancels out the negative
-sign and becomes positive. In the second term we have \(w^*>1-c>1\), which
+In the first term, we have \(w^*<c<0\), is a negative bias. In the second term we have \(w^*>1-c>1\), which
 gives a positive value in \(w^*-1\). In general case where \(w^*\) can go
 above \(1-c\) or below \(c\) and the distribution of \(w\) is not symmetric, then the
 bias is non-zero.
 
-By law of total variance, the variance of the weight is
+By the law of total variance, the variance of the weight is
 \begin{equation}
 \label{eqn: var w trunc}
 \begin{aligned}
@@ -323,11 +324,11 @@ with the expected value
 E(\epsilon_i) = b_i.
 \end{equation}
 
-Let $b_i \neq 0$, then the expected error is non-zero
+Let $b_i \neq 0$, then the expected combined error is non-zero
 \begin{equation}
 E(\epsilon_c) = wb_1+(1-w)b_2
 \end{equation}
-and the variance
+and the variance is
 \begin{equation}
 Var(\epsilon_c) = w^2\sigma_{\xi,11} + (1-w)^2\sigma_{\xi,22} + 2w(1-w)\rho_{\xi_1,\xi_2}\sigma_{\xi,1}\sigma_{\xi,2}
 \end{equation}
@@ -342,7 +343,7 @@ Write \(b_{ij}=b_i*b_j\), then minimising the mean squared error gives
 \end{aligned}
 \end{equation}
 Notice for equation \ref{eqn: w bias}, we can use the equation \ref{eqn: simple weight} from optimal weight $w^*$, with a slight modification on the variance matrix. Instead of using the original variance matrix, we can replace it with
-\(\begin{bmatrix}\sigma_{\xi,11}+b_{11} & \sigma_{\xi,12}+b_{12}\\ \sigma_{\xi,12}+b_{12} & \sigma_{\xi,22}+b_{22}\end{bmatrix}\), and the results will be equal.
+\(\begin{bmatrix}\sigma_{\xi,11}+b_{11} & \sigma_{\xi,12}+b_{12}\\ \sigma_{\xi,12}+b_{12} & \sigma_{\xi,22}+b_{22}\end{bmatrix}\), and the results are equal.
 
 We study a few special cases here. When bias is equal, $b_1=b_2$, we have $\hat{w}=w^*$. The bias cancels each other out. 
 
@@ -612,7 +613,7 @@ in the other two topics.
 
 
 
-We conclude in for the analysis of SPF that there exhibits
+We conclude for the analysis of SPF that there exhibits
 characteristics that are not in the standard cases where correlation are close to 0. By incorporating the
 possibility of negative weight, we expect to see some improvement in the
 forecast errors.
