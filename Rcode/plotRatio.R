@@ -14,13 +14,20 @@ RES <- getEval(DT_FCT)
 
 # plot the data
 plotData <- function(DT,legendPos){
-  plot(DT$RATIO_FULL_THRES,
+  # uncomment to change values
+  # bias
+  t1 <- DT$RATIO_FULL_THRES
+  t2 <- DT$RATIO_FULL_THRES_ABS
+  # no bias
+  # t1 <- DT$RATIO_SUB_THRES
+  # t2 <- DT$RATIO_SUB_THRES_ABS
+  plot(t1,
        x =  thresholdList,
-       type = 'l', ylab = 'Ratio', xlab='Truncation', main = paste0(unique(DT$FCT_TOPIC), " ",unique(DT$FCT_HORIZON)," year ahead"))
-  lines(DT$RATIO_FULL_THRES_ABS,
+       type = 'l', ylab = 'Ratio', ylim =range(t1,t2), xlab='Truncation', main = paste0(unique(DT$FCT_TOPIC), " ",unique(DT$FCT_HORIZON)," year ahead"))
+  lines(t2,
        x =  thresholdList, col = 'red')
   legend(legendPos,c("MSPE Ratio",'MAPE Ratio'),
-         fill=c("black",'red')#, bty = 'n'
+         fill=c("black",'red')
   )
 }
 
