@@ -71,25 +71,26 @@ breaklinks=true}
 \newpage
 
 \section{Introduction}\label{introduction}
-We make predictions in almost all the decisions that we make. Nonetheless, individuals make varied forecasts. In fact, people make different predictions. The number of predictions increases with corresponding increase in the number of people. Hence, determining predictions that are better and the extent by which group predictions could be better than individual forecasts have always been the main issue of concern. The truth is that if we are not sure about the best forecast, then chances are that there are better solutions that can be developed as a linear combination of all the predictions that we make. A linear combination of all predictions is it bears general opinions of the forecasters with lower level of idiosyncratic risks. This approach has been fruitful so far in reducing forecast error. It is important to review the correlation between different groups of forecasters because it plays a vital role in determining the final weight.
+We make predictions in almost all the decisions that we make. Nonetheless, individuals make different forecasts. The number of predictions increases with a corresponding increase in the number of people. Hence, determining predictions that are better and the extent by which group predictions could be better than individual forecasts have always been the central issue of concern. The truth is that if we are not sure about the best forecast, then the chances are that there are better solutions that can be developed as a linear combination of all the predictions that we make. A linear combination of all predictions is it bears general opinions of the forecasters with a lower level of idiosyncratic risks. This approach has been fruitful so far in reducing forecast error. It is essential to review the correlation between different groups of forecasters because it plays a vital role in determining the final weight.
 
-This study was motivated by the underlying need of improving accuracy in determining the optimal weights using truncation. For a couple of years now, optimal combination of forecasts has empirically been overshadowed through the use of simple average method \citep{Bates1969}. Explanations have also been provided detailing out why average is better off in practice compared to optimal combination have been highly centred on the effects of variation and estimation error. Also, this study has been motivated by the idea of predictions and their overall significances in our day to day undertakings considering that well make guesses in one way or another in our different life encounters. The main concern that most people face is to make inferences on whether the estimations that have been made are accurate or not as well as whether group predictions are better than estimations that are made individually. 
+This study was motivated by the underlying need for improving accuracy in determining the optimal weights using truncation. For a couple of years now, the optimal combination of forecasts has empirically been overshadowed through the use of simple average method \citep{Bates1969}. Explanations have also been provided detailing out why the average is better off in practice compared to optimal combination have been highly centred on the effects of variation and estimation error. Also, this study has been motivated by the idea of predictions and their overall significances in our day to day undertakings considering that well make guesses in one way or another in our different life encounters. The main concern that most people face is to make inferences on whether the estimations that have been made are accurate or not as well as whether group predictions are better than estimations that are made individually. 
 
-The need to review combination of different pairs of forecasts as a way of improving individual forecast is also part of the things that motivated the documentation of this research. For instance, the idea of combination of forecasts in portfolio optimization with through the use of variance to come up with weighted average of all the forecasts to improve the ability of constructing the forecasts in the first place. This has proven to be successful in decreasing forecast error (\cite{Clemen1989}, \cite{Diebold1996}, \cite{Chen1999} , \cite{Dunis2000}, \cite{Stock2004}). Just like the application of averaging models, taking the median of different forecast appeared to work amicably \citep{Claeskens2014}.
+The need to review the combination of different pairs of forecasts as a way of improving individual forecast is also part of the things that motivated the documentation of this research. For instance, the idea of a combination of forecasts in portfolio optimization with through the use of variance to come up with a weighted average of all the forecasts to improve the ability to construct the forecasts in the first place. This has proven to be successful in decreasing forecast error (\cite{Clemen1989}, \cite{Diebold1996}, \cite{Chen1999} , \cite{Dunis2000}, \cite{Stock2004}). Just like the application of averaging models, taking the median of different forecast appeared to work amicably \citep{Claeskens2014}.
 
-Furthermore, this study has been motivated through the suggestions that estimation error could be very large and generally inaccurate. If anything, it is important to provide alternative procedures for generating data to increase estimation error and make it large enough to the extent of outweighing associated theoretical gains. It is as well essential to mitigate estimation error by redirecting attention at offering mitigation techniques. Here, the threshold value comes into play for each individual forecast that is provided. Therefore, the extent by which optimal combination can be improved using truncation as well as establishing a coherent understanding of associated gains is an important aspect that motivated the documentation of this research. Through this study, general results are extended to provide the readers and other beneficiaries of this research with information that could prove helpful in making predictions.
+Furthermore, this study has been motivated through the suggestions that estimation erroring covariance could be substantial and generally inaccurate. If anything, it is important to provide alternative procedures for generating data to increase estimation error and make it large enough to the extent of outweighing associated theoretical gains. It is as well essential to mitigate estimation error by redirecting attention at offering mitigation techniques. Here, the threshold value comes into play for each forecast that is provided. Therefore, the extent to which optimal combination can be improved using truncation as well as establishing a coherent understanding of associated gains is an important aspect that motivated the documentation of this research. Through this study, general results are extended to provide the readers and other beneficiaries of this research with information that could prove helpful in making predictions.
 
-The current literature starts with the seminal article of \cite{Bates1969} where forecast combination had been introduced to the public. The literature blooms and twenty years later, \cite{Clemen1989} gathered and reviewed the over 200 items in the literature. Despite the extensive research on forecast combinations, \citeauthor{Clemen1989} found that some issues are still unsolved. One of the issue is 'What is the explanation for the robustness of the simple average of forecasts?'. Simple average with equal weights often outperforms more complicated weighting schemes when one compares the combination of point forecasts based on mean squared prediction error. This is further supported with further studies, for example, \citep{Stock2004}. In 2004, \citeauthor{Elliot2004} made another review on recent theoretical contributions. Additionally on the research relates to this paper, \cite{Gibbs2017} proposed a bias estimation method on the forecast and adjust the weight according to the bias.
+The current literature starts with the seminal article of \cite{Bates1969} where forecast combination had been introduced to the public. The literature blooms and twenty years later, \cite{Clemen1989} gathered and reviewed the over 200 items in the literature. Despite the extensive research on forecast combinations, \citeauthor{Clemen1989} found that some issues are still unsolved. One of the issues is 'What is the explanation for the robustness of the simple average of forecasts?'. Simple average with equal weights often outperforms more complicated weighting schemes when one compares the combination of point forecasts based on mean squared prediction error. This is further supported with further studies, for example, \citep{Stock2004}. In 2004, \citeauthor{Elliot2004} made another review on recent theoretical contributions. Additionally on the research relates to this paper, \cite{Gibbs2017} proposed a bias estimation method on the forecast and adjusted the weight according to the bias.
 
-This paper looks at the correlation between forecasters. The correlation is a strong factor in the weight determination. While many researchers discard correlation due to uncertainty in the covariance estimation, the effect of the correlation can be in favour of the forecast. If both forecaster always over estimates, the high covariance detects this and results in a combined forecast that is not between the two forecasts. Therefore we want to see the effect of negative weights during estimation and to what extend limiting the negative weights can help in the forecast combination.
+This paper looks at the correlation between forecasters. The correlation is a factor in weight determination. While many researchers discard correlation due to uncertainty in the covariance estimation, the effect of the correlation can be in favour of the forecast. If both forecaster always overestimates, the high covariance detects this and results in a combined forecast that is not between the two forecasts. Therefore we want to see the effect of negative weights during estimation and to what extent limiting the negative weights can help in the forecast combination.
 
-We propose to limit the negative weights instead of neglecting the correlation at once. We show with survey data from European Central Bank (ECB) that the limiting negative weight method can improve the prediction. We impose a threshold parameter, where every negative weights below the threshold are set to zero. Not only does the threshold improve the prediction in terms of mean squared prediction error and mean absolute error, the threshold is also able to outperform equal weight in some area.
+We propose to limit the negative weights instead of neglecting the correlation at once. We show with survey data from the European Central Bank (ECB) that the limiting negative weight method can improve the prediction. We impose a threshold parameter, where every negative weight below the threshold is set to zero. Not only does the threshold improve the prediction in terms of mean squared prediction error and mean absolute error, but the threshold is also able to outperform equal weight in some area.
 
-The result shows that the test statistics\footnote{Lower is better.} decreases in a smooth adjustments and the choice of threshold parameter is not very sensitive to minor changes. This relieves the error during threshold selection, as choosing a slightly wrong threshold does not impact the performance largely. We show that even with in-sample threshold parameter selection, the threshold method still outperforms the equal weights.
+The result shows that the test statistics\footnote{Lower is better.} decreases in smooth adjustments, and the choice of threshold parameter is not very sensitive to minor changes. This relieves the error during threshold selection, as choosing a slightly wrong threshold does not impact the performance substantially. We show that even with in-sample threshold parameter selection, the threshold method still outperforms the equal weights.
 
-We look further in bias correction and simulation study. Bias correction aims to decrease the weights of the forecasts with known bias, while in the simulation study we show the effect of noise-to-signal ratio and correlation on the shape of mean squared prediction error. Bias estimation does not improve in most cases, but improve greatly for one timeseries where threshold does not help. The simulation on the other hand shows that when the correlation increases, the end position of the MSPE decreases. The similar effect can be found in the noise-to-signal ratio. When the noise-to-signal ratio increases, the achievable MSPE with negative weights increases.
+We look further in bias correction and simulation study. Bias correction aims to decrease the weights of the forecasts with a known bias, while in the simulation study we show the effect of noise-to-signal ratio and correlation on the shape of mean squared prediction error. Bias estimation does not improve in most cases but improves significantly for one timeseries where threshold does not help. The simulation, on the other hand, shows that when the correlation increases, the end position of the MSPE decreases. The similar effect can be found in the noise-to-signal ratio. When the noise-to-signal ratio increases, the achievable MSPE with negative weights increases.
 
-The paper is structured as following: Section two starts with methodology and the implications on the truncation. Section three explains the data structure and preliminary analysis on the data. Section four provides empirical results and a simulation study on the threshold method in relation with signal-to-noise ratio and correlation.
+The paper is structured as follows: Section two starts with methodology and the implications on the truncation. Section three explains the data structure and the preliminary analysis of the data. Section four provides empirical results and a simulation study on the threshold method about signal-to-noise ratio and correlation.
+
 
 \section{Methodology}\label{methodology}
 
@@ -381,62 +382,32 @@ The implication on the optimal weight is also different from equation \ref{eqn: 
 
 
 
-\section{Survey of Professional Forecasters
-	(SPF)}\label{survey-of-professional-forecasters-spf}
+\section{Survey of Professional Forecasters (SPF)}\label{survey-of-professional-forecasters-spf}
 
-To illustrate the empirical results, we use the data from European Central Bank (ECB) in this paper. The data, Survey of Professional Forecasters (SPF), is a
-quarterly survey initiated by ECB, with the aim to obtain future
-estimates on inflation (HICP), Real Gross Domestic Product year-on-year growth (RGDP) and unemployment rate (UNEM) from
-the private sector. Every quarter, a group of professional forecasters
-from financial and non-financial institution, such as economic research
-institutions, respond to the survey with the idea on the future
-economy. Starting 1999, SPF is the longest survey of macroeconomic
-expectation in the Euro area. Until the date of this paper, there are 75
-quarters of observation available, with 1999 Q4 as the first forecasted
-value, and 2018 Q2 as the last observed true macroeconomic indices. We take 2016 Q1 as the first quarter to forecast, with a extending window size. The first in-sample time frame is forecasts made on 1999 Q4 to 2015 Q4, and the second in-sample time frame adds 2016 Q1 to the first.
+To illustrate the empirical results, we use the data from the European Central Bank (ECB) in this paper. The data, Survey of Professional Forecasters (SPF), is a quarterly survey initiated by ECB, with the aim to obtain future estimates on inflation (HICP), Real Gross Domestic Product year-on-year growth (RGDP) and the unemployment rate (UNEM) from the private sector. Every quarter, a group of professional forecasters from the financial and non-financial institution, such as economic research institutions, respond to the survey with the idea on the future economy. Starting in 1999, SPF is the longest survey of macroeconomic expectation in the Euro area. Until the date of this paper, there are 75 quarters of observation available, with 1999 Q4 as the first forecasted value, and 2018 Q2 as the last observed true macroeconomic indices. We take 2016 Q1 as the first quarter to forecast, with extending window size. The first in-sample time frame is forecasts made on 1999 Q4 to 2015 Q4, and the second in-sample time frame adds 2016 Q1 to the first.
 
-The set up of the survey consists of multiple magnitudes of questions,
-ranging from different horizon to different distribution. The
-forecasters are asked to provide their point forecast and the
-probability of a certain scenario to happen. The survey enables ECB to
-do a quantitative assessment on the consensus of the market, like the
-distribution statistics and standard deviations. For this paper, we take
-the two most answered periods, which is 1 year ahead and 2 years ahead
-as our dataset for all HICP, RGDP, and UNEM.
+The set up of the survey consists of multiple magnitudes of questions, ranging from different horizon to different distribution. The forecasters are asked to provide their point forecast and the probability of a specific scenario to happen. The survey enables ECB to do a quantitative assessment on the consensus of the market, like the distribution statistics and standard deviations. For this paper, we take the two most answered periods, which is one year ahead and two years ahead as our dataset for all HICP, RGDP, and UNEM.
 
-To compare the forecasts with the actual macroeconomics, we obtain the
-true value from ECB database. The data
-cannot be observed from the economic in 100\% accuracy within the first
-time frame and exhibits changes to the initial estimates after
-revision. We use the final revision of the macroeconomics where
-possible, that is, the revision done on 2018 Q2. The use of a final revision is fine because the
-original forecast is not the real target to forecast.
+To compare the forecasts with the actual macroeconomics, we obtain the true value from ECB database. The data cannot be observed from the economic in 100\% accuracy within the first time frame and exhibits changes to the initial estimates after revision. We use the final revision of the macroeconomics where possible, that is, the revision done on 2018 Q2. The use of a final revision is allowed due to the fact that the original forecast is not the real target to forecast.
 
-Within the datasets, not all forecasters did a forecast every time
-period. To avoid singular outliers, we remove all forecasters with a
-total forecasted period of less than 24 quarter (6 years). The removal
-approach is in-line with \cite{Matsypura2018}.
+Within the datasets, not all forecasters did a forecast every time period. To avoid singular outliers, we remove all forecasters with a total forecasted period of less than 24 quarter (6 years). The removal approach is in-line with \cite{Matsypura2018}.
 
-Following \cite{Matsypura2018}, we calculate the covariance by looking
-at the intersection between each forecaster. Let $T_i$ be the set of periods which the $i$-th forecaster has respond to the survey, $T_i \subseteq \{1,\ldots,T\}$, and let $e_{it}$ be the forecast error of $i$-th forecaster on time $t$, $e_{it} \in T_i$. Then the variance/covariance can be calculated with
+Following \cite{Matsypura2018}, we calculate the covariance by looking at the intersection between each forecaster. Let $T_i$ be the set of periods which the $i$-th forecaster has respond to the survey, $T_i \subseteq \{1,\ldots,T\}$, and let $e_{it}$ be the forecast error of $i$-th forecaster on time $t$, $e_{it} \in T_i$. Then the variance/covariance can be calculated with 
+
 
 \begin{equation}
 \label{equation}
 \sigma_{i,j} = \frac{1}{|T_i \cap T_j|}\sum_{t\in \{T_i \cap T_j\}} e_{it}*e_{jt}
 \end{equation}
 
-When there is no intersection between 2 forecasters, we set the
-covariance value to 0. When $i=j$, the intersection of $T_i$ and $T_j$ does not influence the variance calculation, and the variance becomes mean squared error. Additionally, we calculate the correlation by
-using the covariance divided by the standard deviation. Standard
-deviation is obtained from the square root of the diagonal.
+When there is no intersection between 2 forecasters, we set the covariance value to 0. When $i=j$, the intersection of $T_i$ and $T_j$ does not influence the variance calculation, and the variance becomes mean squared error. Additionally, we calculate the correlation by using the covariance divided by the standard deviation. Standard deviation is obtained from the square root of the diagonal.
 
 \begin{equation}
 \label{eqn: cov2cor}
 \rho_{i,j} = \frac{\sigma_{i,j}}{\sigma_{i}\sigma_{j}}
 \end{equation}
 
-The cleaned up gives us a preliminary view on the SPF data without the
-noises.
+The cleaned up gives us a preliminary view of the SPF data without the noises.
 
 \begin{figure}[!h]
 	\centering
@@ -444,31 +415,9 @@ noises.
 	\caption{Survey of Professional Forecasters data illustration}\label{fig: SPF data illustration}
 \end{figure}
 
-In figure \ref{fig: SPF data illustration} and table
-\ref{tab: correlation summary statistics} show the plots of the
-forecasts alongside with the true value in the macroeconomics and the
-statistics of the covariance of the forecast error. We plot only the minimum,
-mean, and maximum from the forecasts. We see that there exist a high
-consistency across all forecasts, with two years ahead stronger than one
-year. The consistency in the forecast is lower in UNEM than the other
-two. Furthermore, many true values lie outside of the forecast range,
-with RGDP the worse of all three. More values outside of the forecast
-range suggest that restricting positive weight may be a strong
-limitation in the forecast combination.
+In figure \ref{fig: SPF data illustration} and table \ref{tab: correlation summary statistics} show the plots of the forecasts alongside with the true value in the macroeconomics and the statistics of the covariance of the forecast error. We plot only the minimum, mean, and maximum from the forecasts. We see that there exist a high consistency across all forecasts, with two years ahead stronger than one year. The consistency in the forecast is lower in UNEM than the other two. Furthermore, many true values lie outside of the forecast range, with RGDP the worse of all three. More values outside of the forecast range suggest that restricting positive weight may be a strong limitation in the forecast combination.
 
-We examine the amount of true value outside of forecast range by
-looking at the summary statistics. Let model space be an indicator with 1
-when the true value is outside of the forecast range, and 0 when the
-true value is inside. Table \ref{tab: modelspace summary statistics}
-shows the mean of the indicator. From the three macro topics, RGDP has the highest percentage of time periods to be outside the forecast range, 83\%, followed by HICP
-with an average of 48\% of the time periods. UNEM with 38\% of the time periods has the lowest percentage to be outside the forecast
-range. Changing from 1 year to 2 years generally does not influence the
-mean of the indicator a lot. From the results from figure
-\ref{fig: SPF data illustration} and table
-\ref{tab: modelspace summary statistics}, we expect to have large effect
-using truncation in the forecast of RGDP, while HICP and UNEM do not
-have a strong effect. We also expect the two years ahead forecast will
-be better than the one year ahead.
+We examine the amount of true value outside of the forecast range by looking at the summary statistics. Let model space be an indicator with 1 when the true value is outside of the forecast range, and 0 when the true value is inside. Table \ref{tab: modelspace summary statistics} shows the mean of the indicator. From the three macro topics, RGDP has the highest percentage of time periods to be outside the forecast range, 83\%, followed by HICP with an average of 48\% of the time periods. UNEM with 38\% of the time periods has the lowest percentage to be outside the forecast range. Changing from one year to two years generally does not influence the mean of the indicator a lot. From the results from figure \ref{fig: SPF data illustration} and table \ref{tab: modelspace summary statistics}, we expect to have large effect using truncation in the forecast of RGDP, while HICP and UNEM do not have a strong effect. We also expect the two years ahead forecast will be better than the one year ahead.
 
 \begin{table}[!h]
 	\centering
@@ -480,18 +429,18 @@ be better than the one year ahead.
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & 1 year & 2 years & 1 year & 2 years & 1 year & 2 years \\ 
+		Horizon     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		Mean        & 0.45        & 0.51         & 0.83        & 0.82        & 0.37         & 0.39       \\
 		\hline
 	\end{tabular}
 \end{table}
 
-As not all forecasters replied to each survey, we show the amount of forecasters per macroeconomic topic in table \ref{tab: amount of forecasters}. The amount of forecasters after filtering is around 70 for 1 year ahead forecasts, and 60 for 2 year ahead forecasts. We also show the amount of replies per forecaster in a summary statistic in table \ref{tab: forecaster summary statistics}. The minimum amount of forecast are set to 24, and all forecasters with less than 24 forecasts are discarded. The maximum replies are around 70, which is close to the full amount of 75 observations. With the mean around 50, we have enough observations to do pair-wise covariance, but multivariate covariance remains sceptical.
+As not all forecasters replied to each survey, we show the number of forecasters per macroeconomic topic in table \ref{tab: amount of forecasters}. The amount of forecasters after filtering is around 70 for one year ahead forecasts, and 60 for two years ahead forecasts. We also show the number of replies per forecaster in a summary statistic in table \ref{tab: forecaster summary statistics}. The minimum amount of forecast is set to 24, and all forecasters with less than 24 forecasts are discarded. The maximum replies are around 70, which is close to the full amount of 75 observations. With the mean around 50, we have enough observations to do pair-wise covariance, but multivariate covariance remains sceptical.
 
 \begin{table}[!h]
 	\centering
-	\caption{Amount of Forecasters. The amount of the forecaster for 1 year ahead forecast is higher than 2 year ahead.}
+	\caption{Amount of Forecasters. The amount of the forecaster for one year ahead forecast is higher than two year ahead.}
 	\label{tab: amount of forecasters}
 	\begin{tabular}{lcccccc}
 		\hline
@@ -499,7 +448,7 @@ As not all forecasters replied to each survey, we show the amount of forecasters
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & 1 year & 2 years & 1 year & 2 years & 1 year & 2 years \\ 
+		Horizon     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		Amount        &      72   &60          &70         &64         & 65         & 53       \\
 		\hline
@@ -516,7 +465,7 @@ As not all forecasters replied to each survey, we show the amount of forecasters
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & 1 year & 2 years & 1 year & 2 years & 1 year & 2 years \\ 
+		Horizon     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		Minimum & 24    & 24    & 26    & 24    & 25    & 24    \\
 		First Q & 40    & 40    & 42    & 35    & 40    & 36    \\
@@ -528,7 +477,7 @@ As not all forecasters replied to each survey, we show the amount of forecasters
 	\end{tabular}
 \end{table}
 
-Table \ref{tab: time summary statistics} shows the summary statistics of the amount of survey replies per time period. On average there are 40 replies per time period. The deviation to the time is small with more than 50\% within 35 to 45 range. The minimum of 22 in UNEM pose a possible problem in the estimation of the covariance. If the estimation of the covariance is bad, limiting negative weights will pose a better result.
+Table \ref{tab: time summary statistics} shows the summary statistics of the number of survey replies per time period. On average there are 40 replies per time period. The deviation to the time is small with more than 50\% within 35 to 45 range. The minimum of 22 in UNEM pose a possible problem in the estimation of the covariance. If the estimation of the covariance is bad, limiting negative weights will pose a better result.
 
 \begin{table}[!h]
 	\centering
@@ -540,7 +489,7 @@ Table \ref{tab: time summary statistics} shows the summary statistics of the amo
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & 1 year & 2 years & 1 year & 2 years & 1 year & 2 years \\ 
+		Horizon     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		Minimum & 37    & 26    & 38    & 28    & 32    & 22    \\
 		First Q & 43    & 35    & 42    & 36    & 38    & 30    \\
@@ -552,7 +501,7 @@ Table \ref{tab: time summary statistics} shows the summary statistics of the amo
 	\end{tabular}
 \end{table}
 
-Table \ref{tab: amount per test period} shows the amount of replies per time period that we use to test the model. The values are lower than the mean for almost all time period except a few. Only RGDP 1 year on 2018 Q1 and 2018 Q2, and UNEM 1 year on 2016Q1 are above the average. This decreases the dimension of the covariance matrix, but on the other hand decreases the aomunt of observations. The trade-off between lower dimension should be more important than the loss in observations.
+Table \ref{tab: amount per test period} shows the number of replies per time period that we use to test the model. The values are lower than the mean for almost all time period except a few. Only RGDP one year on 2018 Q1 and 2018 Q2 and UNEM one year on 2016Q1 are above the average. The low number decreases the dimension of the covariance matrix, but on the other hand, decreases the number of observations. The trade-off between lower dimension should be more important than the loss in observations.
 
 \begin{table}[!h]
 	\centering
@@ -564,7 +513,7 @@ Table \ref{tab: amount per test period} shows the amount of replies per time per
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Test Period     & 1 year & 2 years & 1 year & 2 years & 1 year & 2 years \\ 
+		Test Period     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		2016 Q1      & 45    & 32    & 38    & 33    & 41    & 30    \\
 		2016 Q2      & 40    & 33    & 42    & 37    & 36    & 28    \\
@@ -580,16 +529,7 @@ Table \ref{tab: amount per test period} shows the amount of replies per time per
 	\end{tabular}
 \end{table}
 
-The table \ref{tab: correlation summary statistics} tell us on how the
-forecast errors are correlated. The correlations are split up into
-different forecast topics and different forecast horizons. The diagonal
-elements of the correlation matrix are not within the table when
-generating the summary statistics. For all of the series, the
-correlations are on average above 60\%. In HICP and UNEM the correlation
-increases across all statistics when the forecast horizon increases,
-while RGDP remains the same. The lowest correlation to be found is
--0.02, but this number is not too different from the minimum correlation
-in the other two topics.
+The table \ref{tab: correlation summary statistics} tell us on how the forecast errors are correlated. The correlations are split up into different forecast topics and different forecast horizons. The diagonal elements of the correlation matrix are not within the table when generating the summary statistics. For all of the series, the correlations are on average above 60\%. In HICP and UNEM the correlation increases across all statistics when the forecast horizon increases, while RGDP remains the same. The lowest correlation to be found is -0.02, but this number is not too different from the minimum correlation in the other two topics.
 
 \begin{table}[!h]
 	\centering
@@ -601,7 +541,7 @@ in the other two topics.
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & 1 year & 2 years & 1 year & 2 years & 1 year & 2 years \\ 
+		Horizon     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		Minimum     & 0.03        & 0.02        & 0.11        & 0.13        & -0.02        & 0.08       \\
 		First Q     & 0.53        & 0.62        & 0.63        & 0.65        & 0.47         & 0.56       \\
@@ -614,32 +554,11 @@ in the other two topics.
 \end{table}
 
 
-
-We conclude for the analysis of SPF that there exhibits
-characteristics that are not in the standard cases where correlation are close to 0. By incorporating the
-possibility of negative weight, we expect to see some improvement in the
-forecast errors.
+We conclude for the analysis of SPF that there exhibit characteristics that are not in the standard cases where correlation are close to 0. By incorporating the possibility of negative weight, we expect to see some improvement in the forecast errors.
 
 \section{Empirical Results}\label{empirical-results}
 \subsection{Optimal Weight}\label{optimal-weight}
-Analysis of the optimal weight given by equation
-\ref{eqn: simple weight} provides us with a preliminary understanding of the
-variability. Table \ref{tab: simple weight summary statistics} shows the
-summary statistics of the optimal weight. We see that for all macroeconomic
-topics, the mean and median variate around 0.02, which is close to the
-calculation from equal weight. Looking at the first and the third
-quantile, we see that half of the weight are between -0.6 and 0.6,
-which gives us a possible range of effectiveness of the threshold. The
-minimum and the maximum is extreme considering that 1 is 100\%. With
-negativity up to -11, -21, and -14, and first and third quartile only up
-to -0.6 and 0.6, the weight indicates a strong thick tail behaviour.
-Looking further to the difference between 1 year and 2 years ahead, we
-see that in two out of three macro topics, the extreme
-values converge to 0, while RGDP becomes worse. On the other hand, the
-gap between first and the third quantile increases for all topics. This
-indicates the increase in the choice of negative weight in the general
-cases for 2 yearss horizon. The mean and median does not change much in
-relation to the forecast horizon.
+Analysis of the optimal weight given by equation \ref{eqn: simple weight} provides us with a preliminary understanding of the variability. Table \ref{tab: simple weight summary statistics} shows the summary statistics of the optimal weight. We see that for all macroeconomic topics, the mean and median variate around 0.02, which is close to the calculation from equal weight. Looking at the first and the third quantile, we see that half of the weight are between -0.6 and 0.6, which gives us a possible range of effectiveness of the threshold. The minimum and the maximum is extreme considering that 1 is 100\%. With negativity up to -11, -21, and -14, and first and third quartile only up to -0.6 and 0.6, the weight indicates a strong thick tail behaviour. In the difference between one year and two years ahead, for two out of three macro topics, the extreme values converge to 0. RGDP becomes worse. On the other hand, the gap between the first and the third quantile increases for all topics. This indicates the increase in the choice of negative weight in the general cases for two years horizon. The mean and median does not change much in relation to the forecast horizon.
 
 \begin{table}[!h]
 	\centering
@@ -651,7 +570,7 @@ relation to the forecast horizon.
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & 1 year & 2 years & 1 year & 2 years & 1 year & 2 years \\ 
+		Horizon     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		Minimum      & -11.05      & -6.21      & -9.00      & -21.79      & -14.41      & -5.64      \\
 		First Q      & -0.30       & -0.59      & -0.20      & -0.63       & -0.28       & -0.40      \\
@@ -662,39 +581,25 @@ relation to the forecast horizon.
 		\hline
 	\end{tabular}
 \end{table}
+
 \subsection{Proceure}\label{proceure}
 
-We seek to evaluate the effect of truncating the weight with SPF data.
-The procedure to get the weight can be different between different
-researchers. Therefore we provide a through order of the steps we take in
-the weight estimation. We do the weight estimation for the truncation
-using the following steps:
+We seek to evaluate the effect of truncating the weight with SPF data. The procedure to get the weight can be different between different researchers. Therefore we provide an exact order of the steps taken in the weight estimation. The weight estimation for the truncation using the following steps:
 
-Given each time to forecast, we take all the know observation before
-that forecast time period.
+
+Given each time to forecast, we take all the know observation before that forecast time period.
 
 \begin{enumerate}
 	\def\labelenumi{\arabic{enumi}.}
 	\item
-	Find the nearest positive definite covariance matrix. This step is
-	required for the covariance to be invertible. We employ the nearPD
-	function from r package \emph{Matrix}. The nearPD function first
-	decompose the covariance into univariate variance and the correlation.
-	The function then uses the algorithm by \emph{higham} on the
-	correlation matrix to compute the nearest positive definite matrix.
-	The final results the the covariance matrix that is combined from the
-	univariate variance and the correlation matrix.
+Find the nearest positive definite covariance matrix. This step is required for the covariance to be invertible. We employ the nearPD function from r package \emph{Matrix}. The nearPD function first decomposes the covariance into univariate variance and the correlation. The function then uses the algorithm by \emph{higham} on the correlation matrix to compute the nearest positive definite matrix. The final result is the covariance matrix that is combined from the univariate variance and the correlation matrix.
 	\item
-	Subset the covariance. We take the sub matrix containing only the available forecast on the
-	testing period. That is, if 80 forecasters had made some forecasts
-	before, but out of them, only 40 has a forecast this time, we discard
-	the 40 extra forecasters.
+Subset the covariance. We take the submatrix containing only the available forecast on the testing period. If 80 forecasters had made some forecasts before, but out of them, only 40 has a forecast this time, we discard the 40 extra forecasters.
 	\item
-	Estimate the optimal weight \(w^*\) from equation
+Estimate the optimal weight \(w^*\) from equation
 	\ref{eqn: simple weight}.
 	\item
-	Truncate the optimal weight with equation \ref{eqn: w trunc}. The weight now
-	has less values and does not sum to one. We normalise the weights back such that the sum of the weights is 1.
+	Truncate the optimal weight with equation \ref{eqn: w trunc}. The weight now has fewer values and does not sum to one. We normalise the weights back such that the sum of the weights is 1.
 	\item
 	Combine the forecast using the new weights.
 	\item
@@ -704,9 +609,9 @@ that forecast time period.
 \end{enumerate}
 
 \subsection{Ratio of Test Statistics}\label{ratio-of-test-statistics}
-Ratio of test statistics is best determined by evaluating the performance of various weights using mean absolute prediction error (MAPE) and mean squared prediction error (MSPE). Comparison is made between MSPE and the truncated MAPE and MSPE from the same weight to come up with a test ratio. Results of UNEM, RGDP and HICP are then documented and ratio of the MAPE and MSPE reported to assist in the visualizing the impact of truncation rather than comparing per number to the same weights. The test statistic of the truncation is considered to be smaller than the test statistic with the same weight if the value is less than 1. The weights below the threshold $c$ is set to $c$.
+The ratio of test statistics is best determined by evaluating the performance of various weights using mean absolute prediction error (MAPE) and mean squared prediction error (MSPE). The comparison is made between MSPE and the truncated MAPE and MSPE from the same weight to come up with a test ratio. Results of UNEM, RGDP and HICP are then documented, and the ratio of the MAPE and MSPE are reported to assist in the visualising the impact of truncation rather than comparing per number to the same weights. The test statistic of the truncation is considered to be smaller than the test statistic with the same weight if the value is less than 1. The weights below the threshold $c$ are set to $c$.
 
-From table \ref{tab: c MSPE HICP}, it is clear that with truncation values -0.5 and -1.5, the MSPE is obtained for 1 years horizon and 2 year horizon respectively. In that same regard, the minimum of MAPE are attained at -1 and -1.5 respectively. The corresponding 2 year choice or selection that is based on the MAPE is seen to have collided with the selection that has been made basing on the MSPE. Furthermore, the -1.5 is the only threshold with ratio lower than 1 for MAPE 2 year horizon. The ratio in MSPE differs largely from 1, with 0.91 and 0.93 for 1 and 2 year. This effect is not visible in MAPE ratio.
+From table \ref{tab: c MSPE HICP}, it is clear that with truncation values -0.5 and -1.5, the MSPE is obtained for one year horizon and two years horizon respectively. In that same regard, the minimum of MAPE is attained at -1 and -1.5 respectively. The corresponding two years choice or selection that is based on the MAPE is seen to have collided with the selection that has been made based on the MSPE. Furthermore, the -1.5 is the only threshold with a ratio lower than 1 for MAPE two years horizon. The ratio in MSPE differs largely from 1, with 0.91 and 0.93 for 1 and 2 years. This effect is not visible in MAPE ratio.
 
 \begin{table}[!h]
 	\centering
@@ -715,7 +620,7 @@ From table \ref{tab: c MSPE HICP}, it is clear that with truncation values -0.5 
 	\begin{tabular}{lcccc}
 		\hline\hline
 		&                        \multicolumn{4}{c}{HICP}                         \\
-		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Years Horizon} \\
+		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{one year Horizon} & \multicolumn{2}{c}{two years Horizon} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
 		Threshold & MSPE Ratio &    MAPE Ratio    & MSPE Ratio &    MAPE Ratio    \\ \hline
 -$\infty$ & 3.2902 & 1.5898 & 2.2072 & 1.4347\\ 
@@ -734,7 +639,7 @@ From table \ref{tab: c MSPE HICP}, it is clear that with truncation values -0.5 
 	\end{tabular}
 \end{table}
 
-RGDP is reported in table \ref{tab: c MSPE RGDP}.  The 1 year threshold is approximately -1 and -1.5 thereby obtaining 0.83 and 0.89 for MSPE and MAPE respectively. On a 2 year horizon, the MAPE the MAPE behaves differently. MSPE for RGDP 2 year did not reach the minimum in the range of -5 to 0. We did not search further below -5 for the minimum. A boundary case that is realized because of this cut-off is 1.01. The least MAPE is observed to be attended at -4.5 with a ratio of 0.91. In 1 year horizon, the optimal weight MSPE ratio has a score of 1.44 showing that it was similar to equal weight. With a ratio of 6.07, on the other hand, 2 years horizon does not seem to perform so well in optimal weight. For 2 and 1 year, the optimal MAPE ratio shows that there are similar values of 1.80 and 1.07 respectively to equal weights. 
+RGDP is reported in table \ref{tab: c MSPE RGDP}.  The one year threshold is approximately -1 and -1.5 thereby obtaining 0.83 and 0.89 for MSPE and MAPE respectively. On a two years horizon, the MAPE the MAPE behaves differently. MSPE for RGDP two years did not reach the minimum in the range of -5 to 0. We did not search further below -5 for the minimum. A boundary case that is realized because of this cut-off is 1.01. The least MAPE is observed to be attended at -4.5 with a ratio of 0.91. In one year horizon, the optimal weight MSPE ratio has a score of 1.44 showing that it was similar to equal weight. With a ratio of 6.07, on the other hand, two years horizon does not seem to perform so well in optimal weight. For two and one year, the optimal MAPE ratio shows that there are similar values of 1.80 and 1.07 respectively to equal weights.
 
 \begin{table}[!h]
 	\centering
@@ -743,7 +648,7 @@ RGDP is reported in table \ref{tab: c MSPE RGDP}.  The 1 year threshold is appro
 	\begin{tabular}{lcccc}
 		\hline\hline
 		&                        \multicolumn{4}{c}{RGDP}                         \\
-		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Years Horizon} \\
+		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{one year Horizon} & \multicolumn{2}{c}{two years Horizon} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
 		Threshold & MSPE Ratio &    MAPE Ratio    & MSPE Ratio &    MAPE Ratio    \\ \hline
 -$\infty$ & 1.4387 & 1.0681 & 6.0654 & 1.8047\\ 
@@ -762,7 +667,7 @@ RGDP is reported in table \ref{tab: c MSPE RGDP}.  The 1 year threshold is appro
 	\end{tabular}
 \end{table}
 
-If we take a close look at UNEM, the results that have been provided tend to give ratios that are promising. The lowest MSPE ratio was registered by UNEM for 1 year and 2 years at -1 and 0 respectively. As before, we do not search beyond 0 in this thesis. Comparing to HICP and RGDP, the MSPE ratio of 0.60 and 0.83 are the lowest of all three.  Moreover, a 0.73 MAPE 1 year ratio and 0.90 2 year ratio at -1.5 and -0.5 shows positive news. Interesting to note is the optimal weight in MAPE 1 year is already 0.89. This is greatly lower than the other macroeconomic topics.
+If we take a close look at UNEM, the results that have been provided tend to give ratios that are promising. The lowest MSPE ratio was registered by UNEM for one year and two years at -1 and 0 respectively. As before, we do not search beyond 0 in this thesis. Comparing to HICP and RGDP, the MSPE ratio of 0.60 and 0.83 are the lowest of all three.  Moreover, a 0.73 MAPE one year ratio and 0.90 two years ratio at -1.5 and -0.5 shows positive news. Interesting to note is the optimal weight in MAPE one year is already 0.89. This is lower than the other macroeconomic topics.
 
 \begin{table}[!h]
 	\centering
@@ -771,7 +676,7 @@ If we take a close look at UNEM, the results that have been provided tend to giv
 	\begin{tabular}{lcccc}
 		\hline\hline
 		&                        \multicolumn{4}{c}{UNEM}                         \\
-		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Years Horizon} \\
+		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{one year Horizon} & \multicolumn{2}{c}{two years Horizon} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
 		Threshold & MSPE Ratio &    MAPE Ratio    & MSPE Ratio &    MAPE Ratio    \\ \hline
 -$\infty$ & 1.1639 & 0.8899 & 4.3535 & 1.6517\\ 
@@ -790,7 +695,7 @@ If we take a close look at UNEM, the results that have been provided tend to giv
 	\end{tabular}
 \end{table}
 
-From the figure \ref{fig: c Ratio sub} plotted using a 0.1 step size, HICP inhibits a relatively quick reduction in both minor changes and statistics thereafter. RGDP shows an increase in the lower threshold for 1 year, and and U-shape afterwards. RGDP 2 year has an oddly behaviour showing first an U-shape around -4.5 and then a drop after -1. UNEM 1 year shows an error of a W-shape, This shows that the changes in variance reduction and/or bias increment are not gradual, causing step-like look of the test statistics. UNEM 2 year on the other hand impose a clean slope downwards.
+From figure \ref{fig: c Ratio sub} plotted using a 0.1 step size, HICP inhibits a relatively quick reduction in both minor changes and statistics thereafter. RGDP shows an increase in the lower threshold for one year and a U-shape afterwards. RGDP two years has an odd behaviour showing first a U-shape around -4.5 and then a drop after -1. UNEM one year shows an error of a W-shape. This shows that the changes in variance reduction and/or bias increment are not gradual, causing the step-like look of the test statistics. UNEM two years, on the other hand, impose a clean slope downwards.
 
 \begin{figure}[!h]
 	\centering
@@ -798,12 +703,13 @@ From the figure \ref{fig: c Ratio sub} plotted using a 0.1 step size, HICP inhib
 	\caption{MSPE Ratio for different macroeconomic topics}\label{fig: c Ratio sub}
 \end{figure}
 
-This section shows that it is possible to outperform equal weights and no negative weights under certain circumstances. Five out of six macroeconomic topics show a positive news. This is promising as we show that there is no need to go full in.
+This section shows that it is possible to outperform equal weights and no negative weights under certain circumstances. Five out of six macroeconomic topics show positive news. This is promising as we show that there is no need to go full in.
 
 \subsection{Ratio with $c$ as $0$}\label{ratio-of-mean-squared-prediction-error}
 Section \ref{ratio-of-test-statistics} shows the effect of truncation. This section looks at a special case of the truncation. The weights that are below the threshold are set to $0$. In other words, doing so effectively removes the forecast. This is an interesting case due to the intersection between threshold and variable selection. The difference in section \ref{ratio-of-test-statistics} and section \ref{ratio-of-mean-squared-prediction-error} can then partially be explained by the difference in forecast combination and forecast selection.
 
-We see in table \ref{tab: MSPE HICP} that for the truncation value -2 and -1.5, the minimum of MSPE is attained for 1 year horizon and 2 years horizon respectively. The minimum of MAPE are attended at -2 and 0 respectively. The 1 year selection based on MAPE collides with selection based on MSPE, but the minimum for MAPE is not at -1.5. The optimal weight obtains a ratio of 3.29 and 2.21 for MSPE, significantly larger than the ratio obtained by truncation. The ratio difference of MAPE between optimal weight and truncated weights are smaller compared with MSPE. Truncating all the way to 0 means that no forecast with weight less than 0 are selected. For HICP, selecting too strict threshold does not help in 3 out of 4 cases.
+We see in table \ref{tab: MSPE HICP} that for the truncation value -2 and -1.5, the minimum of MSPE is attained for one year horizon and two years horizon respectively. The minimum of MAPE are attended at -2 and 0 respectively. The one year selection based on MAPE collides with selection based on MSPE, but the minimum for MAPE is not at -1.5. The optimal weight obtains a ratio of 3.29 and 2.21 for MSPE, significantly larger than the ratio obtained by truncation. The ratio difference of MAPE between optimal weight and truncated weights are smaller compared with MSPE. Truncating all the way to 0 means that no forecast with weight less than 0 is selected. For HICP, selecting too strict threshold does not help in 3 out of 4 cases.
+
 
 \begin{table}[!h]
 	\centering
@@ -812,7 +718,7 @@ We see in table \ref{tab: MSPE HICP} that for the truncation value -2 and -1.5, 
 	\begin{tabular}{lcccc}
 		\hline\hline
 		&                        \multicolumn{4}{c}{HICP}                         \\
-		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Years Horizon} \\
+		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{one year Horizon} & \multicolumn{2}{c}{two years Horizon} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
 		Threshold & MSPE Ratio &    MAPE Ratio    & MSPE Ratio &    MAPE Ratio    \\ \hline
 		-$\infty$ & 3.2902 & 1.5898 & 2.2072 & 1.4347\\ 
@@ -830,7 +736,7 @@ We see in table \ref{tab: MSPE HICP} that for the truncation value -2 and -1.5, 
 	\end{tabular}
 \end{table}
 
-Table \ref{tab: MSPE RGDP} shows a similar pattern in RGDP as in HICP. The optimal threshold for 1 year is around -1.5, obtaining 0.83 and 0.88 for MSPE and MAPE respectively. We did not look for threshold larger than 0, and the minimum MSPE of RGDP 2 years is not within the search region. This cut-off gives us 1.01 as the boundary case. The MAPE on 2 year horizon acts differently. The minimum MAPE is attended at -4.5. The optimal weight MSPE ratio in 1 year horizon is similar to equal weight, scoring 1.44 in the ratio. 2 years ahead MSPE ratio in other hand does not perform that well in optimal weight, with a ratio of 6.07. The optimal weight in MAPE ratio for 1 and 2 year show similar values to equal weights, scoring 1.07 and 1.80 respectively.
+Table \ref{tab: MSPE RGDP} shows a similar pattern in RGDP as in HICP. The optimal threshold for one year is around -1.5, obtaining 0.83 and 0.88 for MSPE and MAPE respectively. We did not look for a threshold larger than 0, and the minimum MSPE of RGDP two years is not within the search region. This cut-off gives us 1.01 as the boundary case. The MAPE on two years horizon acts differently. The minimum MAPE is attended at -4.5. The optimal weight MSPE ratio in one year horizon is similar to equal weight, scoring 1.44 in the ratio. Two years ahead MSPE ratio, on the other hand, does not perform that well in optimal weight, with a ratio of 6.07. The optimal weight in MAPE ratio for one and two years show similar values to equal weights, scoring 1.07 and 1.80 respectively.
 
 \begin{table}[!h]
 	\centering
@@ -840,7 +746,7 @@ Table \ref{tab: MSPE RGDP} shows a similar pattern in RGDP as in HICP. The optim
 		\hline\hline
 		& \multicolumn{4}{c}{RGDP}                                                \\
 		\cmidrule(lr){2-5}
-		& \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Years Horizon} \\
+		& \multicolumn{2}{c}{one year Horizon} & \multicolumn{2}{c}{two years Horizon} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
 		Threshold & MSPE Ratio &    MAPE Ratio    & MSPE Ratio &    MAPE Ratio    \\ 
 		\hline
@@ -860,7 +766,7 @@ Table \ref{tab: MSPE RGDP} shows a similar pattern in RGDP as in HICP. The optim
 \end{table}
 
 
-When we look further in UNEM, the results show well performing ratios. UNEM achieved the lowest MSPE ratio in 1 year and 2 years at -1.5 and -0.5. Comparing to HICP and RGDP, the MSPE ratio of 0.70 and 0.82 are the lowest of all three. The MSPE ratio of 0.70 is also an 40\% decrease in the MSPE, even when the non-truncated is already at 1.16. MAPE ratio shows that in 1 year ahead, optimal weight already outperforms equal weights with 0.89, but with truncation the MAPE ratio drops to 0.74. The MAPE ratio in 2 year ahead decreases to 0.91. UNEM seems to have an effect from truncation that is not explained by the correlation. UNEM does not have a difference in correlation to other macroeconomics topics that cannot be explained by estimation noise. One possible explanation is the optimal choice of the truncation is more consistent and does not vary over time. We evaluate the consistency of the truncation in the out-of-sample selection area.
+When we look further in UNEM, the results show well-performing ratios. UNEM achieved the lowest MSPE ratio in one year and two years at -1.5 and -0.5. Comparing to HICP and RGDP, the MSPE ratio of 0.70 and 0.82 are the lowest of all three. The MSPE ratio of 0.70 is also a 40\% decrease in the MSPE, even when the non-truncated is already at 1.16. MAPE ratio shows that in one year ahead, optimal weight already outperforms equal weights with 0.89, but with truncation, the MAPE ratio drops to 0.74. The MAPE ratio in two years ahead decreases to 0.91. UNEM seems to have an effect from truncation that is not explained by the correlation. UNEM does not have a difference in correlation to other macroeconomics topics that cannot be explained by estimation noise. One possible explanation is the optimal choice of the truncation is more consistent and does not vary over time. We evaluate the consistency of the truncation in the out-of-sample selection area.
 
 \begin{table}[!h] 
 	\centering
@@ -870,7 +776,7 @@ When we look further in UNEM, the results show well performing ratios. UNEM achi
 		\hline\hline
 		& \multicolumn{4}{c}{UNEM}                                                \\
 		\cmidrule(lr){2-5}
-		& \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Years Horizon} \\
+		& \multicolumn{2}{c}{one year Horizon} & \multicolumn{2}{c}{two years Horizon} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
 		Threshold & MSPE Ratio &    MAPE Ratio    & MSPE Ratio &    MAPE Ratio    \\ 
 		\hline
@@ -890,8 +796,7 @@ When we look further in UNEM, the results show well performing ratios. UNEM achi
 \end{table}
 
 
-
-Figure \ref{fig: Ratio sub} shows the MSPE ratio and MAPE ratio for HICP, RGDP, and UNEM with forecast horizon 1 and 2 years. The figures are plotted with a step size of 0.1. From the figure, HICP shows a sudden decrease in both statistics and minor changes afterwards. RGDP 1 year shows a similar pattern with a larger increase towards the end. For RGDP 2 years, there is a spike in both statistics around 1.3. Given that the value never falls below 1, we suspect that the correlation does not capture the error well enough, and there might be a better measure to counter the forecast error. UNEM 1 year is a bit volatile but exhibits a well-defined U-shape. For UNEM 2 years, the ratios drop in a smooth way to the minimum.
+Figure \ref{fig: Ratio sub} shows the MSPE ratio and MAPE ratio for HICP, RGDP, and UNEM with forecast horizon 1 and two years. The figures are plotted with a step size of 0.1. From the figure, HICP shows a sudden decrease in both statistics and minor changes afterwards. RGDP one year shows a similar pattern with a larger increase towards the end. For RGDP two years, there is a spike in both statistics around 1.3. Given that the value never falls below 1, we suspect that the correlation does not capture the error well enough, and there might be a better measure to counter the forecast error. UNEM one year is a bit volatile but exhibits a well-defined U-shape. For UNEM two years, the ratios drop in a smooth way to the minimum.
 
 \begin{figure}[!h]
 	\centering
@@ -899,21 +804,18 @@ Figure \ref{fig: Ratio sub} shows the MSPE ratio and MAPE ratio for HICP, RGDP, 
 	\caption{MSPE Ratio for different macroeconomic topics}\label{fig: Ratio sub}
 \end{figure}
 
-To conclude, we see the possibility to improve the MSPE and MAPE by using the truncation in all cases. In the beginning, there is a drop in the test statistics, but closer to the threshold of 0, test statistics increase. The MSPE and MAPE both have a U-shape characteristic, which attribute to variance and bias. By applying truncation, the drop in variance is larger than the increase in bias, and this contributes to the decrease in the test statistics. It is worth noting that all macroeconomic topics has on average better performance than equal weight, which is considered a benchmark that is hard to beat. Two of those  macroeconomic forecasts, HICP 2 years and RGDP 2 year, have a hard to justify improvement in MSPE or MAPE when estimation error is taken into consideration. Other four obtain from 17\% to 30\% decrease when compared to equal weight. The results also show that the decrease in MSPE is not just one point, but a graduate movement. This implies the robustness in truncation selection. Even if the user does not select the most optimal case, but deviates a small amount next to it, the increase in the test statisitcs is relatively contained.
+To conclude, we see the possibility to improve the MSPE and MAPE by using the truncation in all cases. In the beginning, there is a drop in the test statistics, but closer to the threshold of 0, test statistics increase. The MSPE and MAPE both have a U-shape characteristic, which attributes to variance and bias. By applying truncation, the drop in variance is larger than the increase in bias, and this contributes to the decrease in the test statistics. It is worth noting that all macroeconomic topics have on an average better performance than equal weight, which is considered a benchmark that is hard to beat. Two of those  macroeconomic forecasts, HICP two years and RGDP 2 year, have a hard to justify the improvement in MSPE or MAPE when estimation error is taken into consideration. Other four obtain from 17\% to 30\% decrease when compared to equal weight. The results also show that the decrease in MSPE is not just one point, but a graduate movement. This implies the robustness in truncation selection. Even if the user does not select the most optimal case, but deviates a small amount next to it, the increase in the test statistics is relatively contained.
 
 \subsection{Optimal Truncation Selection}\label{out-of-sample-truncation-selection}
 
-In this section, we show the MSPE and MAPE in weight truncation when
-the truncation parameter is in-sample optimally selected. To perform the
-selection of the truncation parameter, we follow the following step:
+In this section, we show the MSPE and MAPE in weight truncation when the truncation parameter is in-sample optimally selected. To perform the selection of the truncation parameter, we follow the following step:
 
 \begin{enumerate}
 	\def\labelenumi{\arabic{enumi}.}
 	\item
 	Estimate the optimal weight in equation \ref{eqn: simple weight}.
 	\item
-	Calculate the in-sample mean squared error (MSE) with truncated weight, e.g., the first window is 1999 Q4 to 2015 Q4. The
-	truncation parameter ranges from -10 to 0 with a step of 0.1. We also look into other starting values, namely -5, -2, and -1.
+	Calculate the in-sample mean squared error (MSE) with truncated weight, e.g., the first window is 1999 Q4 to 2015 Q4. The truncation parameter ranges from -10 to 0 with a step of 0.1. We also look into other starting values, namely -5, -2, and -1.
 	\item
 	Select the truncation parameter with the lowest in-sample MSE.
 	\item
@@ -924,23 +826,14 @@ selection of the truncation parameter, we follow the following step:
 	Calculate the ratio of the test statistics of new weights over equal weights.
 \end{enumerate}
 
-If there are
-multiple truncation points with the same MSE value, we take the
-largest truncation value within the same MSE. The reason to
-choose largest value is that the threshold is closer to the next
-changing point. Assume for example, a weight with a minimum of -1 is
-optimal, and any higher weight results in higher MSE. Then all
-truncation values between -10 and -1 gives the same minimal MSE. We
-therefore choose -1 to record. The choice does not influence the
-forecast and is pure for the analysis later.
+If there are multiple truncation points with the same MSE value, we take the largest truncation value within the same MSE. The reason to choose the largest value is that the threshold is closer to the next changing point. Assume, for example, a weight with a minimum of -1 is optimal, and any higher weight results in higher MSE. Then all truncation values between -10 and -1 gives the same minimal MSE. We therefore choose -1 to record. The choice does not influence the forecast and is purely for the analysis later.
 
 \subsection{Optimal Truncation Selection Result}\label{out-of-sample-truncation-result}
 We evaluate the Optimal Truncation (OT) forecast ability using the same way as section \ref{ratio-of-mean-squared-prediction-error}. The MSPE ratio and the MAPE ratio are given in table \ref{tab: oos mspe}.
 
-As shown in table \ref{tab: oos mspe}, OT improves in all
-MSPE cases when we compare with equal weights. In MAPE, OT failed to improve HICP 1 year, but obtained positive results in other 5 topics. The truncation works better in RGDP and UNEM. If we compare the value to the MSPE or MAPE of optimal weights, we see that the truncation improves the forecasts for all topics except UNEM 1 year. RGDP 2 years also shows in MSPE that none of the constant truncations works as good as changing truncation. This means that the optimal truncation selection overweight the selection uncertainty. These results verify the idea that the truncation improves the upon equal weight even if the truncation uncertainty can increase the MSPE. 
+As shown in table \ref{tab: oos mspe}, OT improves in all MSPE cases when we compare with equal weights. In MAPE, OT failed to improve HICP one year but obtained positive results in other 5 topics. The truncation works better in RGDP and UNEM. If we compare the value to the MSPE or MAPE of optimal weights, we see that the truncation improves the forecasts for all topics except UNEM one year. RGDP two years also shows in MSPE that none of the constant truncations works as good as changing truncation. This means that the optimal truncation selection overweight the selection uncertainty. These results verify the idea that the truncation improves the upon equal weight even if the truncation uncertainty can increase the MSPE. 
 
-Table \ref{tab: oos mspe} also illustrates the effect of changing the search area. Smaller search area gives less uncertainty, but are more restrictive in the solution space. For HICP 1 year and UNEM 2 year, changing the search area does not influence the test statistics enough to be visible under 4 digits of precision. For HICP 2 year and RGDP 1 year, being more restictive increases the test statistics, effectively means worse predictions. For RGDP 2 year and UNEM 1 year, being restrictive decreases the prediction error, and therefore MSPE and MAPE. Since if being restrictive or not relies on prior information on the forecast set, it is hard to determine which is a good choice.
+Table \ref{tab: oos mspe} also illustrates the effect of changing the search area. Smaller search area gives less uncertainty but is more restrictive in the solution space. For HICP one year and UNEM 2 year, changing the search area does not influence the test statistics enough to be visible under 4 digits of precision. For HICP two years and RGDP one year, being more restrictive increases the test statistics effectively means worse predictions. For RGDP two years and UNEM one year, being restrictive decreases the prediction error, and therefore MSPE and MAPE. Since being restrictive or not relies on prior information on the forecast set, it is hard to determine which is a good choice.
 
 \begin{table}[!h]
 	\centering
@@ -952,7 +845,7 @@ Table \ref{tab: oos mspe} also illustrates the effect of changing the search are
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & 1 year & 2 years & 1 year & 2 years & 1 year & 2 years \\ 
+		Horizon     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		-10 & 0.9670   & 0.9611   & 0.9275   & 0.9558   & 0.9153   & 0.8752   \\ 
 		-5  & 0.9670   & 0.9611   & 0.9275   & 0.9558   & 0.9153   & 0.8752   \\ 
@@ -963,7 +856,7 @@ Table \ref{tab: oos mspe} also illustrates the effect of changing the search are
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & 1 year & 2 years & 1 year & 2 years & 1 year & 2 years \\ 
+		Horizon     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		-10 & 1.0015   & 0.9928   & 0.9532   & 0.9577   & 0.9320   & 0.9502   \\
 		-5  & 1.0015   & 0.9928   & 0.9532   & 0.9577   & 0.9320   & 0.9502   \\
@@ -973,19 +866,7 @@ Table \ref{tab: oos mspe} also illustrates the effect of changing the search are
 	\end{tabular}
 \end{table}
 
-To better understand the OT, table
-\ref{tab: truncation summary statistics} looks at the selection of the
-truncation. The results show that on average, a truncation around -0.5
-is selected, indicating a preference in the negative weight. HICP
-2 years and RGDP 2 years select on average lower truncation, -0.9 and
--1.5 respectively. UNEM selects -0.5 on average, highest among all. The
-minimum across all macro topics are at most -1, with RGDP 1 year, RGDP 2
-year, and UNEM 1 year the lowest selected minimum. The first and the
-third quantiles show that for the most cases, the truncations are not
-extreme, ranging between -0.5 to -0.2 in 1 year and -1 to 0 in 2 years
-horizon. We notice an increase in the variation when the horizon
-increases. This can be attribute to the uncertainty in the horizon adds
-uncertainty in the truncation parameter selection.
+To better understand the OT, table \ref{tab: truncation summary statistics} looks at the selection of the truncation. The results show that on average, a truncation around -0.5 is selected, indicating a preference in the negative weight. HICP two years and RGDP two years select on average lower truncation, -0.9 and -1.5 respectively. UNEM selects -0.5 on average, highest among all. The minimum across all macro topics are at most -1, with RGDP one year, RGDP 2 year, and UNEM one year the lowest selected minimum. The first and the third quantiles show that for the most cases, the truncations are not extreme, ranging between -0.5 to -0.2 in one year and -1 to 0 in two years horizon. We notice an increase in the variation when the horizon increases. This can be attributed to the uncertainty in the horizon adds uncertainty in the truncation parameter selection.
 
 \begin{table}[!h]
 	\centering
@@ -997,7 +878,7 @@ uncertainty in the truncation parameter selection.
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & 1 year & 2 years & 1 year & 2 years & 1 year & 2 years \\ 
+		Horizon     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		Minimum     & -1.3        & -3.8        & -3.4        & -10         & -3.3        & -1.2        \\
 		First Q     & -0.7        & -1.0        & -0.5        & -1.1        & -0.4        & -0.3        \\
@@ -1019,10 +900,7 @@ Figure \ref{fig: fluctuation} gives a visual inspection on the stability of the 
 
 \subsection{Bias weighting}\label{bias-weighting}
 
-The bias weighting is an interesting case here. If the model in the bias
-estimation successfully estimates the predictable part and the
-unpredictable error, this can attribute to a better weight selection
-with additional information gained. Our approach to bias estimation is similar to \cite{Gibbs2017} but deviates in the variable used. We estimate the bias by
+The bias weighting is an interesting case here. If the model in the bias estimation successfully estimates the predictable part and the unpredictable error, this can attribute to a better weight selection with additional information gained. Our approach to bias estimation is similar to \cite{Gibbs2017} but deviates in the variable used. We estimate the bias by
 \begin{equation}
 \label{eqn: bias estimation}
 \epsilon_{i,t} = \alpha + \gamma_i y_{i,t} + \eta_{i,t},
@@ -1040,7 +918,7 @@ E(\epsilon_{i,t+1}) = \alpha + \gamma_i y_{i,t+1}.
 \end{equation}
 and equation \ref{eqn: bias estimation} becomes the equation given by \citeauthor{Gibbs2017}.
 
-Table \ref{tab: MSPE HICP bias}, \ref{tab: MSPE RGDP bias}, and \ref{tab: MSPE UNEM bias} shows the effect of truncation with bias-corrected weight. The estimation of bias increases the estimation error and therefore is another trade-off between estimation error and the bias. Only two out of six topics have a ratio below 1, considerably worse than without bias correction. The two topics are RGDP 2 year and UNEM 1 year, with minimum of 0.83 and 0.56 respectively. For HICP with bias correction, the truncation performs best with the highest value. This is different from no-bias selection.
+Table \ref{tab: MSPE HICP bias}, \ref{tab: MSPE RGDP bias}, and \ref{tab: MSPE UNEM bias} shows the effect of truncation with bias-corrected weight. The estimation of bias increases the estimation error and therefore is another trade-off between estimation error and the bias. Only two out of six topics have a ratio below 1, considerably worse than without bias correction. The two topics are RGDP two years and UNEM one year, with a minimum of 0.83 and 0.56 respectively. For HICP with bias correction, the truncation performs best with the highest value. This is different from no-bias selection.
 
 \begin{table}[!h]
 	\centering
@@ -1049,7 +927,7 @@ Table \ref{tab: MSPE HICP bias}, \ref{tab: MSPE RGDP bias}, and \ref{tab: MSPE U
 	\begin{tabular}{lcccc}
 		\hline
 		&                        \multicolumn{4}{c}{HICP}                         \\
-		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Years Horizon} \\
+		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{one year Horizon} & \multicolumn{2}{c}{two years Horizon} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
 		Threshold & MSPE Ratio & MAPE Ratio  & MSPE Ratio & MAPE Ratio  \\ \hline
 		-$\infty$ & 2.7747 & 1.7760 & 1.6452 & 1.3735\\ 
@@ -1068,7 +946,7 @@ Table \ref{tab: MSPE HICP bias}, \ref{tab: MSPE RGDP bias}, and \ref{tab: MSPE U
 \end{table}
 
 
-RGDP shows similar results in 1 year, where truncation helps, but selecting 0 is the best performing one. On the other hand, RGDP 2 years shows that it can achieve a MSPE ratio of 0.83 with a truncation value of -1. The selection from MAPE ratio yields the same truncation. Comparing this to RGDP without bias correction, the bias-corrected performs worse in 1 year horizon, while performing better in 2 years horizon. The best truncation also changes to a different value, from -1.5 for 1 year horizon and 0 for 2 years horizon in no correction to 0 and -1 respectively.
+RGDP shows similar results in one year, where truncation helps, but selecting 0 is the best performing one. On the other hand, RGDP two years shows that it can achieve an MSPE ratio of 0.83 with a truncation value of -1. The selection from MAPE ratio yields the same truncation. Comparing this to RGDP without bias correction, the bias-corrected performs worse in one year horizon, while performing better in two years horizon. The best truncation also changes to a different value, from -1.5 for one year horizon and 0 for two years horizon in no correction to 0 and -1 respectively.
 
 \begin{table}[!h]
 	\centering
@@ -1077,7 +955,7 @@ RGDP shows similar results in 1 year, where truncation helps, but selecting 0 is
 	\begin{tabular}{lcccc}
 		\hline
 		&                        \multicolumn{4}{c}{RGDP}                         \\
-		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Years Horizon} \\
+		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{one year Horizon} & \multicolumn{2}{c}{two years Horizon} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
 		Threshold & MSPE Ratio & MAPE Ratio  & MSPE Ratio & MAPE Ratio  \\ \hline
 		-$\infty$ & 3.3002 & 1.5457 & 1.0535 & 0.9458\\ 
@@ -1096,7 +974,7 @@ RGDP shows similar results in 1 year, where truncation helps, but selecting 0 is
 \end{table}
 
 
-With UNEM 1 year as low as 0.56, UNEM achieved is a large improvement to the equal weight case. However, this effect does not show in the 2 years horizon. The 2 years horizon MSPE ratio increased to higher than equal weight.
+With UNEM one year as low as 0.56, UNEM achieved is a large improvement to the equal weight case. However, this effect does not show in the two years horizon. The two years horizon MSPE ratio increased to higher than equal weight.
 
 
 \begin{table}[!h]
@@ -1106,7 +984,7 @@ With UNEM 1 year as low as 0.56, UNEM achieved is a large improvement to the equ
 	\begin{tabular}{lcccc}
 		\hline
 		&                        \multicolumn{4}{c}{UNEM}                         \\
-		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{1 Year Horizon} & \multicolumn{2}{c}{2 Years Horizon} \\
+		\cmidrule(lr){2-5}                              & \multicolumn{2}{c}{one year Horizon} & \multicolumn{2}{c}{two years Horizon} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}
 		Threshold & MSPE Ratio & MAPE Ratio  & MSPE Ratio & MAPE Ratio  \\ \hline
 		-$\infty$ & 3.7993 & 1.4829 & 21.2312 & 3.0358\\ 
@@ -1124,7 +1002,7 @@ With UNEM 1 year as low as 0.56, UNEM achieved is a large improvement to the equ
 	\end{tabular}
 \end{table}
 
-Figure \ref{fig: Ratio bias} shows the MSPE ratio and MAPE ratio over the different threshold in higher granularity. HICP does not attend the minimum with threshold up to 0 for both forecast horizon. The same conclusion also holds for RGDP 1 year and UNEM 2 years. On the other hand, RGDP 2 years has a large effect in truncation with bias-correction occurs, while performs badly without bias-correction. One reason for this is that the problem with RGDP is the highly biasses over time, which cannot be corrected using cross-sectional truncation. UNEM 1 year is another macroeconomic topic that perform better with bias correction. We see from the plot that a large area is well below 0.7, relieving the problem of selecting precisely -0.5.
+Figure \ref{fig: Ratio bias} shows the MSPE ratio and MAPE ratio over the different threshold in higher granularity. HICP does not attend the minimum with a threshold up to 0 for both forecast horizon. The same conclusion also holds for RGDP one year and UNEM two years. On the other hand, RGDP two years has a large effect in truncation with bias-correction occurs, while performs badly without bias-correction. One reason for this is that the problem with RGDP is highly biasses over time, which cannot be corrected using cross-sectional truncation. UNEM one year is another macroeconomic topic that performs better with bias correction. We see from the plot that a large area is well below 0.7, relieving the problem of selecting precisely -0.5.
 
 
 \begin{figure}[!h]
@@ -1141,20 +1019,20 @@ Figure \ref{fig: Ratio bias} shows the MSPE ratio and MAPE ratio over the differ
 \end{figure}
 
 
-All in all, we observed the possibility to combine bias-correction and truncation. Some macroeconomic performs better with only truncation, while some perform better with the addition of bias-correction. A possible explanation is that the truncation has effect in a different direction than the bias-correction. Truncation relies on the high correlation between different $y_i$, while bias-correction relies on the consistency and predictability of the forecast error in a univariate setting. This difference between two approaches explains the different effect between series. If the predictability of the forecast error is small, such that predicting the forecast increases the MSE, adjusting the bias does not help. Of course, the truncation and bias-correction are not mutually independent. An increase in the correlation increases the similarity of the estimation error. In turn, the estimation errors do not cancel out but magnifies. 
+All in all, we observed the possibility to combine bias-correction and truncation. Some macroeconomic performs better with the only truncation, while some perform better with the addition of bias-correction. A possible explanation is that the truncation has effect in a different direction than the bias-correction. Truncation relies on the high correlation between different $y_i$, while bias-correction relies on the consistency and predictability of the forecast error in a univariate setting. This difference between the two approaches explains the different effect between series. If the predictability of the forecast error is small, such that predicting the forecast increases the MSE, adjusting the bias does not help. Of course, the truncation and bias-correction are not mutually independent. An increase in the correlation increases the similarity of the estimation error. In turn, the estimation errors do not cancel out but magnify. 
 
 
 
 \subsection{Simulation}\label{simulation}
-In this section, we show different effect on the underlying model influences the MSPE. For simplicity, we select four true weights and change the data generating model regarding correlation and error variance. We start with the true weight as $w=(-0.5,0.3,0,1.2)'$, and proceed with correlation matrix where all off-diagonals are the same value. Covariance matrix follows by setting all variance to 1. The error term is generated with univariate random normal distribution, while the forecasts are generated by multivariate normal. We do not use biased forecast in this simulation. The simulation runs 10 observations per time for 2000 times for each correlation and error variance combination. Then the simulation takes the average of the MSPE.
+In this section, we show a different effect on the underlying model influences the MSPE. For simplicity, we select four true weights and change the data generating model regarding correlation and error variance. We start with the true weight as $w=(-0.5,0.3,0,1.2)'$, and proceed with the correlation matrix where all off-diagonals are the same value. Covariance matrix follows by setting all variance to 1. The error term is generated with a univariate random normal distribution, while the forecasts are generated by multivariate normal. We do not use biased forecast in this simulation. The simulation runs 10 observations per time for 2000 times for each correlation and error variance combination. Then the simulation takes the average of the MSPE.
 
 In figure \ref{fig: simulation} different effects of correlation and error variance are shown. We select four different correlation, from 0.5 to 0.8, covering most of the correlation we observed in SPF. For the error variance, we show a range of selection from 0.4 to 0.9. Since the data variance is 1, the error variance quickly gives an idea on the fit of each forecast. 
 
 From figure \ref{fig: simulation}, changes in the correlation and error variance does not influence the position where the MSPE drops or rises. Changes in error variance influence trivially on the level of MSPE. Higher error variance leads to higher MSPE. Changes in correlation show the location where the truncation effect converge to. For low correlation, 0.5 and 0.6, there is a distinct upward movement when truncation goes to 0 for all error variance. This forms the U-shape one expect when the bias increases. For high correlation, the effect of truncation does not increase the bias large enough, making the U-shape observable in only a few cases. Other cases with higher error variance show a continuous decline in MSPE. 
 
-Referring to section \ref{bias-weighting}, the changes in the shape can be accounted for the additional estimation error caused by the bias term. In figure \ref{fig: simulation}, it would be similar to plots of correlation 0.7 where error variance goes from 0.7 to 0.9.
+Referring back to section \ref{bias-weighting}, the changes in the shape can be accounted for the additional estimation error caused by the bias term. In figure \ref{fig: simulation}, it would be similar to plots of correlation 0.7 where error variance goes from 0.7 to 0.9.
 
-For a U-shape to exist, e.g. equal weight is not the best, the correlation and error variance both plays an important role. Higher correlation only allows lower error when finding the optimal truncation parameter, while lower correlation also allows higher error to exist.
+For a U-shape to exist, e.g. equal weight is not the best, the correlation and error variance both plays an important role. Higher correlation only allows lower error when finding the optimal truncation parameter, while a lower correlation also allows higher error to exist.
 
 \begin{figure}[!h]
 	\centering
@@ -1163,25 +1041,19 @@ For a U-shape to exist, e.g. equal weight is not the best, the correlation and e
 \end{figure}
 
 \section{Conclusion and discussion}\label{conclusion}
-In this paper, we look into the possibility to use truncation to improve the forecast within forecast combination. Simple weight derived with a deterministic weight assumption often show bad empirical behaviour when compared to equal weight by arithmetic mean. Equal weight has a behaviour that the combined forecast cannot exceed the minimum or the maximum of all forecast. This limitation also holds for all weight selection method where the weight cannot be negative. 
+In this paper, we look into the possibility to use truncation to improve the forecast within the forecast combination. Simple weight derived with a deterministic weight assumption often shows bad empirical behaviour when compared to equal weight by arithmetic mean. Equal weight has a behaviour that the combined forecast cannot exceed the minimum or the maximum of all forecast. This limitation also holds for all weight selection method where the weight cannot be negative. 
 
 Using truncation, five out of six macroeconomic topics have a positive effect on the mean squared prediction error (MSPE) and mean absolute prediction error (MAPE) for the European Central Bank's (ECB) survey of professional forecasters (SPF). SPF is a quarterly survey sent to the private sector to understand their view on inflation (HICP), economic growth (RGDP), and unemployment (UNEM) in the next one and two year. The survey forecasts have a strong correlation within the forecasters, which we show that the true value often lies outside of the minimum/maximum range. Additionally, the increase in the correlation leads to an increase in the negative weight. Therefore the relaxation of no negative weight helps in this aspect.
 
-By truncation, we also set the weight below a certain threshold to 0, which removes the forecasts from the combination list. The results indicate a positive effect up to 30\% decrease in MSPE compared to equal weight. 
-This is positive news considering the amount of forecaster is relatively large compared to the sample size. 
-With up to 120 forecasters and 60 observations, the weight estimation contains a large amount of estimation noise.
-This gives the estimated weight a wide variation, with a minimum of -21.79 and maximum of 16.34. On the other hand, the weights calculated by equal weight method are around 0.01.
+By truncation, we also set the weight below a certain threshold to 0, which removes the forecasts from the combination list. The results indicate a positive effect up to 30\% decrease in MSPE compared to equal weight. This is positive news considering the amount of forecaster is relatively large compared to the sample size. With up to 120 forecasters and 60 observations, the weight estimation contains a large amount of estimation noise. This gives the estimated weight a wide variation, with a minimum of -21.79 and maximum of 16.34. On the other hand, the weights calculated by equal weight method are around 0.01.
 
-The effect of truncation comes into play for optimal threshold selection on the underlying truncation parameter. The decrease can go to as low as 12\% and 30\% in MSPE. Optimal threshold provides room for variation in parameter over time contrary to situations where parameters remain constant. This leads to performance increase for RGDP with 2 years forecast horizon. Improvement in MAPE and MSPE is noted for all 6 microeconomic instances when comparison is made for all equal weight. A majority of the parameters are under -1.5 for the chosen truncation. Of course, this is well under the initial -21.79. Variation is limited by setting the parameter under -1.5 thus reducing the estimation error and variance. 
+The effect of truncation comes into play for optimal threshold selection on the underlying truncation parameter. The decrease can go to as low as 12\% and 30\% in MSPE. Optimal threshold provides room for variation in parameter over time contrary to situations where parameters remain constant. This leads to a performance increase for RGDP with two years forecast horizon. Improvement in MAPE and MSPE is noted for all 6 microeconomic instances when the comparison is made for all equal weight. A majority of the parameters are under -1.5 for the chosen truncation. Of course, this is well under the initial -21.79. Variation is limited by setting the parameter under -1.5 thus reducing the estimation error and variance. 
 
-Looking further into the weight selection, it is possible that the characteristic of SPF is dominated by a consistent bias over a certain forecaster. An example would be a case where the forecaster undervalues the growth and the decline, resulting in a forecast closer to 0 than the true value. Therefore we construct the bias correcting forecast weight and applies the truncation analysis on the corrected weight. The result is a mix bag of good and bad news. Four out of six macroeconomic topics are worse than equal weight, while without bias correction, we have only 1 truncation weight that is under-performing. There are still declines in the test statistics compared to the non-truncated ones. On the positive news, bias-correction improves the only macro topic that does not outperform equal weight without bias-correction. The MSPE decreases up to 17\% compared with equal weight and MAPE up to 12 \%. Another positive news is an additional decrease of 13\% in UNEM 1 year ahead. The difference with and without bias correction could be in the direction of the changes of the weight. Truncation tries to extend the forecast upon the range by using negative weight, while bias-correction tries to identify the consistent bias within each forecaster.
+Looking further into the weight selection, it is possible that the characteristic of SPF is dominated by a consistent bias over a certain forecaster. An example would be a case where the forecaster undervalues the growth and the decline, resulting in a forecast closer to 0 than the true value. Therefore we construct the bias correcting forecast weight and applies the truncation analysis on the corrected weight. The result is a mixed bag of good and bad news. Four out of six macroeconomic topics are worse than equal weight, while without bias correction, we have only 1 truncation weight that is under-performing. There are still declines in the test statistics compared to the non-truncated ones. On the positive news, bias-correction improves the only macro topic that does not outperform equal weight without bias-correction. The MSPE decreases up to 17\% compared with equal weight and MAPE up to 12\%. Another positive news is an additional decrease of 13\% in UNEM one year ahead. The difference with and without bias correction could be in the direction of the changes in the weight. Truncation tries to extend the forecast upon the range by using negative weight, while bias-correction tries to identify the consistent bias within each forecaster.
 
-We also study the different effect of correlation and estimation uncertainty on the shape of the MSPE. Correlation and estimation uncertainty both play important intertwined roles in the truncation. Higher correlation only allows lower error when finding the optimal truncation parameter, while lower correlation also allows higher error to exist. Since estimation uncertainty and correlation can be known before applying truncation, the selection of best truncation using that information is a possible future research topic.
+We also study the different effect of correlation and estimation uncertainty on the shape of the MSPE. Correlation and estimation uncertainty both play important intertwined roles in the truncation. Higher correlation only allows lower error when finding the optimal truncation parameter, while a lower correlation also allows higher error to exist. Since estimation uncertainty and correlation can be known before applying truncation, the selection of best truncation using that information is a possible future research topic.
 
-We list a few other points in this paper that require further research. All analytic derivations are done in two forecasts scenarios, which can be extended to multivariate setting. 
-RGDP 2 years ahead shows an unexpected shape of MSPE, with the reason to this shape unclear.
-Knowing the reason to spikes in the truncation selection is helpful as this can help in limiting variation.
-Combination of other techniques like shrinkage on the covariance to improve the estimates. Additionally, use the threshold value instead of 0 to the truncation can also change the effect of the method.
+We list a few other points in this paper that require further research. All analytic derivations are done in two forecasts scenarios, which can be extended to the multivariate setting. RGDP two years ahead shows an unexpected shape of MSPE, with the reason for this shape unclear. Knowing the reason for spikes in the truncation selection is helpful as this can help in limiting variation - a combination of other techniques like shrinkage on the covariance to improve the estimates. Additionally, use the threshold value instead of 0 to the truncation can also change the effect of the method.
 
 All in all, we demonstrate the ability to improve upon equal weight by truncation. The requirements for the improvement lies in the correlation and forecast uncertainty. When the conditions are met, for example, the SPF data, equal weight is no longer the prime choice in the forecast combination. 
 
