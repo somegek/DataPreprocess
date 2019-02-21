@@ -200,7 +200,7 @@ w^\dagger = w^*(1+\frac{\sigma_{22} d_1 + \sigma_{11} d_2 -\sigma_{12} (d_1 + d_
 The non-deterministic weight selection is a linear combination of the
 original weight. The non-deterministic weight does not change if the
 third moments are \(0\). 
-In real life case, it is not hard to imagine that the weights are correlated with the data used to calculate the weights. However, since the weights are unobserved, there are no straightforward solution for the third moment.
+In real life case, it is not hard to imagine that the weights are correlated with the data used to calculate the weights. However, since the weights are unobserved, there are no straightforward solutions for the third moment.
 
 From equation \ref{eqn: w w/ var w}, we look in the scaling parameter
 and the intercept adjustment vector. Under same condition where
@@ -313,7 +313,7 @@ bias is non-zero.
 %We expect that when $c$ is small enough, e.g. $\tilde{w}\approx w^*$, the increase in bias is small compared to the decrease in variance. When the truncation $c$ gradually increases, the decrease of the variance starts to slow down, and the bias starts to increase more. This is due to the quadratic behaviour of MSE. Thus, somewhere between $w^*$ and $\frac{1}{n}$, there will be an optimal trade-off. This is similar to shrinkage estimator \citep{James1961}. However, truncation set the truncated weight to 0 instead of $c$. This effectively removes the forecast from the list to be combined. By incorporating this truncation style, the weight can be viewed as a variable selection method in the area of forecast combination, where negative weight is empirically inferior to positive weight. 
 
 \subsection{Bias Correction}\label{bias-correction}
-In this section we provide the bias correction following \cite{Gibbs2017}. They suggest that knowing the conditional bias helps the weight estimation. If the conditional bias is large for a certain forecast, the forecast should be under-weighted, similar to the case where the variance of the forecast is large.
+In this section, we provide the bias correction following \cite{Gibbs2017}. They suggest that knowing the conditional bias helps weight estimation. If the conditional bias is large for a certain forecast, the forecast should be under-weighted, similar to the case where the variance of the forecast is large.
 
 To start with bias estimation, let the prediction error from forecast \(i\) be \(\epsilon_i = y - y_i\), that we can decompose it into predictable term and unpredictable term:
 
@@ -421,7 +421,7 @@ We examine the amount of true value outside of the forecast range by looking at 
 
 \begin{table}[!h]
 	\centering
-	\caption{Mean of the model space indicator of the forecast. The indicators are split up into different forecast topics and different forecast horizons. From the three macro topic, RGDP has the least chance within the forecast range, followed by HICP. UNEM has the highest chance to be in the forecast range.}
+	\caption{Mean of the model space indicator of the forecast. The indicators are split up into different forecast topics and different forecast horizons. From the three macro topics, RGDP has the least chance within the forecast range, followed by HICP. UNEM has the highest chance to be in the forecast range.}
 	\label{tab: modelspace summary statistics}
 	\begin{tabular}{lcccccc}
 		\hline
@@ -440,7 +440,7 @@ As not all forecasters replied to each survey, we show the number of forecasters
 
 \begin{table}[!h]
 	\centering
-	\caption{Amount of Forecasters. The amount of the forecaster for one year ahead forecast is higher than two year ahead.}
+	\caption{Amount of Forecasters. The amount of forecasters for one year ahead forecast is higher than two years ahead.}
 	\label{tab: amount of forecasters}
 	\begin{tabular}{lcccccc}
 		\hline
@@ -457,7 +457,7 @@ As not all forecasters replied to each survey, we show the number of forecasters
 
 \begin{table}[!h]
 	\centering
-	\caption{Summary statistics of the survey reply amounts per forecasters. The average forecasters made around 50 replies for the whole duration of the survey. No forecaster replied to all survey. Means are round down to whole number for readability.}
+	\caption{Summary statistics of the survey reply amounts per forecasters. The average forecasters made around 50 replies for the whole duration of the survey. No forecaster replied to all survey. Means are round down to whole numbers for readability.}
 	\label{tab: forecaster summary statistics}
 	\begin{tabular}{lcccccc}%{S[table-format=3.2]}
 		\hline
@@ -481,7 +481,7 @@ Table \ref{tab: time summary statistics} shows the summary statistics of the num
 
 \begin{table}[!h]
 	\centering
-	\caption{Summary statistics of the survey reply amounts per time period. There are around 35 to 45 responses for half of the time. Means are round down to whole number for readability.}
+	\caption{Summary statistics of the survey reply amount per time period. There are around 35 to 45 responses for half of the time. Means are round down to whole numbers for readability.}
 	\label{tab: time summary statistics}
 	\begin{tabular}{lcccccc}%{S[table-format=3.2]}
 		\hline
@@ -533,7 +533,7 @@ The table \ref{tab: correlation summary statistics} tell us on how the forecast 
 
 \begin{table}[!h]
 	\centering
-	\caption{Summary statistics of the correlation of the forecast error. The correlation are split up into different forecast topics and different forecast horizons. For all of the series, the correlation are on average above 60\%. In HICP and UNEM the correlation increases across all statistics when the forecast horizon increases, while RGDP remains the same.}
+	\caption{Summary statistics of the correlation of the forecast error. The correlations are split up into different forecast topics and different forecast horizons. For all of the series, the correlations are on average above 60\%. In HICP and UNEM the correlation increases across all statistics when the forecast horizon increases, while RGDP remains the same.}
 	\label{tab: correlation summary statistics}
 	\begin{tabular}{lcccccc}%{S[table-format=3.2]}
 		\hline
@@ -562,7 +562,7 @@ Analysis of the optimal weight given by equation \ref{eqn: simple weight} provid
 
 \begin{table}[!h]
 	\centering
-	\caption{Summary statistics of the weight from equation \ref{eqn: simple weight}. The mean and median is close to the value from equal weight. However, extreme values exist in the weight, visible in the mimum and maximum. Based on the first and the third quantile, we see that half of the weight are between -0.6 and 0.6.}
+	\caption{Summary statistics of the weight from equation \ref{eqn: simple weight}. The mean and median is close to the value from equal weight. However, extreme values exist in the weight, visible in the minimum and maximum. Based on the first and the third quantile, we see that half of the weight are between -0.6 and 0.6.}
 	\label{tab: simple weight summary statistics}
 	\begin{tabular}{lcccccc}%{S[table-format=3.2]}
 		\hline
@@ -713,7 +713,7 @@ We see in table \ref{tab: MSPE HICP} that for the truncation value -2 and -1.5, 
 
 \begin{table}[!h]
 	\centering
-	\caption{Mean Squared Prediction Error (MSPE) and Mean Absolute Prediction Error (MAPE) of inflation with truncated value set to 0. The MSPE and MAPE of the truncated value are given in the ratio of truncation to equal weight. Larger than 1 means truncated is worse, whereas smaller than 1 means truncated weight helps in reducing MSPE or MAPE.}
+	\caption{Mean Squared Prediction Error (MSPE) and Mean Absolute Prediction Error (MAPE) of inflation with the truncated value set to 0. The MSPE and MAPE of the truncated value are given in the ratio of truncation to equal weight. Larger than 1 means truncated is worse, whereas smaller than 1 means truncated weight helps in reducing MSPE or MAPE.}
 	\label{tab: MSPE HICP}
 	\begin{tabular}{lcccc}
 		\hline\hline
@@ -740,7 +740,7 @@ Table \ref{tab: MSPE RGDP} shows a similar pattern in RGDP as in HICP. The optim
 
 \begin{table}[!h]
 	\centering
-	\caption{Mean Squared Prediction Error (MSPE) and Mean Absolute Prediction Error (MAPE) of economic growth with  truncated value set to 0. The MSPE and MAPE of the truncated value are given in the ratio of truncation to equal weight. Larger than 1 means truncated is worse, whereas smaller than 1 means truncated weight helps in reducing MSPE or MAPE.}
+	\caption{Mean Squared Prediction Error (MSPE) and Mean Absolute Prediction Error (MAPE) of economic growth with the truncated value set to 0. The MSPE and MAPE of the truncated value are given in the ratio of truncation to equal weight. Larger than 1 means truncated is worse, whereas smaller than 1 means truncated weight helps in reducing MSPE or MAPE.}
 	\label{tab: MSPE RGDP}
 	\begin{tabular}{lcccc}
 		\hline\hline
@@ -770,7 +770,7 @@ When we look further in UNEM, the results show well-performing ratios. UNEM achi
 
 \begin{table}[!h] 
 	\centering
-	\caption{Mean Squared Prediction Error (MSPE) and Mean Absolute Prediction Error (MAPE) of unemployment with  truncated value set to 0. The MSPE and MAPE of the truncated value are given in the ratio of truncation to equal weight. Larger than 1 means truncated is worse, whereas smaller than 1 means truncated weight helps in reducing MSPE or MAPE.}
+	\caption{Mean Squared Prediction Error (MSPE) and Mean Absolute Prediction Error (MAPE) of unemployment with the truncated value set to 0. The MSPE and MAPE of the truncated value are given in the ratio of truncation to equal weight. Larger than 1 means truncated is worse, whereas smaller than 1 means truncated weight helps in reducing MSPE or MAPE.}
 	\label{tab: MSPE UNEM}
 	\begin{tabular}{lcccc}
 		\hline\hline
@@ -1049,11 +1049,11 @@ By truncation, we also set the weight below a certain threshold to 0, which remo
 
 The effect of truncation comes into play for optimal threshold selection on the underlying truncation parameter. The decrease can go to as low as 12\% and 30\% in MSPE. Optimal threshold provides room for variation in parameter over time contrary to situations where parameters remain constant. This leads to a performance increase for RGDP with two years forecast horizon. Improvement in MAPE and MSPE is noted for all 6 microeconomic instances when the comparison is made for all equal weight. A majority of the parameters are under -1.5 for the chosen truncation. Of course, this is well under the initial -21.79. Variation is limited by setting the parameter under -1.5 thus reducing the estimation error and variance. 
 
-Looking further into the weight selection, it is possible that the characteristic of SPF is dominated by a consistent bias over a certain forecaster. An example would be a case where the forecaster undervalues the growth and the decline, resulting in a forecast closer to 0 than the true value. Therefore we construct the bias correcting forecast weight and applies the truncation analysis on the corrected weight. The result is a mixed bag of good and bad news. Four out of six macroeconomic topics are worse than equal weight, while without bias correction, we have only 1 truncation weight that is under-performing. There are still declines in the test statistics compared to the non-truncated ones. On the positive news, bias-correction improves the only macro topic that does not outperform equal weight without bias-correction. The MSPE decreases up to 17\% compared with equal weight and MAPE up to 12\%. Another positive news is an additional decrease of 13\% in UNEM one year ahead. The difference with and without bias correction could be in the direction of the changes in the weight. Truncation tries to extend the forecast upon the range by using negative weight, while bias-correction tries to identify the consistent bias within each forecaster.
+Looking further into the weight selection, it is possible that the characteristic of SPF is dominated by a consistent bias over a certain forecaster. An example would be a case where the forecaster undervalues the growth and the decline, resulting in a forecast closer to 0 than the true value. Therefore we construct the bias correcting forecast weight and applies the truncation analysis on the corrected weight. The result is a mixed bag of good and bad news. Four out of six macroeconomic topics are worse than equal weight, while without bias correction, we have only 1 truncation weight that is under-performing. There are still declines in the test statistics compared to the non-truncated ones. On the positive news, bias-correction improves the only macro topic that does not outperform equal weight without bias-correction. The MSPE decreases up to 17\% compared with equal weight and MAPE up to 12 \%. Another positive news is an additional decrease of 13\% in UNEM one year ahead. The difference with and without bias correction could be in the direction of the changes in the weight. Truncation tries to extend the forecast upon the range by using negative weight, while bias-correction tries to identify the consistent bias within each forecaster.
 
 We also study the different effect of correlation and estimation uncertainty on the shape of the MSPE. Correlation and estimation uncertainty both play important intertwined roles in the truncation. Higher correlation only allows lower error when finding the optimal truncation parameter, while a lower correlation also allows higher error to exist. Since estimation uncertainty and correlation can be known before applying truncation, the selection of best truncation using that information is a possible future research topic.
 
-We list a few other points in this paper that require further research. All analytic derivations are done in two forecasts scenarios, which can be extended to the multivariate setting. RGDP two years ahead shows an unexpected shape of MSPE, with the reason for this shape unclear. Knowing the reason for spikes in the truncation selection is helpful as this can help in limiting variation - a combination of other techniques like shrinkage on the covariance to improve the estimates. Additionally, use the threshold value instead of 0 to the truncation can also change the effect of the method.
+We list a few other points in this paper that require further research. All analytic derivations are done in two forecasts scenarios, which can be extended to the multivariate setting. RGDP two years ahead shows an unexpected shape of MSPE, with the reason for this shape unclear. Knowing the reason for spikes in the truncation selection is helpful as this can help in limiting variation — a combination of other techniques like shrinkage on the covariance to improve the estimates. Additionally, use the threshold value instead of 0 to the truncation can also change the effect of the method.
 
 All in all, we demonstrate the ability to improve upon equal weight by truncation. The requirements for the improvement lies in the correlation and forecast uncertainty. When the conditions are met, for example, the SPF data, equal weight is no longer the prime choice in the forecast combination. 
 
@@ -1063,3 +1063,5 @@ All in all, we demonstrate the ability to improve upon equal weight by truncatio
 \bibliography{shortbib}
 
 \end{document}
+
+
