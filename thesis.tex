@@ -252,65 +252,20 @@ c &, \text{ if } w^*<c \\
 \textbf{This weight estimation limits the minimum of the weight to $c$, and normalises the sum of weight to $1$. 
 One special case of $c$ is worth noting. When $c$ is set to $0$, the truncated weight becomes a variable selection method. If the weight is below the threshold, the forecast is discarded.}
 
-Assuming that there is no skewness in the joint distribution, e.g.,
-\(w^*\) is an unbiased estimator of the true \(w\), then by law of total expectation, the expected value of
-the weight \(\tilde{w}\) is
+Assume that the weight $w$ follows the probability density function $D(w)$, and the truncation threshold is negative $c<0$. The variance of the truncated weight is
 \begin{equation}
-\label{eqn: E w trunc}
+\label{eqn: var trunc}
 \begin{aligned}
-E(\tilde{w}) &= E(w^*|c<w^*<1-c)P(c<w^*<1-c) + P(w^*>1-c).
+Var(\tilde{w}) &= \frac{1}{\alpha^2} \int_{c}^{\infty} (w-E(w))^2 D(w) dw\\
+&\leq \int_{c}^{\infty} (w-E(w))^2 D(w) dw\\
+&\leq \int_{-\infty}^{\infty} (w-E(w))^2 D(w) dw\\
+&=Var(w^*)\\
+\alpha &= \int_{c}^{\infty} w dw\\
+&\geq \int_{-\infty}^{\infty} w dw\\
+&=1.
 \end{aligned}
 \end{equation}
-The bias is therefore
-\begin{equation}
-\label{eqn: bias w trunc}
-\begin{aligned}
-Bias_c(\tilde{w}) &= E(w^*) - E(\tilde{w}) \\
-&= E(w^*|w^*<c)P(w^*<c) + E(w^*-1|w^*>1-c)P(w^*>1-c).
-\end{aligned}
-\end{equation}
-In the first term, we have \(w^*<c<0\), is a negative bias. In the second term we have \(w^*>1-c>1\), which
-gives a positive value in \(w^*-1\). In general case where \(w^*\) can go
-above \(1-c\) or below \(c\) and the distribution of \(w\) is not symmetric, then the
-bias is non-zero.
-
-%By the law of total variance, the variance of the weight is
-%\begin{equation}
-%\label{eqn: var w trunc}
-%\begin{aligned}
-%Var(\tilde{w}) &= Var(I_{c<w^*<1-c}w^*+I_{w^*>1-c})\\
-%&=Var(w^*|c<w^*<1-c)P(c<w^*<1-c) + P(w^*>1-c)(1-P(w^*>1-c)) \\&- 2E(w^*|c<w^*<1-c)P(c<w^*<1-c)P(w^*>1-c),
-%\end{aligned}
-%\end{equation}
-%and the difference between $\tilde{w}$ and $w^*$ is
-%\begin{equation}
-%\label{eqn: delta var w trunc}
-%\begin{aligned}
-%Var(w^*) - Var(\tilde{w})=& Var(w^* | w^*<c)P(w<c)+Var(w^*|w^*>1-c)P(w^*>1-c)\\
-%+&E(w^*|w^*<c)^2P(w^*<c)(1-P(w^*<c))\\
-%+&E(w^*|w^*>1-c)^2P(w^*>1-c)(1-P(w^*>1-c))\\
-%-&2E(w^*|w^*<c)P(w^*<c)E(w^*|w^*>1-c)P(w^*>1-c)\\
-%-&2E(w^*|c<w^*<1-c)P(c<w^*<1-c)E(w^*|w^*>1-c)P(w^*>1-c)\\
-%-&2E(w^*|w^*>1-c)P(w^*>1-c)E(w^*|c<w^*<1-c)P(c<w^*<1-c)\\
-%+&2P(w^*>1-c)E(w^*|c<w^*<1-c)P(c<w^*<1-c)\\
-%=& Var(w^*|w^*<c, w^*>1-c)\\
-%-&2E(w^*|c<w^*<1-c)P(c<w^*<1-c)\\&[P(w^*>1-c)(E(w^*|w^*>1-c)-1)-E(w^*|w^*<c)P(w^*<c)].
-%\end{aligned}
-%\end{equation}
-%where row 1, 2, 3, and 5 collapse to $Var(w^*|w^*<c, w^*>1-c)$. Since $E(w^*|w^*>1-c)-1 >0$ and $E(w^*|w^*<c)<0$, the term within the square bracket is positive. The effect of the second term depends solely on $E(w^*|c<w^*<1-c)$. The value of the expectation can be both positive or negative, and we cannot infer the effect without the distribution of $w^*$. 
-
-
-%The mean squared error (MSE) is then given by 
-%\begin{equation}
-%\label{eqn: MSE trunc}
-%\begin{aligned}
-%MSE_c &= Bias_c(\tilde{w})^2 + Var(\tilde{w})\\
-%&=(E(w^*|w^*<c)P(w^*<c) + E(w^*-1|w^*>1-c)P(w^*>1-c))^2 \\
-%&+ Var(w^*|c<w^*<1-c)P(c<w^*<1-c) + P(w^*>1-c)(1-P(w^*>1-c)) \\
-%&- 2E(w^*|c<w^*<1-c)P(c<w^*<1-c)P(w^*>1-c)
-%\end{aligned}
-%\end{equation}
-%We expect that when $c$ is small enough, e.g. $\tilde{w}\approx w^*$, the increase in bias is small compared to the decrease in variance. When the truncation $c$ gradually increases, the decrease of the variance starts to slow down, and the bias starts to increase more. This is due to the quadratic behaviour of MSE. Thus, somewhere between $w^*$ and $\frac{1}{n}$, there will be an optimal trade-off. This is similar to shrinkage estimator \citep{James1961}. However, truncation set the truncated weight to 0 instead of $c$. This effectively removes the forecast from the list to be combined. By incorporating this truncation style, the weight can be viewed as a variable selection method in the area of forecast combination, where negative weight is empirically inferior to positive weight. 
+Since $alpha \geq 1$, we have the scaling decreases the variance. Combine with $(w-E(W))^2 \geq 0$, we have that by setting truncation and rescaling, the variance of the truncated weight is smaller than the original weights.
 
 \subsection{Bias Correction}\label{bias-correction}
 In this section, we provide the bias correction following \cite{Gibbs2017}. They suggest that knowing the conditional bias helps weight estimation. If the conditional bias is large for a certain forecast, the forecast should be under-weighted, similar to the case where the variance of the forecast is large.
