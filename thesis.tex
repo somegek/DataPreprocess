@@ -8,7 +8,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-pdftitle={Forecast combination with truncation},
+pdftitle={Forecast combination with truncation in the negative weights},
 pdfauthor={Daniel Hsiao},
 pdfborder={0 0 0},
 breaklinks=true}
@@ -42,12 +42,14 @@ breaklinks=true}
 }
 }
 
-\setlength{\droptitle}{-2em}
-\title{Forecast combination with truncation}
+\setlength{\droptitle}{0em}
+\title{Forecast combination with truncation in the negative weights}
 \pretitle{\vspace{\droptitle}\centering\huge}
 \posttitle{\par}
-\author{Daniel Hsiao}
-\preauthor{\centering\large\emph}
+\author{
+	Daniel Hsiao - 382648\\[2.5cm]
+	abc}
+\preauthor{\centering\large}
 \postauthor{\par}
 \predate{\centering\large\emph}
 \postdate{\par}
@@ -62,13 +64,29 @@ breaklinks=true}
 \captionsetup{font=small}
 
 \begin{document}
-\maketitle
+	\begin{titlepage}
+	\centering
+	{\LARGE ERASMUS UNIVERSITY ROTTERDAM}\\[0.5cm]
+	{\large Erasmus School of Economics}\\[1.5cm] 
+	{\large \textbf{Master Thesis}}\\[0.5cm] 	
+	{\LARGE Forecast Combination with Truncation on the Negative Weights}\\[1cm] 
+	{\large Ching Teng Hsiao}\\382648\\
+	\textit{Quantitative Finance, Erasmus University Rotterdam}\\[1.5cm]
+	{\large Supervisor: \\Wendun Wang}\\
+	\textit{Econometrics Institute, Erasmus University Rotterdam}\\[ 1cm]
+	{\large \today}\\[2.5cm]
+	\begin{abstract}
+		This thesis examines the predictive power in forecast combination when the negative weights are not ignored. Instead of removing the negative weights, we use truncation to limit the negative weights to a selected range of levels. Using Survey of Professional Forecasters from European Central Bank, a dataset with high correlation in forecast error, this thesis reports a positive performance compare to both equal weights and no-negative weights in five out of six cases. We also show that the truncation is also able to improve the forecast when the selection of the threshold is out-of-sample. Additionally, conditional-bias-adjusted weights and simulation study has been carried out as an demonstration to the robustness.
+	\end{abstract}
+\end{titlepage}
+
 \newpage
 {
 	\setcounter{tocdepth}{3}
 	\tableofcontents
 }
 \newpage
+
 
 \section{Introduction}\label{introduction}
 We make predictions in almost all the decisions that we make. Nonetheless, individuals make different forecasts. The number of predictions increases with a corresponding increase in the number of people. Hence, determining predictions that are better and the extent by which group predictions could be better than individual forecasts have always been the central issue of concern. The truth is that if we are not sure about the best forecast, then the chances are that there are better solutions that can be developed as a linear combination of all the predictions that we make. A linear combination of all predictions is it bears general opinions of the forecasters with a lower level of idiosyncratic risks. This approach has been fruitful so far in reducing forecast error. It is essential to review the correlation between different groups of forecasters because it plays a vital role in determining the final weight.
@@ -238,7 +256,7 @@ When $\rho$ reaches 1, the determinant becomes 0, and the limit of weight become
 
 \subsection{Truncated weight}\label{truncated-weight}
 
-To avoid the high correlated forecasts, truncation is  used on the
+To avoid the high correlated forecasts, truncation is used on the
 weights after estimation. Given optimal weight $w^*$, the truncated weight is 
 \begin{equation}
 \label{eqn: w trunc}
@@ -249,26 +267,58 @@ c &, \text{ if } w^*<c \\
 1-c &, \text{ if } w^*>1-c.
 \end{dcases}
 \end{equation}
-\textbf{This weight estimation limits the minimum of the weight to $c$, and normalises the sum of weight to $1$. 
-One special case of $c$ is worth noting. When $c$ is set to $0$, the truncated weight becomes a variable selection method. If the weight is below the threshold, the forecast is discarded.}
 
-Assume that the weight $w$ follows the probability density function $D(w)$, and the truncation threshold is negative $c<0$. The variance of the truncated weight is
+This weight estimation limits the minimum of the weight to $c$, and normalises the sum of weight to $1$. 
+
+Due to the truncation, the bias and variance changes in respect to the choice of $c$. Assume that the weight $w$ follows the probability density function $D(w)$, and the truncation threshold is negative $c<0$. The bias of the estimation can be expressed by
+\begin{equation}
+\label{eqn: bias trunc}
+\begin{aligned}
+Bias(\tilde{w}) &= \int_{-\infty}^{c} (w-c) D(w)dw + (1-\frac{1}{\alpha})\int_{c}^{\infty}( w-E(w))D(w)dw\\
+\alpha &= \int_{c}^{\infty} w dw\\
+&\geq \int_{-\infty}^{\infty} w dw\\
+&=1.
+\end{aligned}
+\end{equation}
+The bias is a sum of the bias from the truncated weights and the bias from the rescaling. When the threshold goes to $-\infty$, both part becomes $0$ and the bias is $0$.
+
+The variance of the truncated weight is
 \begin{equation}
 \label{eqn: var trunc}
 \begin{aligned}
 Var(\tilde{w}) &= \frac{1}{\alpha^2} \int_{c}^{\infty} (w-E(w))^2 D(w) dw\\
 &\leq \int_{c}^{\infty} (w-E(w))^2 D(w) dw\\
 &\leq \int_{-\infty}^{\infty} (w-E(w))^2 D(w) dw\\
-&=Var(w^*)\\
-\alpha &= \int_{c}^{\infty} w dw\\
-&\geq \int_{-\infty}^{\infty} w dw\\
-&=1.
+&=Var(w^*)
 \end{aligned}
 \end{equation}
-Since $alpha \geq 1$, we have the scaling decreases the variance. Combine with $(w-E(W))^2 \geq 0$, we have that by setting truncation and rescaling, the variance of the truncated weight is smaller than the original weights.
+Since $\alpha \geq 1$, we have the scaling decreases the variance. Combine with $(w-E(W))^2 \geq 0$, we have that by setting truncation and rescaling, the variance of the truncated weight is smaller than the original weights. The effect of the variance is in relation to $c$. When the threshold becomes small, $c \rightarrow -\infty$, the effect of the threshold disappears and the variance becomes equal, $Var(\tilde{w}) = Var(w^*)$ and $\alpha = 1$.
+
+Increasing the threshold $c$ increases the bias in the estimation, but also decreases the variance. The cases where the mean squared error (MSE) is the minimum is therefore the most interesting. Due to unknown distribution of the weights, the minimum MSE needs to be computed numerically.
+
+One special case of $c$ is worth noting. When $c$ is set to $0$, the truncated weight becomes a variable selection method. If the weight is below the threshold, the forecast is discarded. Setting $c$ to $0$ however does not imply on reduction of the equation \ref{eqn: bias trunc} and \ref{eqn: var trunc}.
+
+Another special case is when there is an assumption on the distribution of the weights. If the weights follows a normal distribution, $w\sim N(\mu,\sigma)$, and let $\phi(x)$ and $\Phi(x)$ be the probability density function and cumulative density function of standard normal distribution respectively, then the bias and the variance are as follows:
+\begin{equation}
+\label{eqn: trunc norm}
+\begin{aligned}
+Bias(\tilde(w)) &= \sigma \frac{\phi(c)}{1-\Phi(c)}\\
+Var(\tilde(w)) &= \sigma^2 \bigg[1-\frac{c\phi(c)}{1-\Phi(c)}-\big(\frac{\phi(c)}{1-\Phi(c)}\big)^2\bigg].
+\end{aligned}
+\end{equation}
+The effect of $c$ reaching $-\infty$ is the same as equation \ref{eqn: bias trunc} and \ref{eqn: var trunc}: bias becomes $0$ and variance becomes variance of original weights. The effect of the squared bias and the variance on the MSE is
+\begin{equation}
+\label{eqn: trunc mse}
+MSE(\tilde{w}) = \sigma^2 \bigg[ 1 -\frac{c\phi(c)}{1-\Phi(c)}\bigg].
+\end{equation}
+Since the MSE of the optimal weight is the variance, $MSE(w^*) = \sigma^2$, the derivative of the difference in MSE is
+\begin{equation}
+\frac{\partial \triangle MSE}{\partial c} = \sigma^2\frac{\bigg[(1-c^2)\phi(c)[1-\Phi(c)]+c\phi(c)^2\bigg]}{(1-\Phi(c))^2}.
+\end{equation}
+Numerical optimisation shows that the maximum in $\triangle MSE$ is reached at $c=-0.84\sigma^2$. However, as the true $\sigma^2$ is unknown, this does not translate to analytical results.
 
 \subsection{Bias Correction}\label{bias-correction}
-In this section, we provide the bias correction following \cite{Gibbs2017}. They suggest that knowing the conditional bias helps weight estimation. If the conditional bias is large for a certain forecast, the forecast should be under-weighted, similar to the case where the variance of the forecast is large.
+In this section, we provide the bias correction following \cite{Gibbs2017}, where the authors suggest that knowing the conditional bias helps weight estimation. If the conditional bias is large for a certain forecast, the forecast should be under-weighted, similar to the case where the variance of the forecast is large.
 
 To start with bias estimation, let the prediction error from forecast \(i\) be \(\epsilon_i = y - y_i\), that we can decompose it into predictable term and unpredictable term:
 
@@ -800,7 +850,7 @@ Table \ref{tab: oos mspe} also illustrates the effect of changing the search are
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & one year & two years & one year & two years & one year & two years \\ 
+		Threshold     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		-10 & 0.9670   & 0.9611   & 0.9275   & 0.9558   & 0.9153   & 0.8752   \\ 
 		-5  & 0.9670   & 0.9611   & 0.9275   & 0.9558   & 0.9153   & 0.8752   \\ 
@@ -811,7 +861,7 @@ Table \ref{tab: oos mspe} also illustrates the effect of changing the search are
 		\cmidrule(lr){2-7}
 		Macro topic & \multicolumn{2}{c}{HICP} & \multicolumn{2}{c}{RGDP} & \multicolumn{2}{c}{UNEM} \\
 		\cmidrule(lr){2-3} \cmidrule(lr){4-5}\cmidrule(lr){6-7}
-		Horizon     & one year & two years & one year & two years & one year & two years \\ 
+		Threshold     & one year & two years & one year & two years & one year & two years \\ 
 		\hline
 		-10 & 1.0015   & 0.9928   & 0.9532   & 0.9577   & 0.9320   & 0.9502   \\
 		-5  & 1.0015   & 0.9928   & 0.9532   & 0.9577   & 0.9320   & 0.9502   \\
