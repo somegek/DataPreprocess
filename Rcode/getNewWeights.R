@@ -5,7 +5,7 @@ getNewWeights <- function(DT){
   
   # remove value below threshold and scale to 1
   thresholdFunc <- function(x, threshold){
-    x[x<threshold] <- threshold
+    x[x<threshold] <- 0
     x <- x/sum(x)
     x
   }

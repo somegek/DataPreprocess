@@ -81,22 +81,22 @@ for (corr in c(0.5,0.6,0.7,0.8)){
   for(errVar in epsList){
     if(errVar == 0.4){
       # make new plot
-      plot(unlist(DT[correlation == corr & errorVar==errVar]), type = 'l',ylim=c(0,0.4), ylab = 'MSPE', xlab='Threshold',xaxt = "n", main = paste0('Correlation: ',corr))
+      plot(x = truncation, y = unlist(DT[correlation == corr & errorVar==errVar][,-1:-2]), type = 'l',ylim=c(0,0.4), ylab = 'MSPE', xlab='Threshold', main = paste0('Correlation: ',corr))
     }else if(errVar == 0.5){
       # draw new line
-      lines(unlist(DT[correlation == corr & errorVar==errVar]), type = 'l', col='red')
+      lines(x = truncation, unlist(DT[correlation == corr & errorVar==errVar][,-1:-2]), type = 'l', col='red')
     }else if(errVar == 0.6){
       # draw new line
-      lines(unlist(DT[correlation == corr & errorVar==errVar]), type = 'l', col='orange')
+      lines(x = truncation, unlist(DT[correlation == corr & errorVar==errVar][,-1:-2]), type = 'l', col='orange')
     }else if(errVar == 0.7){
       # draw new line
-      lines(unlist(DT[correlation == corr & errorVar==errVar]), type = 'l', col='blue')
+      lines(x = truncation, unlist(DT[correlation == corr & errorVar==errVar][,-1:-2]), type = 'l', col='blue')
     }else if(errVar == 0.8){
       # draw new line
-      lines(unlist(DT[correlation == corr & errorVar==errVar]), type = 'l', col='forestgreen')
+      lines(x = truncation, unlist(DT[correlation == corr & errorVar==errVar][,-1:-2]), type = 'l', col='forestgreen')
     }else if(errVar == 0.9){
       # draw new line
-      lines(unlist(DT[correlation == corr & errorVar==errVar]), type = 'l', col='purple')
+      lines(x = truncation, unlist(DT[correlation == corr & errorVar==errVar][,-1:-2]), type = 'l', col='purple')
     }
   }
   legend('bottomleft',as.character(epsList),
